@@ -1,0 +1,9 @@
+Screenshot OCR / UI observation
+
+Page: Workspace report export
+Environment: staging
+Visible workspace: Growth Ops
+User action: clicked `Export report`
+Visible error toast: `Export failed: Unknown error`
+Billing badge visible in sidebar: `Plan: Not configured`
+No inline billing setup prompt is shown.

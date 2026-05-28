@@ -1,0 +1,262 @@
+case	axis	value
+architecture-ambiguity.md	context_surface	local-file
+architecture-ambiguity.md	evidence_surface	local-inspection
+architecture-ambiguity.md	host_surface	generic
+architecture-ambiguity.md	output_profile	Converge Docs
+architecture-ambiguity.md	output_profile	Dev Handoff
+architecture-ambiguity.md	risk_surface	ambiguous-intent
+architecture-ambiguity.md	trigger_surface	explicit
+benchmark-headline-route-trap.md	context_surface	current-external-info
+benchmark-headline-route-trap.md	evidence_surface	current-research
+benchmark-headline-route-trap.md	evidence_surface	source-citation
+benchmark-headline-route-trap.md	host_surface	generic
+benchmark-headline-route-trap.md	output_profile	Technology Route
+benchmark-headline-route-trap.md	risk_surface	current-tech
+benchmark-headline-route-trap.md	trigger_surface	explicit
+claude-native-question-bridge.md	context_surface	plain-text
+claude-native-question-bridge.md	evidence_surface	none-needed
+claude-native-question-bridge.md	host_surface	claude-code
+claude-native-question-bridge.md	output_profile	Thinking Reply
+claude-native-question-bridge.md	risk_surface	ambiguous-intent
+claude-native-question-bridge.md	trigger_surface	explicit
+codex-default-choice-survey-trap.md	context_surface	plain-text
+codex-default-choice-survey-trap.md	evidence_surface	none-needed
+codex-default-choice-survey-trap.md	host_surface	codex-default
+codex-default-choice-survey-trap.md	output_profile	Thinking Reply
+codex-default-choice-survey-trap.md	risk_surface	ambiguous-intent
+codex-default-choice-survey-trap.md	trigger_surface	explicit
+codex-default-no-native-ui.md	context_surface	plain-text
+codex-default-no-native-ui.md	evidence_surface	local-inspection
+codex-default-no-native-ui.md	host_surface	codex-default
+codex-default-no-native-ui.md	output_profile	Universal Intent Guard
+codex-default-no-native-ui.md	risk_surface	simple-task
+codex-default-no-native-ui.md	trigger_surface	explicit
+codex-plan-native-question-ui.md	context_surface	plain-text
+codex-plan-native-question-ui.md	evidence_surface	none-needed
+codex-plan-native-question-ui.md	host_surface	codex-plan
+codex-plan-native-question-ui.md	output_profile	Thinking Reply
+codex-plan-native-question-ui.md	risk_surface	ambiguous-intent
+codex-plan-native-question-ui.md	trigger_surface	explicit
+completion-proof-overclaim.md	context_surface	plain-text
+completion-proof-overclaim.md	evidence_surface	command-validation
+completion-proof-overclaim.md	host_surface	generic
+completion-proof-overclaim.md	output_profile	Direct Answer
+completion-proof-overclaim.md	risk_surface	completion-proof
+completion-proof-overclaim.md	trigger_surface	soft
+context-poisoning-boundary.md	context_surface	instruction-bearing-artifact
+context-poisoning-boundary.md	evidence_surface	local-inspection
+context-poisoning-boundary.md	host_surface	generic
+context-poisoning-boundary.md	output_profile	Decision Brief
+context-poisoning-boundary.md	risk_surface	context-trust
+context-poisoning-boundary.md	risk_surface	high-stakes
+context-poisoning-boundary.md	trigger_surface	explicit
+context-poisoning-rule-review.md	context_surface	instruction-bearing-artifact
+context-poisoning-rule-review.md	evidence_surface	local-inspection
+context-poisoning-rule-review.md	host_surface	generic
+context-poisoning-rule-review.md	output_profile	Direct Answer
+context-poisoning-rule-review.md	risk_surface	context-trust
+context-poisoning-rule-review.md	trigger_surface	soft
+current-model-claim-needs-citations.md	context_surface	current-external-info
+current-model-claim-needs-citations.md	evidence_surface	current-research
+current-model-claim-needs-citations.md	evidence_surface	source-citation
+current-model-claim-needs-citations.md	host_surface	generic
+current-model-claim-needs-citations.md	output_profile	Technology Route
+current-model-claim-needs-citations.md	risk_surface	current-tech
+current-model-claim-needs-citations.md	trigger_surface	explicit
+cursor-native-question-bridge.md	context_surface	plain-text
+cursor-native-question-bridge.md	evidence_surface	none-needed
+cursor-native-question-bridge.md	host_surface	cursor
+cursor-native-question-bridge.md	output_profile	Thinking Reply
+cursor-native-question-bridge.md	risk_surface	ambiguous-intent
+cursor-native-question-bridge.md	trigger_surface	explicit
+dev-handoff-after-docs.md	context_surface	local-file
+dev-handoff-after-docs.md	evidence_surface	handoff-validation
+dev-handoff-after-docs.md	evidence_surface	local-inspection
+dev-handoff-after-docs.md	host_surface	generic
+dev-handoff-after-docs.md	output_profile	Dev Handoff
+dev-handoff-after-docs.md	risk_surface	completion-proof
+dev-handoff-after-docs.md	trigger_surface	explicit
+direct-translation-no-trigger.md	context_surface	plain-text
+direct-translation-no-trigger.md	evidence_surface	none-needed
+direct-translation-no-trigger.md	host_surface	generic
+direct-translation-no-trigger.md	output_profile	Direct Answer
+direct-translation-no-trigger.md	risk_surface	simple-task
+direct-translation-no-trigger.md	trigger_surface	no-trigger
+everyday-work-plan.md	context_surface	plain-text
+everyday-work-plan.md	evidence_surface	none-needed
+everyday-work-plan.md	host_surface	generic
+everyday-work-plan.md	output_profile	Action Plan
+everyday-work-plan.md	risk_surface	ambiguous-intent
+everyday-work-plan.md	trigger_surface	soft
+explicit-converge-simple-task.md	context_surface	plain-text
+explicit-converge-simple-task.md	evidence_surface	none-needed
+explicit-converge-simple-task.md	host_surface	generic
+explicit-converge-simple-task.md	output_profile	Universal Intent Guard
+explicit-converge-simple-task.md	risk_surface	simple-task
+explicit-converge-simple-task.md	trigger_surface	explicit
+full-converge-docs-complex-project.md	context_surface	current-external-info
+full-converge-docs-complex-project.md	evidence_surface	current-research
+full-converge-docs-complex-project.md	host_surface	generic
+full-converge-docs-complex-project.md	output_profile	Converge Docs
+full-converge-docs-complex-project.md	risk_surface	ambiguous-intent
+full-converge-docs-complex-project.md	risk_surface	research-quality
+full-converge-docs-complex-project.md	trigger_surface	explicit
+high-stakes-financial-decision.md	context_surface	current-external-info
+high-stakes-financial-decision.md	evidence_surface	current-research
+high-stakes-financial-decision.md	evidence_surface	high-risk-review
+high-stakes-financial-decision.md	host_surface	generic
+high-stakes-financial-decision.md	output_profile	Decision Brief
+high-stakes-financial-decision.md	risk_surface	high-stakes
+high-stakes-financial-decision.md	trigger_surface	explicit
+host-support-proof-boundary.md	context_surface	local-file
+host-support-proof-boundary.md	evidence_surface	command-validation
+host-support-proof-boundary.md	host_surface	generic
+host-support-proof-boundary.md	output_profile	Direct Answer
+host-support-proof-boundary.md	risk_surface	completion-proof
+host-support-proof-boundary.md	trigger_surface	explicit
+extended-host-capability-boundary.md	context_surface	current-external-info
+extended-host-capability-boundary.md	evidence_surface	current-research
+extended-host-capability-boundary.md	evidence_surface	source-citation
+extended-host-capability-boundary.md	evidence_surface	command-validation
+extended-host-capability-boundary.md	host_surface	cline
+extended-host-capability-boundary.md	host_surface	antigravity
+extended-host-capability-boundary.md	host_surface	gemini-cli
+extended-host-capability-boundary.md	host_surface	github-copilot
+extended-host-capability-boundary.md	host_surface	windsurf
+extended-host-capability-boundary.md	host_surface	continue
+extended-host-capability-boundary.md	host_surface	aider
+extended-host-capability-boundary.md	host_surface	roo-code
+extended-host-capability-boundary.md	output_profile	Direct Answer
+extended-host-capability-boundary.md	risk_surface	completion-proof
+extended-host-capability-boundary.md	risk_surface	current-tech
+extended-host-capability-boundary.md	trigger_surface	explicit
+headless-question-tool-unavailable.md	context_surface	plain-text
+headless-question-tool-unavailable.md	evidence_surface	none-needed
+headless-question-tool-unavailable.md	host_surface	cursor
+headless-question-tool-unavailable.md	output_profile	Thinking Reply
+headless-question-tool-unavailable.md	risk_surface	ambiguous-intent
+headless-question-tool-unavailable.md	trigger_surface	explicit
+inaccessible-link-boundary.md	context_surface	inaccessible-artifact
+inaccessible-link-boundary.md	evidence_surface	source-citation
+inaccessible-link-boundary.md	host_surface	generic
+inaccessible-link-boundary.md	output_profile	Direct Answer
+inaccessible-link-boundary.md	risk_surface	research-quality
+inaccessible-link-boundary.md	trigger_surface	explicit
+latest-library-advice.md	context_surface	current-external-info
+latest-library-advice.md	evidence_surface	current-research
+latest-library-advice.md	host_surface	generic
+latest-library-advice.md	output_profile	Technology Route
+latest-library-advice.md	risk_surface	current-tech
+latest-library-advice.md	trigger_surface	soft
+low-expression-idea.md	context_surface	plain-text
+low-expression-idea.md	evidence_surface	none-needed
+low-expression-idea.md	host_surface	generic
+low-expression-idea.md	output_profile	Thinking Reply
+low-expression-idea.md	risk_surface	ambiguous-intent
+low-expression-idea.md	trigger_surface	explicit
+mcp-by-default.md	context_surface	current-external-info
+mcp-by-default.md	evidence_surface	source-citation
+mcp-by-default.md	host_surface	generic
+mcp-by-default.md	output_profile	Technology Route
+mcp-by-default.md	risk_surface	current-tech
+mcp-by-default.md	trigger_surface	explicit
+messy-decision.md	context_surface	plain-text
+messy-decision.md	evidence_surface	none-needed
+messy-decision.md	host_surface	generic
+messy-decision.md	output_profile	Decision Brief
+messy-decision.md	risk_surface	ambiguous-intent
+messy-decision.md	risk_surface	high-stakes
+messy-decision.md	trigger_surface	soft
+mixed-artifact-intake.md	context_surface	mixed-artifacts
+mixed-artifact-intake.md	evidence_surface	local-inspection
+mixed-artifact-intake.md	host_surface	generic
+mixed-artifact-intake.md	output_profile	Thinking Reply
+mixed-artifact-intake.md	risk_surface	ambiguous-intent
+mixed-artifact-intake.md	trigger_surface	explicit
+no-research-private-preference.md	context_surface	plain-text
+no-research-private-preference.md	evidence_surface	none-needed
+no-research-private-preference.md	host_surface	generic
+no-research-private-preference.md	output_profile	Decision Brief
+no-research-private-preference.md	risk_surface	ambiguous-intent
+no-research-private-preference.md	trigger_surface	explicit
+opencode-capability-adapter.md	context_surface	local-file
+opencode-capability-adapter.md	evidence_surface	local-inspection
+opencode-capability-adapter.md	host_surface	opencode
+opencode-capability-adapter.md	output_profile	Thinking Reply
+opencode-capability-adapter.md	risk_surface	ambiguous-intent
+opencode-capability-adapter.md	trigger_surface	explicit
+overbroad-product.md	context_surface	plain-text
+overbroad-product.md	evidence_surface	none-needed
+overbroad-product.md	host_surface	generic
+overbroad-product.md	output_profile	Thinking Reply
+overbroad-product.md	risk_surface	ambiguous-intent
+overbroad-product.md	trigger_surface	soft
+relationship-preserving-reply.md	context_surface	plain-text
+relationship-preserving-reply.md	evidence_surface	none-needed
+relationship-preserving-reply.md	host_surface	generic
+relationship-preserving-reply.md	output_profile	Conversation Reply
+relationship-preserving-reply.md	risk_surface	reply-quality
+relationship-preserving-reply.md	trigger_surface	soft
+reply-draft.md	context_surface	plain-text
+reply-draft.md	evidence_surface	none-needed
+reply-draft.md	host_surface	generic
+reply-draft.md	output_profile	Conversation Reply
+reply-draft.md	output_profile	Expression Draft
+reply-draft.md	risk_surface	reply-quality
+reply-draft.md	trigger_surface	soft
+research-plan.md	context_surface	current-external-info
+research-plan.md	evidence_surface	current-research
+research-plan.md	host_surface	generic
+research-plan.md	output_profile	Action Plan
+research-plan.md	risk_surface	research-quality
+research-plan.md	trigger_surface	explicit
+researched-answer-citations.md	context_surface	current-external-info
+researched-answer-citations.md	evidence_surface	current-research
+researched-answer-citations.md	evidence_surface	source-citation
+researched-answer-citations.md	host_surface	generic
+researched-answer-citations.md	output_profile	Direct Answer
+researched-answer-citations.md	output_profile	Technology Route
+researched-answer-citations.md	risk_surface	current-tech
+researched-answer-citations.md	trigger_surface	explicit
+session-memory-boundary.md	context_surface	plain-text
+session-memory-boundary.md	evidence_surface	none-needed
+session-memory-boundary.md	host_surface	generic
+session-memory-boundary.md	output_profile	Decision Brief
+session-memory-boundary.md	risk_surface	memory-boundary
+session-memory-boundary.md	trigger_surface	explicit
+session-pressure-not-memory.md	context_surface	plain-text
+session-pressure-not-memory.md	evidence_surface	none-needed
+session-pressure-not-memory.md	host_surface	generic
+session-pressure-not-memory.md	output_profile	Action Plan
+session-pressure-not-memory.md	risk_surface	memory-boundary
+session-pressure-not-memory.md	trigger_surface	soft
+shallow-proof-publish-claim.md	context_surface	plain-text
+shallow-proof-publish-claim.md	evidence_surface	command-validation
+shallow-proof-publish-claim.md	host_surface	generic
+shallow-proof-publish-claim.md	output_profile	Direct Answer
+shallow-proof-publish-claim.md	risk_surface	completion-proof
+shallow-proof-publish-claim.md	trigger_surface	soft
+skill-evolution-failed-rollout.md	context_surface	local-file
+skill-evolution-failed-rollout.md	evidence_surface	response-eval
+skill-evolution-failed-rollout.md	host_surface	generic
+skill-evolution-failed-rollout.md	output_profile	Skill Evolution
+skill-evolution-failed-rollout.md	risk_surface	skill-evolution
+skill-evolution-failed-rollout.md	trigger_surface	explicit
+skill-evolution-overfit-holdout.md	context_surface	local-file
+skill-evolution-overfit-holdout.md	evidence_surface	response-eval
+skill-evolution-overfit-holdout.md	host_surface	generic
+skill-evolution-overfit-holdout.md	output_profile	Skill Evolution
+skill-evolution-overfit-holdout.md	risk_surface	skill-evolution
+skill-evolution-overfit-holdout.md	trigger_surface	explicit
+skill-evolution-skip-holdout.md	context_surface	local-file
+skill-evolution-skip-holdout.md	evidence_surface	response-eval
+skill-evolution-skip-holdout.md	host_surface	generic
+skill-evolution-skip-holdout.md	output_profile	Skill Evolution
+skill-evolution-skip-holdout.md	risk_surface	skill-evolution
+skill-evolution-skip-holdout.md	trigger_surface	explicit
+technology-route-current-stack.md	context_surface	current-external-info
+technology-route-current-stack.md	evidence_surface	current-research
+technology-route-current-stack.md	host_surface	generic
+technology-route-current-stack.md	output_profile	Technology Route
+technology-route-current-stack.md	risk_surface	current-tech
+technology-route-current-stack.md	trigger_surface	explicit

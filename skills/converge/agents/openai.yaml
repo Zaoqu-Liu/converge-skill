@@ -1,0 +1,7 @@
+interface:
+  display_name: "Converge"
+  short_description: "Clarify fuzzy work into decisions, plans, and proof"
+  default_prompt: "Use $converge to reconstruct my real intent, inspect available context, verify current claims when needed, and give the next decision, draft, or action plan."
+
+policy:
+  allow_implicit_invocation: true

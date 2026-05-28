@@ -1,0 +1,66 @@
+# Host Support Ledger
+
+Last reviewed: 2026-05-28
+
+This ledger records what Converge can honestly claim for each host. Use it with `host-adapter-matrix.md` and `host-native-interaction-runbook.md`.
+
+## Current Global Evidence
+
+- Static coverage: `SKILL.md`, `host-adapter-matrix.md`, `host-native-interaction-runbook.md`, and host-specific eval cases cover Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, Aider, and unknown hosts.
+- Source coverage: `host-source-evidence.md` records the current official host documentation checked for Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, Aider, and Roo Code status boundaries.
+- Contract coverage: `host-capability-contract.tsv` machine-checks each host profile against source anchors, install surfaces, native question surfaces, fallback behavior, current claim tier, eval case, and H3 boundary.
+- Install coverage: release checks compare canonical source against installed copies for Claude Code, Cursor, opencode, Cline, and Google Antigravity.
+- Behavior coverage: 36 of 39 real response-eval cases are reviewed as Pass with 0 Fail.
+- Missing behavior evidence: the remaining 3 cases require real native interactive question UI and must not be filled from CLI/headless fallback output.
+
+## Host Ledger
+
+| Host | Highest Current Claim | Evidence | H3 Native Interaction Status | Claim Boundary |
+|---|---|---|---|---|
+| Codex Default | H2 fallback-tested | `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, release validators | Not applicable; default mode has no `request_user_input` | Can claim Codex Default fallback behavior, not Plan native UI. |
+| Codex Plan | H0 documented | `codex-plan-native-question-ui.md`, `host-native-interaction-runbook.md` | H3 status: Unproven in this environment | Can claim documented Plan Mode rules only until a real Plan Mode run uses `request_user_input`. |
+| Claude Code | H1 installed | Installed copy matches canonical source; `claude-native-question-bridge.md` documents expected native behavior | H3 status: Unproven in this environment | Can claim Claude Code install/bridge coverage, not native `AskUserQuestion` behavior. |
+| Cursor | H1 installed plus H2 fallback-tested | Installed copy and `~/.cursor/rules/converge.mdc` match canonical bridge; Cursor fallback case reviewed | H3 status: Unproven in this environment | Can claim Cursor install/bridge and fallback handling, not native `AskQuestion` behavior. |
+| opencode | H1 installed plus H2 fallback-tested | Installed copy matches canonical source; `opencode-capability-adapter.md` reviewed | No specific native question tool claimed | Can claim opencode install and capability-based fallback handling. |
+| Cline | H1 installed | Installed copy matches canonical source after release check; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim Cline installed skill coverage, not activation/native question behavior. |
+| Google Antigravity | H1 installed | Installed copy matches canonical source after release check; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim Antigravity installed skill coverage, not activation/native question behavior. |
+| Gemini CLI | H0 documented | `host-source-evidence.md` records `GEMINI.md`/context-file docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented context-file bridge rules only. |
+| GitHub Copilot | H0 documented | `host-source-evidence.md` records repository instruction docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented repository-instruction bridge rules only. |
+| Windsurf Cascade | H0 documented | `host-source-evidence.md` records rule docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented rule bridge rules only. |
+| Continue | H0 documented | `host-source-evidence.md` records local/hub rule docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented rule bridge rules only. |
+| Aider | H0 documented | `host-source-evidence.md` records `CONVENTIONS.md` docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented convention-file bridge rules only. |
+| Unknown or future host | H0 capability model | `host-adapter-matrix.md` capability map | H3 status: Unproven until a native tool is observed | Can claim capability-based rules, not brand-specific support. |
+
+## Native Cases Still Open
+
+These must remain missing until reviewed in a real interactive host:
+
+- `codex-plan-native-question-ui.md`
+- `claude-native-question-bridge.md`
+- `cursor-native-question-bridge.md`
+
+Extended hosts such as Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, and Aider also need real host runs before any H2/H3/H4 claim.
+
+## Reporting Language
+
+Use scoped claims:
+
+```text
+Converge is installed and release-checked for Claude Code, Cursor, and opencode. It is headless/fallback-tested for the reviewed non-native paths. Native interactive question paths for Codex Plan, Claude Code, and Cursor remain H3-unproven until real interactive runs capture the native question UI being used correctly.
+```
+
+Do not say:
+
+```text
+Converge fully supports every host's native question UI.
+```
+
+## Promotion Rule
+
+To promote a host from H1/H2 to H3:
+
+1. Run the matching native case in a real interactive host.
+2. Capture the native UI/tool evidence listed in `host-native-interaction-runbook.md`.
+3. Create a normal response-eval result file for the matching case.
+4. Run `scripts/check_converge_response_eval.py --require-all-cases --require-real-results` against the complete result set.
+5. Only then update this ledger from `H3 status: Unproven` to a scoped H3 claim.

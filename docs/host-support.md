@@ -1,0 +1,33 @@
+# Host Support
+
+Converge supports hosts by capability, not by brand. Every claim must map to a proof tier.
+
+## Proof Tiers
+
+| Tier | Claim | Minimum evidence |
+|---|---|---|
+| H0 | documented rule coverage | official docs, skill rules, eval case |
+| H1 | installed or bridged | synced copy or bridge matches canonical source |
+| H2 | fallback behavior tested | real response-eval in CLI/headless/non-interactive mode |
+| H3 | native interactive behavior tested | real host run with native question UI/tool available and used correctly |
+| H4 | production-like workflow tested | multiple real tasks across files/tools/research/editing with scoped proof |
+
+## Current Scope
+
+H1 install coverage is release-checked for Claude Code, Cursor, opencode, Cline, and Google Antigravity.
+
+H0 documented instruction-surface coverage exists for Gemini CLI, GitHub Copilot, Windsurf, Continue, and Aider.
+
+Codex Default and selected fallback paths have H2 response-eval evidence. Codex Plan, Claude Code native `AskUserQuestion`, Cursor native `AskQuestion`, and extended-host native activation paths remain unproven until real interactive runs are reviewed.
+
+## Source Of Truth
+
+Use these files before changing host support:
+
+- `skills/converge/host-source-evidence.md`
+- `skills/converge/host-capability-contract.tsv`
+- `skills/converge/host-adapter-matrix.md`
+- `skills/converge/host-support-ledger.md`
+- `skills/converge/host-native-interaction-runbook.md`
+
+Do not promote a host claim by editing prose only. Update the contract, eval coverage, and validation evidence together.
