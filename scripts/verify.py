@@ -4,19 +4,73 @@
 from __future__ import annotations
 
 from pathlib import Path
+import os
 import subprocess
 import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "skills" / "converge"
+REQUIRED_ROOT_FILES = [
+    "README.md",
+    "LICENSE",
+    "VERSION",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "docs/quickstart.md",
+    "docs/install.md",
+    "docs/host-support.md",
+    "docs/evaluation.md",
+    "docs/release.md",
+    ".github/workflows/validate.yml",
+]
+GENERATED_PATTERNS = {
+    "__pycache__",
+    ".DS_Store",
+    ".pytest_cache",
+}
+GENERATED_SUFFIXES = {
+    ".pyc",
+    ".pyo",
+    ".swp",
+}
 
 
 def run(command: list[str]) -> None:
     print("+ " + " ".join(command), flush=True)
-    completed = subprocess.run(command, cwd=ROOT)
+    env = os.environ.copy()
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    completed = subprocess.run(command, cwd=ROOT, env=env)
     if completed.returncode != 0:
         raise SystemExit(completed.returncode)
+
+
+def check_repository_hygiene() -> None:
+    missing = [rel for rel in REQUIRED_ROOT_FILES if not (ROOT / rel).is_file()]
+    if missing:
+        raise SystemExit(f"missing repository file(s): {', '.join(missing)}")
+
+    version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    if not re_match_version(version):
+        raise SystemExit(f"VERSION must be semantic x.y.z, got: {version}")
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    if f"## {version} " not in changelog and f"## {version} -" not in changelog:
+        raise SystemExit(f"CHANGELOG.md missing entry for {version}")
+
+    generated: list[str] = []
+    for path in ROOT.rglob("*"):
+        if ".git" in path.parts:
+            continue
+        if path.name in GENERATED_PATTERNS or path.suffix in GENERATED_SUFFIXES:
+            generated.append(str(path.relative_to(ROOT)))
+    if generated:
+        raise SystemExit("generated files present: " + ", ".join(sorted(generated)))
+
+
+def re_match_version(value: str) -> bool:
+    parts = value.split(".")
+    return len(parts) == 3 and all(part.isdigit() for part in parts)
 
 
 def main() -> int:
@@ -24,6 +78,7 @@ def main() -> int:
         print(f"missing skill: {SKILL_ROOT / 'SKILL.md'}")
         return 1
 
+    check_repository_hygiene()
     python = sys.executable
     run([python, str(SKILL_ROOT / "scripts" / "check_converge_skill.py")])
     run(
@@ -47,6 +102,7 @@ def main() -> int:
             "--skip-installs",
         ]
     )
+    check_repository_hygiene()
     print("Repository verification passed.")
     return 0
 

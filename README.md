@@ -1,5 +1,8 @@
 # Converge Skill
 
+[![Validate](https://github.com/Zaoqu-Liu/converge-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/Zaoqu-Liu/converge-skill/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Owner-mode intent reconstruction for fuzzy, high-ambiguity work across modern AI agent hosts.
 
 Converge turns under-specified human input into a clear understanding, a defensible recommendation, and a directly usable output: a reply, plan, decision brief, technology route, product/architecture document, or implementation handoff.
@@ -58,6 +61,15 @@ Instruction-surface coverage is documented for Gemini CLI, GitHub Copilot, Winds
 
 ## Install
 
+Fast path:
+
+```bash
+git clone https://github.com/Zaoqu-Liu/converge-skill.git
+cd converge-skill
+python3 scripts/verify.py
+python3 skills/converge/scripts/sync_converge_install.py
+```
+
 Clone the repository and sync the canonical skill into supported local agent hosts:
 
 ```bash
@@ -71,6 +83,8 @@ python3 skills/converge/scripts/sync_converge_install.py --targets claude,cursor
 ```
 
 See [docs/install.md](docs/install.md) for host-specific notes.
+
+See [docs/quickstart.md](docs/quickstart.md) for the five-minute setup path.
 
 ## Validate
 
@@ -109,6 +123,10 @@ Start here when changing support claims:
 - `skills/converge/host-native-interaction-runbook.md`
 
 Any change to host support should update the source evidence, capability contract, eval coverage, and release checks together.
+
+## Version
+
+Current package version: `0.1.0`. See [CHANGELOG.md](CHANGELOG.md).
 
 ## Boundary
 
