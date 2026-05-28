@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Zaoqu-Liu/converge-skill/protocol/schemas/converge-compatible-manifest.schema.json",
+  "title": "Converge-Compatible Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["converge_protocol", "name", "description", "intent_surfaces", "host_support", "evals", "proof_policy"],
+  "properties": {
+    "converge_protocol": {
+      "type": "string",
+      "pattern": "^1\\.0$"
+    },
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "intent_surfaces": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "host_support": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "enum": ["H0", "H1", "H2", "H3", "H4"]
+      }
+    },
+    "evals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_count", "required_tags"],
+      "properties": {
+        "case_count": {"type": "integer", "minimum": 0},
+        "required_tags": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "proof_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["no_overclaim", "source_required_for_current_claims"],
+      "properties": {
+        "no_overclaim": {"type": "boolean"},
+        "source_required_for_current_claims": {"type": "boolean"}
+      }
+    }
+  }
+}

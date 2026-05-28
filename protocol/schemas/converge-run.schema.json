@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Zaoqu-Liu/converge-skill/protocol/schemas/converge-run.schema.json",
+  "title": "Converge Protocol Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "intent",
+    "context",
+    "decision",
+    "evidence",
+    "interaction",
+    "output",
+    "proof"
+  ],
+  "properties": {
+    "protocol_version": {
+      "type": "string",
+      "pattern": "^1\\.0$"
+    },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["user_said", "inferred_goal", "output_type", "success_condition"],
+      "properties": {
+        "user_said": {"type": "string"},
+        "inferred_goal": {"type": "string"},
+        "output_type": {"type": "string"},
+        "success_condition": {"type": "string"},
+        "open_questions": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inspected", "unavailable", "trust_boundary"],
+      "properties": {
+        "inspected": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "unavailable": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "trust_boundary": {"type": "string"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner_recommendation", "alternatives", "rejected_paths", "risks"],
+      "properties": {
+        "owner_recommendation": {"type": "string"},
+        "alternatives": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "rejected_paths": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "risks": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stable", "drift_prone", "sources", "validation_spike"],
+      "properties": {
+        "stable": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "drift_prone": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "sources": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "validation_spike": {"type": "string"}
+      }
+    },
+    "interaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host", "native_question_available", "fallback_used", "questions_asked", "assumptions_taken"],
+      "properties": {
+        "host": {"type": "string"},
+        "native_question_available": {"type": "boolean"},
+        "fallback_used": {"type": "boolean"},
+        "questions_asked": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "assumptions_taken": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "artifact", "next_action"],
+      "properties": {
+        "profile": {"type": "string"},
+        "artifact": {"type": "string"},
+        "next_action": {"type": "string"}
+      }
+    },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim", "evidence", "tier", "remaining_boundary"],
+      "properties": {
+        "claim": {"type": "string"},
+        "evidence": {"type": "string"},
+        "tier": {
+          "type": "string",
+          "enum": ["H0", "H1", "H2", "H3", "H4"]
+        },
+        "remaining_boundary": {"type": "string"}
+      }
+    }
+  }
+}

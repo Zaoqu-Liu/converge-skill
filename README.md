@@ -7,6 +7,8 @@ Owner-mode intent reconstruction for fuzzy, high-ambiguity work across modern AI
 
 Converge turns under-specified human input into a clear understanding, a defensible recommendation, and a directly usable output: a reply, plan, decision brief, technology route, product/architecture document, or implementation handoff.
 
+This repository now contains both the canonical skill and the seed reference implementation for **Converge Protocol v1**.
+
 ## Why This Exists
 
 Most agent failures do not start with bad code. They start with a bad read of the user's intent:
@@ -30,6 +32,8 @@ skills/converge/SKILL.md
 It includes:
 
 - an owner-mode intent reconstruction protocol
+- Converge Protocol v1 schemas for run state, host capability, eval results, and compatible manifests
+- a reference `converge` CLI/runtime for validation, host doctor checks, install, pack, eval, and release gates
 - low-friction modes for simple tasks and deep modes for ambiguous work
 - evidence gates for current technical decisions
 - high-risk boundaries for medical, legal, financial, security, compliance, and irreversible decisions
@@ -94,6 +98,26 @@ Run the repository validation suite:
 python3 scripts/verify.py
 ```
 
+Validate only protocol schemas/examples:
+
+```bash
+python3 -m converge validate --protocol-only
+```
+
+Inspect local host support state:
+
+```bash
+python3 -m converge doctor
+```
+
+For an installed console command:
+
+```bash
+python3 -m pip install -e .
+converge validate --protocol-only
+converge doctor
+```
+
 The verifier runs the Converge structural validator, eval-suite checks, coverage matrix, response-eval self-tests, smoke packet generation, script compilation, and release gate without requiring user-local install directories.
 
 For local install consistency across supported hosts:
@@ -107,6 +131,10 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 ```text
 .
 ├── skills/converge/          # canonical skill package
+├── protocol/                 # Converge Protocol v1 schemas and examples
+├── converge/                 # reference CLI/runtime
+├── intentbench/              # benchmark seed and public benchmark plan
+├── gallery/                  # before/after demo plan
 ├── docs/                     # repository-level install, host, and evaluation docs
 ├── scripts/verify.py         # repository validation entrypoint
 └── .github/workflows/        # CI validation
@@ -123,6 +151,13 @@ Start here when changing support claims:
 - `skills/converge/host-native-interaction-runbook.md`
 
 Any change to host support should update the source evidence, capability contract, eval coverage, and release checks together.
+
+## Protocol And Runtime
+
+- [docs/protocol.md](docs/protocol.md): Converge Protocol v1 object model and compatibility contract.
+- [docs/cli.md](docs/cli.md): reference CLI/runtime commands.
+- `protocol/schemas/`: JSON schemas.
+- `protocol/examples/`: valid example instances.
 
 ## Version
 

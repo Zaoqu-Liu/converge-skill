@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Adds Converge Protocol v1 schemas and examples.
+- Adds the reference `converge` CLI/runtime with `validate`, `doctor`, `install`, `pack`, `eval`, and `release-check` commands.
+- Adds protocol, CLI, IntentBench, and gallery documentation seeds.
+
 ## 0.1.0 - 2026-05-28
 
 - Initial public release of the Converge skill.

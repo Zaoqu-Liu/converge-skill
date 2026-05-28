@@ -1,0 +1,16 @@
+{
+  "protocol_version": "1.0",
+  "hosts": [
+    {
+      "host_id": "cursor",
+      "display_name": "Cursor",
+      "instruction_surface": ".cursor/rules",
+      "install_surface": "~/.cursor/skills/converge plus ~/.cursor/rules/converge.mdc",
+      "interaction_surface": "AskQuestion when present",
+      "fallback_surface": "short textual fallback",
+      "current_claim": "H1 installed plus H2 fallback-tested",
+      "eval_case": "cursor-native-question-bridge.md",
+      "h3_boundary": "requires real Cursor run with AskQuestion used correctly"
+    }
+  ]
+}

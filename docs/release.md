@@ -6,6 +6,8 @@ Use this before publishing a new Converge release.
 
 ```bash
 python3 scripts/verify.py
+python3 -m converge validate --protocol-only
+python3 -m converge doctor --json
 python3 skills/converge/scripts/sync_converge_install.py
 python3 skills/converge/scripts/check_converge_release.py --source skills/converge --targets all
 ```
@@ -22,6 +24,7 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 
 - `VERSION` matches the release tag.
 - `CHANGELOG.md` has a dated entry.
+- Protocol schemas and examples pass `python3 -m converge validate --protocol-only`.
 - GitHub Actions `Validate` passes on `main`.
 - No generated files such as `__pycache__`, `.pyc`, `.DS_Store`, or swap files are tracked.
 

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "converge-skill"
+version = "0.1.0"
+description = "Converge Protocol reference runtime and skill package"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+  {name = "Zaoqu Liu"}
+]
+keywords = [
+  "ai-agents",
+  "agent-skills",
+  "codex",
+  "claude-code",
+  "cursor",
+  "opencode",
+  "prompt-engineering",
+  "intent-protocol"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13"
+]
+
+[project.scripts]
+converge = "converge.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["converge*"]

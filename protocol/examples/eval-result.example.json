@@ -1,0 +1,12 @@
+{
+  "protocol_version": "1.0",
+  "case": "low-expression-idea.md",
+  "verdict": "pass",
+  "host": "codex-default",
+  "model": "example",
+  "evidence": ["The response states multiple intent hypotheses and makes an owner recommendation."],
+  "passed_gates": ["Intent reconstruction", "Owner recommendation", "Proof boundary"],
+  "failed_gates": [],
+  "failure_tags": [],
+  "proof_tier": "H2"
+}

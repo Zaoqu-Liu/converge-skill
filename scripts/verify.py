@@ -13,16 +13,32 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "skills" / "converge"
 REQUIRED_ROOT_FILES = [
     "README.md",
+    "pyproject.toml",
     "LICENSE",
     "VERSION",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
     "SECURITY.md",
     "docs/quickstart.md",
+    "docs/protocol.md",
+    "docs/cli.md",
     "docs/install.md",
     "docs/host-support.md",
     "docs/evaluation.md",
     "docs/release.md",
+    "protocol/schemas/converge-run.schema.json",
+    "protocol/schemas/host-capability.schema.json",
+    "protocol/schemas/eval-result.schema.json",
+    "protocol/schemas/converge-compatible-manifest.schema.json",
+    "protocol/examples/converge-run.example.json",
+    "protocol/examples/host-capability.example.json",
+    "protocol/examples/eval-result.example.json",
+    "protocol/examples/converge-compatible-manifest.example.json",
+    "converge/__init__.py",
+    "converge/__main__.py",
+    "converge/cli.py",
+    "intentbench/README.md",
+    "gallery/README.md",
     ".github/workflows/validate.yml",
 ]
 GENERATED_PATTERNS = {
@@ -80,6 +96,8 @@ def main() -> int:
 
     check_repository_hygiene()
     python = sys.executable
+    run([python, "-m", "converge", "validate", "--protocol-only"])
+    run([python, "-m", "converge", "doctor", "--json"])
     run([python, str(SKILL_ROOT / "scripts" / "check_converge_skill.py")])
     run(
         [

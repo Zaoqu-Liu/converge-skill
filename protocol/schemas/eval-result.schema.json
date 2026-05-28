@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Zaoqu-Liu/converge-skill/protocol/schemas/eval-result.schema.json",
+  "title": "Converge Evaluation Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "case", "verdict", "host", "evidence", "failure_tags"],
+  "properties": {
+    "protocol_version": {
+      "type": "string",
+      "pattern": "^1\\.0$"
+    },
+    "case": {"type": "string"},
+    "verdict": {
+      "type": "string",
+      "enum": ["pass", "fail"]
+    },
+    "host": {"type": "string"},
+    "model": {"type": "string"},
+    "evidence": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "passed_gates": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "failed_gates": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "failure_tags": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "proof_tier": {
+      "type": "string",
+      "enum": ["H0", "H1", "H2", "H3", "H4"]
+    }
+  }
+}

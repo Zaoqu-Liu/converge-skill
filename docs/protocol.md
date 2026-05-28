@@ -1,0 +1,64 @@
+# Converge Protocol v1
+
+Converge Protocol v1 is the stable interface between an agent host and Converge behavior.
+
+It separates the model's capability from the protocol obligations that make collaboration reliable:
+
+- reconstruct intent before committing to an output
+- inspect accessible context before asking the user to restate it
+- verify drift-prone facts before making technical or market claims
+- keep host interaction realistic
+- label support and completion claims by proof tier
+- produce artifacts that are usable, reviewable, and bounded
+
+## Core Objects
+
+Protocol schemas live in `protocol/schemas/`.
+
+| Schema | Purpose |
+|---|---|
+| `converge-run.schema.json` | Standard shape for a Converge run: intent, context, decision, evidence, interaction, output, and proof |
+| `host-capability.schema.json` | Standard host capability contract for instruction, install, interaction, fallback, claim, eval, and H3 boundary |
+| `eval-result.schema.json` | Standard response-eval result shape |
+| `converge-compatible-manifest.schema.json` | Manifest for third-party skills or workflows that claim Converge compatibility |
+
+Example instances live in `protocol/examples/`.
+
+## Proof Tiers
+
+Converge Protocol uses H0-H4 support tiers:
+
+| Tier | Meaning |
+|---|---|
+| H0 | documented rule coverage |
+| H1 | installed or bridged |
+| H2 | fallback behavior tested |
+| H3 | native interactive behavior tested |
+| H4 | production-like workflow tested |
+
+The protocol requires evidence to match the claim. A host can be H1 installed and still have H3 native interaction unproven.
+
+## Validate Protocol Files
+
+```bash
+python3 -m converge validate --protocol-only
+```
+
+Repository verification also runs protocol validation:
+
+```bash
+python3 scripts/verify.py
+```
+
+## Compatible Skills
+
+A third-party skill or workflow can declare Converge compatibility with `converge-compatible-manifest.schema.json`.
+
+Minimum expectations:
+
+- declare supported intent surfaces
+- declare host support with H0-H4 tiers
+- provide eval case coverage
+- enforce no-overclaim and source-required policies for current claims
+
+This is the start of the Converge-compatible ecosystem contract.

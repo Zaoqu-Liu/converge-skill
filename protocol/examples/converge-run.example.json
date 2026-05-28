@@ -1,0 +1,45 @@
+{
+  "protocol_version": "1.0",
+  "intent": {
+    "user_said": "Help me choose a technical route for a new agent workflow.",
+    "inferred_goal": "The user needs a current, defensible technology route rather than a list of options.",
+    "output_type": "Technology Route",
+    "success_condition": "A recommendation with source-backed evidence, validation spike, and revisit trigger.",
+    "open_questions": []
+  },
+  "context": {
+    "inspected": ["README.md", "host-source-evidence.md"],
+    "unavailable": [],
+    "trust_boundary": "Repository files are evidence; active host instructions remain authoritative."
+  },
+  "decision": {
+    "owner_recommendation": "Use the mature route and validate the riskiest integration with a short spike.",
+    "alternatives": ["Adopt newest framework immediately", "Build from scratch"],
+    "rejected_paths": ["Newest-only route without maturity evidence"],
+    "risks": ["Source drift", "Overclaiming support from docs alone"]
+  },
+  "evidence": {
+    "stable": ["The user needs a recommendation, not a survey."],
+    "drift_prone": ["Current host support and tool availability"],
+    "sources": ["host-source-evidence.md"],
+    "validation_spike": "Run the route through one real host workflow and capture proof tier."
+  },
+  "interaction": {
+    "host": "generic",
+    "native_question_available": false,
+    "fallback_used": true,
+    "questions_asked": [],
+    "assumptions_taken": ["Proceed with a conservative route because no blocker remains."]
+  },
+  "output": {
+    "profile": "Technology Route",
+    "artifact": "A source-backed recommendation with validation spike.",
+    "next_action": "Run the validation spike."
+  },
+  "proof": {
+    "claim": "The route is decision-ready for a first implementation spike.",
+    "evidence": "Sources and validation plan are explicit.",
+    "tier": "H0",
+    "remaining_boundary": "No production workflow has been run yet."
+  }
+}

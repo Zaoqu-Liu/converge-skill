@@ -21,6 +21,20 @@ Expected result:
 Repository verification passed.
 ```
 
+## 2.5. Inspect The Protocol Runtime
+
+```bash
+python3 -m converge validate --protocol-only
+python3 -m converge doctor
+```
+
+Optional console command:
+
+```bash
+python3 -m pip install -e .
+converge doctor
+```
+
 ## 3. Install To Local Agent Hosts
 
 ```bash

@@ -1,0 +1,19 @@
+{
+  "converge_protocol": "1.0",
+  "name": "example-research-skill",
+  "description": "Example skill declaring Converge-compatible intent and proof behavior.",
+  "intent_surfaces": ["research-plan", "current-tech-route", "evidence-gate"],
+  "host_support": {
+    "codex": "H1",
+    "cursor": "H1",
+    "claude-code": "H1"
+  },
+  "evals": {
+    "case_count": 12,
+    "required_tags": ["missing-citations", "stale-confidence", "proof-overclaim"]
+  },
+  "proof_policy": {
+    "no_overclaim": true,
+    "source_required_for_current_claims": true
+  }
+}
