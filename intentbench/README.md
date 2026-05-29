@@ -1,6 +1,6 @@
 # IntentBench
 
-IntentBench is the planned public benchmark layer for Converge Protocol.
+IntentBench is the public benchmark layer for Converge Protocol.
 
 It will evaluate whether an agent can:
 
@@ -15,13 +15,35 @@ It will evaluate whether an agent can:
 - hand off architecture work correctly
 - adapt to host capabilities without hallucinating tools
 
-The current seed data is the Converge eval suite in `skills/converge/eval-cases/` plus `skills/converge/eval-coverage.tsv`.
+The benchmark contract is `intentbench/manifest.json`. The current case corpus is the Converge eval suite in `skills/converge/eval-cases/` plus `skills/converge/eval-coverage.tsv`.
 
-Future benchmark releases should publish:
+Build a benchmark runpack:
 
+```bash
+python3 -m converge benchmark --out /tmp/intentbench
+python3 -m converge benchmark --suite host --out /tmp/intentbench-host
+```
+
+Validate the benchmark manifest:
+
+```bash
+python3 -m converge benchmark --validate
+```
+
+Summarize filled real results:
+
+```bash
+python3 -m converge benchmark --results /tmp/intentbench/results --require-real-results
+```
+
+IntentBench reports pass/fail evidence and axis coverage. It deliberately does not use numeric quality scores.
+
+Benchmark releases should publish:
+
+- `manifest.json`
 - blind prompt packets
 - review packets
-- result schemas
-- baseline runs
+- result stubs or result schema references
+- baseline runs when real host/model results exist
 - host-specific assumptions
-- pass/fail summaries by failure tag
+- pass/fail summaries by failure tag and coverage axis

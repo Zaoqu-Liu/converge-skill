@@ -43,6 +43,7 @@ REQUIRED_ROOT_FILES = [
     "converge/cli.py",
     "converge/hosts.py",
     "intentbench/README.md",
+    "intentbench/manifest.json",
     "gallery/README.md",
     ".github/workflows/validate.yml",
 ]
@@ -117,6 +118,9 @@ def main() -> int:
     run([python, str(SKILL_ROOT / "scripts" / "summarize_converge_response_eval.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "select_converge_response_eval_batch.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "check_converge_native_proof.py"), "--self-test"])
+    run([python, str(SKILL_ROOT / "scripts" / "check_intentbench.py"), "--self-test"])
+    run([python, str(SKILL_ROOT / "scripts" / "summarize_intentbench.py"), "--self-test"])
+    run([python, "-m", "converge", "benchmark", "--validate"])
     run(
         [
             python,

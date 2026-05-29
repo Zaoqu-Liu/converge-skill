@@ -76,6 +76,19 @@ python3 -m converge native-proof --proofs /tmp/converge-native-proof/proofs --re
 
 This command does not create H3 evidence by itself. It creates the proof packet and validates filled proof JSON plus real transcript, screenshot, log, or exported conversation evidence from an interactive host run.
 
+### benchmark
+
+Build or summarize IntentBench benchmark runpacks:
+
+```bash
+python3 -m converge benchmark --validate
+python3 -m converge benchmark --out /tmp/intentbench
+python3 -m converge benchmark --suite host --out /tmp/intentbench-host --with-result-stubs
+python3 -m converge benchmark --results /tmp/intentbench/results --require-real-results
+```
+
+The benchmark command uses `intentbench/manifest.json`, `skills/converge/eval-cases/`, `skills/converge/eval-coverage.tsv`, and the response-eval result format. It reports pass/fail and axis coverage rather than numeric quality scores.
+
 ### release-check
 
 Run the release gate:

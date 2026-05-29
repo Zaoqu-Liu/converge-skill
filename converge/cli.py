@@ -211,6 +211,46 @@ def cmd_native_proof(args: argparse.Namespace) -> int:
     return run(command)
 
 
+def cmd_benchmark(args: argparse.Namespace) -> int:
+    if args.results:
+        command = [
+            sys.executable,
+            str(SKILL_ROOT / "scripts" / "summarize_intentbench.py"),
+            str(args.results),
+            "--root",
+            str(SKILL_ROOT),
+            "--show-axes",
+        ]
+        if args.require_real_results:
+            command.append("--require-real-results")
+        return run(command)
+
+    if args.validate:
+        command = [
+            sys.executable,
+            str(SKILL_ROOT / "scripts" / "check_intentbench.py"),
+            "--manifest",
+            str(ROOT / "intentbench" / "manifest.json"),
+        ]
+        return run(command)
+
+    command = [
+        sys.executable,
+        str(SKILL_ROOT / "scripts" / "build_intentbench.py"),
+        "--manifest",
+        str(ROOT / "intentbench" / "manifest.json"),
+        "--out",
+        str(args.out.expanduser().resolve()),
+        "--suite",
+        args.suite,
+        "--skill-path",
+        str(SKILL_ROOT / "SKILL.md"),
+    ]
+    if args.with_result_stubs:
+        command.append("--with-result-stubs")
+    return run(command)
+
+
 def cmd_release_check(args: argparse.Namespace) -> int:
     command = [
         sys.executable,
@@ -262,6 +302,15 @@ def build_parser() -> argparse.ArgumentParser:
     native_proof.add_argument("--proofs", type=Path, help="validate an existing proofs directory")
     native_proof.add_argument("--require-real-artifacts", action="store_true")
     native_proof.set_defaults(func=cmd_native_proof)
+
+    benchmark = subparsers.add_parser("benchmark", help="build or summarize IntentBench runpacks")
+    benchmark.add_argument("--out", type=Path, default=Path("/tmp/intentbench"))
+    benchmark.add_argument("--suite", default="core")
+    benchmark.add_argument("--with-result-stubs", action="store_true")
+    benchmark.add_argument("--results", type=Path, help="summarize filled response-eval results")
+    benchmark.add_argument("--require-real-results", action="store_true")
+    benchmark.add_argument("--validate", action="store_true")
+    benchmark.set_defaults(func=cmd_benchmark)
 
     release_check = subparsers.add_parser("release-check", help="run the release gate")
     release_check.add_argument("--targets", default="all")

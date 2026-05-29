@@ -16,6 +16,7 @@ This runs:
 - response-eval validator self-tests
 - summary and batch selector self-tests
 - native-proof validator self-tests
+- IntentBench validator self-tests and manifest validation
 - release smoke checks with `--skip-installs`
 
 ## Local Install Release Check
@@ -69,3 +70,21 @@ python3 skills/converge/scripts/check_converge_native_proof.py \
 ```
 
 Do not use install checks, official docs, or CLI/headless fallback output as H3 proof.
+
+## IntentBench
+
+IntentBench packages the eval suite into benchmark runpacks with blind prompts, review packets, result stubs, and coverage metadata:
+
+```bash
+python3 -m converge benchmark --validate
+python3 -m converge benchmark --out /tmp/intentbench
+python3 -m converge benchmark --suite evidence --out /tmp/intentbench-evidence
+```
+
+Filled results can be summarized with:
+
+```bash
+python3 -m converge benchmark --results /tmp/intentbench/results --require-real-results
+```
+
+Use this for before/after comparisons: the benchmark should show which cases, failure tags, and coverage axes improved or regressed. Do not convert it into a numeric quality score.

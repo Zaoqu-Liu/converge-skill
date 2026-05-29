@@ -1,0 +1,65 @@
+{
+  "protocol_version": "1.0",
+  "benchmark_id": "intentbench-core",
+  "benchmark_version": "0.1.0",
+  "name": "IntentBench Core",
+  "description": "A pass/fail benchmark for Converge Protocol intent reconstruction, context intake, evidence discipline, host realism, output routing, and proof boundaries.",
+  "source_skill": "skills/converge",
+  "case_source": "skills/converge/eval-cases",
+  "coverage_source": "skills/converge/eval-coverage.tsv",
+  "rubric_source": "skills/converge/eval-rubric.md",
+  "result_schema": "protocol/schemas/eval-result.schema.json",
+  "required_axes": [
+    "output_profile",
+    "trigger_surface",
+    "context_surface",
+    "evidence_surface",
+    "risk_surface",
+    "host_surface"
+  ],
+  "scoring": {
+    "unit": "case_pass_fail",
+    "full_pass_requires": "A valid real response-eval result for every benchmark case, all with Verdict: Pass.",
+    "axis_summary": "Report valid pass/fail coverage by output_profile, trigger_surface, context_surface, evidence_surface, risk_surface, and host_surface.",
+    "no_numeric_quality_score": true
+  },
+  "suites": [
+    {
+      "suite_id": "core",
+      "description": "All current Converge eval cases.",
+      "selector": {"axis": "*", "values": ["*"]}
+    },
+    {
+      "suite_id": "intent",
+      "description": "Low-expression intent, over-questioning, output routing, and owner recommendation cases.",
+      "selector": {
+        "axis": "risk_surface",
+        "values": ["ambiguous-intent", "simple-task", "reply-quality"]
+      }
+    },
+    {
+      "suite_id": "evidence",
+      "description": "Current research, source citation, context trust, high-risk, and completion proof cases.",
+      "selector": {
+        "axis": "evidence_surface",
+        "values": ["current-research", "source-citation", "local-inspection", "command-validation", "high-risk-review"]
+      }
+    },
+    {
+      "suite_id": "host",
+      "description": "Host capability, native question UI boundary, fallback, and tool realism cases.",
+      "selector": {
+        "axis": "host_surface",
+        "values": ["codex-default", "codex-plan", "claude-code", "cursor", "opencode", "cline", "antigravity", "gemini-cli", "github-copilot", "windsurf", "continue", "aider"]
+      }
+    },
+    {
+      "suite_id": "handoff",
+      "description": "Converge Docs, architecture, dev handoff, and final proof discipline cases.",
+      "selector": {
+        "axis": "output_profile",
+        "values": ["Converge Docs", "Dev Handoff", "Skill Evolution"]
+      }
+    }
+  ]
+}

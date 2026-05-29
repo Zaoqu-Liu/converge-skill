@@ -41,6 +41,7 @@ It includes:
 - cross-host adapter rules for Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, Aider, and unknown future hosts
 - a machine-readable host adapter registry that drives `doctor`, install target selection, release checks, and TSV drift validation
 - H3 native interaction proof packets for real native question UI/tool evidence
+- IntentBench benchmark manifests and runpacks for before/after pass/fail comparison by coverage axis
 - eval cases, coverage matrix, response-eval tools, release checks, and install sync scripts
 
 ## Support Claims
@@ -118,6 +119,13 @@ Build H3 native interaction proof packets:
 python3 -m converge native-proof --out /tmp/converge-native-proof
 ```
 
+Build an IntentBench runpack:
+
+```bash
+python3 -m converge benchmark --validate
+python3 -m converge benchmark --out /tmp/intentbench
+```
+
 For an installed console command:
 
 ```bash
@@ -141,7 +149,7 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 ├── skills/converge/          # canonical skill package
 ├── protocol/                 # Converge Protocol v1 schemas and examples
 ├── converge/                 # reference CLI/runtime
-├── intentbench/              # benchmark seed and public benchmark plan
+├── intentbench/              # IntentBench manifest and benchmark docs
 ├── gallery/                  # before/after demo plan
 ├── docs/                     # repository-level install, host, and evaluation docs
 ├── scripts/verify.py         # repository validation entrypoint

@@ -6,6 +6,7 @@
 - Adds the reference `converge` CLI/runtime with `validate`, `doctor`, `install`, `pack`, `eval`, and `release-check` commands.
 - Adds a machine-readable host adapter registry that drives doctor output, install targets, release checks, and TSV drift validation.
 - Adds H3 native interaction proof schema, runpack builder, validator, and `converge native-proof`.
+- Adds IntentBench manifest validation, runpack builder, result summarization, and `converge benchmark`.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
 
 ## 0.1.0 - 2026-05-28

@@ -387,6 +387,9 @@ Load only the resource needed for the current task:
 - `scripts/select_converge_response_eval_batch.py`: chooses deterministic pilot, next-cover, failed/invalid, or full response-eval batches from the coverage matrix.
 - `scripts/build_converge_native_proof.py`: builds H3 native interaction proof runpacks for Codex Plan, Claude Code, and Cursor.
 - `scripts/check_converge_native_proof.py`: validates H3 native interaction proof JSON and transcript/screenshot/log evidence.
+- `scripts/build_intentbench.py`: builds IntentBench runpacks from eval cases, coverage rows, and rubric sources.
+- `scripts/check_intentbench.py`: validates the IntentBench manifest, suite selectors, coverage, and scoring policy.
+- `scripts/summarize_intentbench.py`: summarizes filled IntentBench runpack results by pass/fail status and coverage axis.
 - `scripts/host_adapter_registry.py`: shared registry reader for install and release scripts.
 - `scripts/sync_converge_install.py`: syncs the canonical skill to registry-declared user skill directories, installs required bridge files such as the Cursor rule bridge, and creates backups.
 - `scripts/check_converge_release.py`: runs structural, eval-suite, response-eval smoke, install consistency, Cursor rule bridge, and script compile checks.

@@ -62,6 +62,8 @@ def run_skill_validators(root: Path) -> list[CheckResult]:
         [sys.executable, str(root / "scripts" / "summarize_converge_response_eval.py"), "--self-test"],
         [sys.executable, str(root / "scripts" / "select_converge_response_eval_batch.py"), "--self-test"],
         [sys.executable, str(root / "scripts" / "check_converge_native_proof.py"), "--self-test"],
+        [sys.executable, str(root / "scripts" / "check_intentbench.py"), "--self-test"],
+        [sys.executable, str(root / "scripts" / "summarize_intentbench.py"), "--self-test"],
     ]
     return [run_command(command) for command in commands]
 

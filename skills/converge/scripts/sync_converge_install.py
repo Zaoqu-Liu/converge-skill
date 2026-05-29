@@ -52,6 +52,9 @@ def validate_source(source: Path) -> None:
         "scripts/select_converge_response_eval_batch.py",
         "scripts/build_converge_native_proof.py",
         "scripts/check_converge_native_proof.py",
+        "scripts/build_intentbench.py",
+        "scripts/check_intentbench.py",
+        "scripts/summarize_intentbench.py",
         "scripts/sync_converge_install.py",
         "scripts/check_converge_release.py",
     ]
