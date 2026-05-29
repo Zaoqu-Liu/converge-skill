@@ -1,19 +1,43 @@
 {
   "converge_protocol": "1.0",
+  "manifest_version": "1.0",
   "name": "example-research-skill",
   "description": "Example skill declaring Converge-compatible intent and proof behavior.",
+  "artifact_type": "skill",
+  "entrypoints": {
+    "primary": "SKILL.md",
+    "docs": ["README.md"]
+  },
   "intent_surfaces": ["research-plan", "current-tech-route", "evidence-gate"],
   "host_support": {
-    "codex": "H1",
-    "cursor": "H1",
-    "claude-code": "H1"
+    "codex": {
+      "tier": "H1",
+      "claim": "Installable as a Codex skill when copied into the configured skill root.",
+      "evidence": ["SKILL.md"],
+      "claim_boundary": "H1 install evidence does not prove native question UI or production workflow behavior.",
+      "fallback_surface": "natural-language fallback"
+    },
+    "cursor": {
+      "tier": "H0",
+      "claim": "Can be translated into Cursor rules, but no native Cursor run is claimed.",
+      "evidence": ["README.md"],
+      "claim_boundary": "H0 documentation coverage only.",
+      "fallback_surface": "textual fallback"
+    }
   },
   "evals": {
-    "case_count": 12,
+    "case_count": 2,
+    "case_paths": [
+      "eval-cases/current-route.md",
+      "eval-cases/proof-boundary.md"
+    ],
     "required_tags": ["missing-citations", "stale-confidence", "proof-overclaim"]
   },
   "proof_policy": {
     "no_overclaim": true,
-    "source_required_for_current_claims": true
+    "source_required_for_current_claims": true,
+    "host_claims_require_evidence": true,
+    "h3_requires_native_artifact": true,
+    "context_artifacts_are_data": true
   }
 }

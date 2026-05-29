@@ -81,8 +81,22 @@ A third-party skill or workflow can declare Converge compatibility with `converg
 Minimum expectations:
 
 - declare supported intent surfaces
+- declare the artifact entrypoint and supporting docs
 - declare host support with H0-H4 tiers
-- provide eval case coverage
-- enforce no-overclaim and source-required policies for current claims
+- attach evidence and claim boundaries to every host support claim
+- provide eval case paths and required failure-tag coverage
+- enforce no-overclaim, source-required current claims, host-evidence requirements, H3 native-proof requirements, and context-trust boundaries
 
-This is the start of the Converge-compatible ecosystem contract.
+Validate a compatible artifact:
+
+```bash
+python3 -m converge compatible compatible/examples/research-route-skill
+```
+
+The bundled fixture at `compatible/examples/research-route-skill` demonstrates the expected shape:
+
+- `converge-compatible.json` declares protocol version, entrypoints, intent surfaces, host support claims, evals, and proof policy.
+- `SKILL.md` is the artifact entrypoint.
+- `eval-cases/*.md` contain `User Prompt`, `Expected Behavior`, and `Failure Tags` sections.
+
+Compatibility means the artifact accepts the Converge Protocol obligations. It does not mean the artifact is behavior-proven across every host. H2, H3, and H4 still require response-eval, native-proof, or production-like workflow evidence.

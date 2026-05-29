@@ -42,6 +42,13 @@ REQUIRED_ROOT_FILES = [
     "converge/__main__.py",
     "converge/cli.py",
     "converge/hosts.py",
+    "compatible/README.md",
+    "compatible/examples/research-route-skill/README.md",
+    "compatible/examples/research-route-skill/SKILL.md",
+    "compatible/examples/research-route-skill/converge-compatible.json",
+    "compatible/examples/research-route-skill/eval-cases/low-expression-route.md",
+    "compatible/examples/research-route-skill/eval-cases/current-route.md",
+    "compatible/examples/research-route-skill/eval-cases/proof-boundary.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -51,6 +58,7 @@ REQUIRED_ROOT_FILES = [
     "site/app.js",
     "site/assets/protocol-map.svg",
     "scripts/check_gallery_site.py",
+    "scripts/check_converge_compatible.py",
     ".github/workflows/validate.yml",
 ]
 GENERATED_PATTERNS = {
@@ -127,6 +135,8 @@ def main() -> int:
     run([python, str(SKILL_ROOT / "scripts" / "check_intentbench.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "summarize_intentbench.py"), "--self-test"])
     run([python, "-m", "converge", "benchmark", "--validate"])
+    run([python, str(ROOT / "scripts" / "check_converge_compatible.py"), "--self-test"])
+    run([python, "-m", "converge", "compatible", "compatible/examples"])
     run([python, str(ROOT / "scripts" / "check_gallery_site.py")])
     run(
         [

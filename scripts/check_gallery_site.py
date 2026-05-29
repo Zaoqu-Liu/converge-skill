@@ -31,9 +31,11 @@ REQUIRED_SITE_FILES = (
 REQUIRED_SITE_PHRASES = (
     "Converge Protocol",
     "IntentBench",
+    "Converge-compatible",
     "H0-H4",
     "before/after gallery",
     "python3 -m converge benchmark",
+    "python3 -m converge compatible",
     "python3 -m converge doctor",
 )
 REQUIRED_DOC_LINKS = (
@@ -43,6 +45,9 @@ REQUIRED_DOC_LINKS = (
     "../docs/host-support.md",
     "../docs/evaluation.md",
     "../intentbench/manifest.json",
+    "../compatible/README.md",
+    "../compatible/examples/research-route-skill/converge-compatible.json",
+    "../protocol/schemas/converge-compatible-manifest.schema.json",
     "../gallery/examples.json",
 )
 

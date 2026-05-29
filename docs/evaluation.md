@@ -17,6 +17,7 @@ This runs:
 - summary and batch selector self-tests
 - native-proof validator self-tests
 - IntentBench validator self-tests and manifest validation
+- Converge-compatible manifest validator self-test and bundled example validation
 - gallery/site validation for before/after examples and docs-site wiring
 - release smoke checks with `--skip-installs`
 
@@ -89,6 +90,17 @@ python3 -m converge benchmark --results /tmp/intentbench/results --require-real-
 ```
 
 Use this for before/after comparisons: the benchmark should show which cases, failure tags, and coverage axes improved or regressed. Do not convert it into a numeric quality score.
+
+## Compatible Manifest Evidence
+
+Use the compatible validator for third-party skills, rules, workflows, prompt packs, and host adapters:
+
+```bash
+python3 -m converge compatible compatible/examples
+python3 scripts/check_converge_compatible.py compatible/examples/research-route-skill
+```
+
+This does not prove real behavior. It proves that the artifact declares the Converge Protocol version, entrypoints, host support claims, proof boundaries, eval case coverage, and strict proof policies in a machine-checkable form.
 
 ## Gallery And Docs Site
 

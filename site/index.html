@@ -17,6 +17,7 @@
         <a href="#protocol">Protocol</a>
         <a href="#proof">Proof</a>
         <a href="#benchmark">IntentBench</a>
+        <a href="#compatible">Compatible</a>
         <a href="#gallery">Gallery</a>
         <a href="#install">Install</a>
       </nav>
@@ -143,6 +144,26 @@
         <pre class="command"><code>python3 -m converge benchmark --validate
 python3 -m converge benchmark --suite host --out /tmp/intentbench-host --with-result-stubs
 python3 -m converge benchmark --results /tmp/intentbench-host/results --require-real-results</code></pre>
+      </section>
+
+      <section id="compatible" class="band">
+        <div class="section-head">
+          <p class="eyebrow">Compatible</p>
+          <h2>Third-party skills can make machine-checkable claims.</h2>
+          <p>
+            Converge-compatible manifests let external skills, rules, workflows, prompt packs, and host adapters
+            declare entrypoints, intent surfaces, host proof tiers, eval coverage, and proof policies.
+          </p>
+        </div>
+        <pre class="command"><code>python3 -m converge compatible compatible/examples
+python3 -m converge compatible compatible/examples/research-route-skill
+python3 scripts/check_converge_compatible.py --self-test</code></pre>
+        <div class="link-grid">
+          <a href="../compatible/README.md">Compatible contract</a>
+          <a href="../compatible/examples/research-route-skill/converge-compatible.json">Example manifest</a>
+          <a href="../protocol/schemas/converge-compatible-manifest.schema.json">Manifest schema</a>
+          <a href="../docs/protocol.md">Protocol docs</a>
+        </div>
       </section>
 
       <section id="gallery" class="band gallery-band">

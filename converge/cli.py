@@ -37,8 +37,11 @@ REQUIRED_SCHEMAS = {
     "eval-result.schema.json": ["protocol_version", "case", "verdict", "host", "evidence", "failure_tags"],
     "converge-compatible-manifest.schema.json": [
         "converge_protocol",
+        "manifest_version",
         "name",
         "description",
+        "artifact_type",
+        "entrypoints",
         "intent_surfaces",
         "host_support",
         "evals",
@@ -251,6 +254,17 @@ def cmd_benchmark(args: argparse.Namespace) -> int:
     return run(command)
 
 
+def cmd_compatible(args: argparse.Namespace) -> int:
+    command = [
+        sys.executable,
+        str(ROOT / "scripts" / "check_converge_compatible.py"),
+    ]
+    if args.self_test:
+        command.append("--self-test")
+    command.extend(str(target) for target in args.targets)
+    return run(command)
+
+
 def cmd_release_check(args: argparse.Namespace) -> int:
     command = [
         sys.executable,
@@ -311,6 +325,11 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark.add_argument("--require-real-results", action="store_true")
     benchmark.add_argument("--validate", action="store_true")
     benchmark.set_defaults(func=cmd_benchmark)
+
+    compatible = subparsers.add_parser("compatible", help="validate Converge-compatible manifests")
+    compatible.add_argument("targets", nargs="*", type=Path, default=[Path("compatible/examples")])
+    compatible.add_argument("--self-test", action="store_true")
+    compatible.set_defaults(func=cmd_compatible)
 
     release_check = subparsers.add_parser("release-check", help="run the release gate")
     release_check.add_argument("--targets", default="all")

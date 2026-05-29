@@ -89,6 +89,18 @@ python3 -m converge benchmark --results /tmp/intentbench/results --require-real-
 
 The benchmark command uses `intentbench/manifest.json`, `skills/converge/eval-cases/`, `skills/converge/eval-coverage.tsv`, and the response-eval result format. It reports pass/fail and axis coverage rather than numeric quality scores.
 
+### compatible
+
+Validate Converge-compatible manifests for third-party skills, rules, workflows, prompt packs, or host adapters:
+
+```bash
+python3 -m converge compatible compatible/examples
+python3 -m converge compatible compatible/examples/research-route-skill
+python3 -m converge compatible --self-test
+```
+
+The validator resolves `converge-compatible.json`, checks entrypoint files, host support proof tiers, host evidence references, eval case sections, required failure-tag coverage, and strict proof-policy keys.
+
 ### release-check
 
 Run the release gate:

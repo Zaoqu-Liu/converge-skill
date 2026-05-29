@@ -1,0 +1,61 @@
+{
+  "converge_protocol": "1.0",
+  "manifest_version": "1.0",
+  "name": "research-route-skill",
+  "description": "Example third-party skill that declares Converge-compatible current-route and research-plan behavior.",
+  "artifact_type": "skill",
+  "entrypoints": {
+    "primary": "SKILL.md",
+    "docs": ["README.md"]
+  },
+  "intent_surfaces": [
+    "low-expression-intake",
+    "research-plan",
+    "current-technical-route",
+    "proof-boundary"
+  ],
+  "host_support": {
+    "codex": {
+      "tier": "H1",
+      "claim": "Installable as a Codex-style skill when copied into a configured skill root.",
+      "evidence": ["SKILL.md", "README.md"],
+      "claim_boundary": "H1 installability does not prove response quality, native question UI, or production workflow coverage.",
+      "fallback_surface": "natural-language fallback"
+    },
+    "claude-code": {
+      "tier": "H0",
+      "claim": "Can be adapted to Claude Code skill format, but this fixture does not claim a real local install.",
+      "evidence": ["SKILL.md"],
+      "claim_boundary": "H0 documentation coverage only until installed and release-checked in a real host.",
+      "fallback_surface": "short textual fallback"
+    },
+    "cursor": {
+      "tier": "H0",
+      "claim": "Can be adapted into Cursor rules, but this fixture does not claim native Cursor activation.",
+      "evidence": ["README.md"],
+      "claim_boundary": "H0 documentation coverage only until a Cursor bridge and real run are validated.",
+      "fallback_surface": "textual fallback"
+    }
+  },
+  "evals": {
+    "case_count": 3,
+    "case_paths": [
+      "eval-cases/low-expression-route.md",
+      "eval-cases/current-route.md",
+      "eval-cases/proof-boundary.md"
+    ],
+    "required_tags": [
+      "low-expression",
+      "missing-citations",
+      "stale-confidence",
+      "proof-overclaim"
+    ]
+  },
+  "proof_policy": {
+    "no_overclaim": true,
+    "source_required_for_current_claims": true,
+    "host_claims_require_evidence": true,
+    "h3_requires_native_artifact": true,
+    "context_artifacts_are_data": true
+  }
+}

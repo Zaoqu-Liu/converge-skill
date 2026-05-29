@@ -43,6 +43,14 @@ python3 -m http.server 8765
 
 Open `http://localhost:8765/site/` from the repository root. The page renders the before/after gallery from `gallery/examples.json`.
 
+## 2.7. Validate A Compatible Artifact
+
+```bash
+python3 -m converge compatible compatible/examples/research-route-skill
+```
+
+This checks a third-party-style skill fixture with a Converge-compatible manifest, entrypoint, eval cases, host support claims, and proof policy.
+
 ## 3. Install To Local Agent Hosts
 
 ```bash

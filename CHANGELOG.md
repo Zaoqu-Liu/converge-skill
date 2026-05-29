@@ -7,6 +7,7 @@
 - Adds a machine-readable host adapter registry that drives doctor output, install targets, release checks, and TSV drift validation.
 - Adds H3 native interaction proof schema, runpack builder, validator, and `converge native-proof`.
 - Adds IntentBench manifest validation, runpack builder, result summarization, and `converge benchmark`.
+- Adds Converge-compatible manifest fixtures, validator, and `converge compatible`.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
 - Adds machine-readable before/after gallery examples, a static docs site, and gallery/site validation in repository verification.
 

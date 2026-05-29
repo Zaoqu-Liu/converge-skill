@@ -4,33 +4,86 @@
   "title": "Converge-Compatible Manifest",
   "type": "object",
   "additionalProperties": false,
-  "required": ["converge_protocol", "name", "description", "intent_surfaces", "host_support", "evals", "proof_policy"],
+  "required": [
+    "converge_protocol",
+    "manifest_version",
+    "name",
+    "description",
+    "artifact_type",
+    "entrypoints",
+    "intent_surfaces",
+    "host_support",
+    "evals",
+    "proof_policy"
+  ],
   "properties": {
     "converge_protocol": {
       "type": "string",
       "pattern": "^1\\.0$"
     },
-    "name": {"type": "string"},
-    "description": {"type": "string"},
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^1\\.0$"
+    },
+    "name": {"type": "string", "minLength": 3},
+    "description": {"type": "string", "minLength": 20},
+    "artifact_type": {
+      "type": "string",
+      "enum": ["skill", "agent-rule", "workflow", "prompt-pack", "host-adapter"]
+    },
+    "entrypoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary"],
+      "properties": {
+        "primary": {"type": "string"},
+        "docs": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
     "intent_surfaces": {
       "type": "array",
+      "minItems": 1,
       "items": {"type": "string"}
     },
     "host_support": {
       "type": "object",
       "additionalProperties": {
-        "type": "string",
-        "enum": ["H0", "H1", "H2", "H3", "H4"]
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tier", "claim", "evidence", "claim_boundary", "fallback_surface"],
+        "properties": {
+          "tier": {
+            "type": "string",
+            "enum": ["H0", "H1", "H2", "H3", "H4"]
+          },
+          "claim": {"type": "string"},
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string"}
+          },
+          "claim_boundary": {"type": "string"},
+          "fallback_surface": {"type": "string"}
+        }
       }
     },
     "evals": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["case_count", "required_tags"],
+      "required": ["case_count", "case_paths", "required_tags"],
       "properties": {
-        "case_count": {"type": "integer", "minimum": 0},
+        "case_count": {"type": "integer", "minimum": 1},
+        "case_paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"}
+        },
         "required_tags": {
           "type": "array",
+          "minItems": 1,
           "items": {"type": "string"}
         }
       }
@@ -38,10 +91,19 @@
     "proof_policy": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["no_overclaim", "source_required_for_current_claims"],
+      "required": [
+        "no_overclaim",
+        "source_required_for_current_claims",
+        "host_claims_require_evidence",
+        "h3_requires_native_artifact",
+        "context_artifacts_are_data"
+      ],
       "properties": {
         "no_overclaim": {"type": "boolean"},
-        "source_required_for_current_claims": {"type": "boolean"}
+        "source_required_for_current_claims": {"type": "boolean"},
+        "host_claims_require_evidence": {"type": "boolean"},
+        "h3_requires_native_artifact": {"type": "boolean"},
+        "context_artifacts_are_data": {"type": "boolean"}
       }
     }
   }

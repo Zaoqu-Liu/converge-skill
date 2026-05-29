@@ -42,6 +42,7 @@ It includes:
 - a machine-readable host adapter registry that drives `doctor`, install target selection, release checks, and TSV drift validation
 - H3 native interaction proof packets for real native question UI/tool evidence
 - IntentBench benchmark manifests and runpacks for before/after pass/fail comparison by coverage axis
+- Converge-compatible manifests and validation fixtures for third-party skills, rules, workflows, prompt packs, and host adapters
 - before/after gallery data and a static docs site that make Converge behavior legible before installation
 - eval cases, coverage matrix, response-eval tools, release checks, and install sync scripts
 
@@ -127,6 +128,13 @@ python3 -m converge benchmark --validate
 python3 -m converge benchmark --out /tmp/intentbench
 ```
 
+Validate third-party Converge-compatible manifests:
+
+```bash
+python3 -m converge compatible compatible/examples
+python3 scripts/check_converge_compatible.py compatible/examples/research-route-skill
+```
+
 For an installed console command:
 
 ```bash
@@ -156,6 +164,7 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 ├── skills/converge/          # canonical skill package
 ├── protocol/                 # Converge Protocol v1 schemas and examples
 ├── converge/                 # reference CLI/runtime
+├── compatible/               # Converge-compatible manifest examples and fixtures
 ├── intentbench/              # IntentBench manifest and benchmark docs
 ├── gallery/                  # before/after examples and machine-readable data
 ├── site/                     # static docs site for 30-second product comprehension
@@ -198,6 +207,8 @@ Any change to host support should update the adapter registry, source evidence, 
 - [docs/cli.md](docs/cli.md): reference CLI/runtime commands.
 - `protocol/schemas/`: JSON schemas.
 - `protocol/examples/`: valid example instances.
+- [compatible/README.md](compatible/README.md): third-party Converge-compatible artifact contract.
+- [compatible/examples/research-route-skill](compatible/examples/research-route-skill): example external skill with manifest, eval cases, and proof policy.
 
 ## Version
 
