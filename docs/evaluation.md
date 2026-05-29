@@ -17,6 +17,7 @@ This runs:
 - summary and batch selector self-tests
 - native-proof validator self-tests
 - IntentBench validator self-tests and manifest validation
+- gallery/site validation for before/after examples and docs-site wiring
 - release smoke checks with `--skip-installs`
 
 ## Local Install Release Check
@@ -88,3 +89,13 @@ python3 -m converge benchmark --results /tmp/intentbench/results --require-real-
 ```
 
 Use this for before/after comparisons: the benchmark should show which cases, failure tags, and coverage axes improved or regressed. Do not convert it into a numeric quality score.
+
+## Gallery And Docs Site
+
+The public-facing gallery is also validated:
+
+```bash
+python3 scripts/check_gallery_site.py
+```
+
+This verifies that `gallery/examples.json` uses the expected schema, references real eval cases, has explicit proof boundaries, and that `site/index.html` renders the examples while linking to the protocol, install, host support, evaluation, and IntentBench artifacts.

@@ -35,6 +35,14 @@ python3 -m pip install -e .
 converge doctor
 ```
 
+## 2.6. Preview The Docs Site
+
+```bash
+python3 -m http.server 8765
+```
+
+Open `http://localhost:8765/site/` from the repository root. The page renders the before/after gallery from `gallery/examples.json`.
+
 ## 3. Install To Local Agent Hosts
 
 ```bash

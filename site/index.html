@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Converge Protocol</title>
+    <meta name="description" content="Converge Protocol turns fuzzy human requests into scoped intent, evidence, decisions, host behavior, and proof boundaries.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Converge Protocol home">
+        <span class="brand-mark">C</span>
+        <span>Converge Protocol</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#protocol">Protocol</a>
+        <a href="#proof">Proof</a>
+        <a href="#benchmark">IntentBench</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#install">Install</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Agent Intent Layer</p>
+          <h1>Converge Protocol v1 for agent intent.</h1>
+          <p class="lead">
+            Make agents understand before they execute: a protocol, runtime, benchmark, and proof system for turning vague human work into scoped intent,
+            inspected context, current evidence, host-realistic interaction, and bounded claims.
+          </p>
+          <div class="actions" aria-label="Quick actions">
+            <a class="button primary" href="../docs/quickstart.md">5-minute setup</a>
+            <a class="button" href="../docs/protocol.md">Read protocol</a>
+          </div>
+        </div>
+        <figure class="hero-visual" aria-label="Protocol map">
+          <img src="assets/protocol-map.svg" alt="Converge Protocol map from fuzzy request to agent execution">
+        </figure>
+      </section>
+
+      <section class="signal-strip" aria-label="Current verified surface">
+        <div>
+          <strong>40</strong>
+          <span>eval cases</span>
+        </div>
+        <div>
+          <strong>261</strong>
+          <span>coverage rows</span>
+        </div>
+        <div>
+          <strong>H0-H4</strong>
+          <span>proof tiers</span>
+        </div>
+        <div>
+          <strong>CLI</strong>
+          <span>validate, doctor, install, eval</span>
+        </div>
+      </section>
+
+      <section id="protocol" class="band">
+        <div class="section-head">
+          <p class="eyebrow">Protocol</p>
+          <h2>One loop, many hosts.</h2>
+          <p>
+            Converge sits between user intent and host execution. It does not grant tools or bypass permissions;
+            it makes the agent account for intent, context, evidence, decisions, output routing, and proof.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="panel">
+            <h3>Intent</h3>
+            <p>Reconstruct plausible true goals before choosing an output.</p>
+          </article>
+          <article class="panel">
+            <h3>Context</h3>
+            <p>Inspect accessible files, links, screenshots, repos, and instruction-bearing artifacts.</p>
+          </article>
+          <article class="panel">
+            <h3>Evidence</h3>
+            <p>Verify drift-prone claims and cite the sources or commands that support the route.</p>
+          </article>
+          <article class="panel">
+            <h3>Decision</h3>
+            <p>Give owner-mode recommendations, not neutral surveys or blank-page homework.</p>
+          </article>
+          <article class="panel">
+            <h3>Host</h3>
+            <p>Use native interaction only when the active host actually exposes it.</p>
+          </article>
+          <article class="panel">
+            <h3>Proof</h3>
+            <p>Keep claims bounded by H0-H4 evidence instead of install paths or vibes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="proof" class="band proof-band">
+        <div class="section-head">
+          <p class="eyebrow">Proof tiers</p>
+          <h2>Support claims are scoped evidence, not branding.</h2>
+        </div>
+        <div class="tier-table" role="table" aria-label="Converge support proof tiers">
+          <div role="row">
+            <span role="cell">H0</span>
+            <strong role="cell">Documented rules</strong>
+            <p role="cell">Static host or capability boundary is documented and covered by eval cases.</p>
+          </div>
+          <div role="row">
+            <span role="cell">H1</span>
+            <strong role="cell">Installed or bridged</strong>
+            <p role="cell">Installed copy or bridge matches canonical source.</p>
+          </div>
+          <div role="row">
+            <span role="cell">H2</span>
+            <strong role="cell">Fallback tested</strong>
+            <p role="cell">Real response-eval passes in CLI, headless, or non-interactive mode.</p>
+          </div>
+          <div role="row">
+            <span role="cell">H3</span>
+            <strong role="cell">Native interaction tested</strong>
+            <p role="cell">Real host run uses the native question UI/tool correctly.</p>
+          </div>
+          <div role="row">
+            <span role="cell">H4</span>
+            <strong role="cell">Production workflow tested</strong>
+            <p role="cell">Multiple real tasks pass across files, tools, research, and editing.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="benchmark" class="band">
+        <div class="section-head">
+          <p class="eyebrow">IntentBench</p>
+          <h2>Regression testing for intent quality.</h2>
+          <p>
+            IntentBench packages Converge eval cases into blind prompts, review packets, result stubs,
+            and pass/fail scorecards by coverage axis. It deliberately avoids numeric quality scores.
+          </p>
+        </div>
+        <pre class="command"><code>python3 -m converge benchmark --validate
+python3 -m converge benchmark --suite host --out /tmp/intentbench-host --with-result-stubs
+python3 -m converge benchmark --results /tmp/intentbench-host/results --require-real-results</code></pre>
+      </section>
+
+      <section id="gallery" class="band gallery-band">
+        <div class="section-head">
+          <p class="eyebrow">Before / after</p>
+          <h2>What changes when Converge is active.</h2>
+          <p>This before/after gallery pairs a weak response pattern with the Converge response pattern and its proof boundary.</p>
+        </div>
+        <p class="data-source">Source: <a href="../gallery/examples.json">gallery/examples.json</a></p>
+        <div id="gallery-list" class="gallery-list" aria-live="polite"></div>
+      </section>
+
+      <section id="install" class="band install-band">
+        <div class="section-head">
+          <p class="eyebrow">Install</p>
+          <h2>Install locally, then inspect support evidence.</h2>
+        </div>
+        <pre class="command"><code>git clone https://github.com/Zaoqu-Liu/converge-skill.git
+cd converge-skill
+python3 scripts/verify.py
+python3 -m converge doctor --json
+python3 -m converge install --targets all</code></pre>
+        <div class="link-grid">
+          <a href="../docs/install.md">Install docs</a>
+          <a href="../docs/host-support.md">Host support</a>
+          <a href="../docs/evaluation.md">Evaluation</a>
+          <a href="../intentbench/manifest.json">IntentBench manifest</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Converge Protocol v1 seed</span>
+      <a href="https://github.com/Zaoqu-Liu/converge-skill">GitHub</a>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

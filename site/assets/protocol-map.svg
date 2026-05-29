@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Converge Protocol map</title>
+  <desc id="desc">A protocol flow from user intent through Converge gates to host execution and evidence.</desc>
+  <rect width="1200" height="520" fill="#f8fafc"/>
+  <g fill="none" stroke="#0f172a" stroke-width="2">
+    <path d="M180 260 H370"/>
+    <path d="M830 260 H1020"/>
+    <path d="M600 150 V95"/>
+    <path d="M600 370 V425"/>
+  </g>
+  <g fill="#0f172a" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <text x="120" y="72" font-size="18" font-weight="700">User</text>
+    <text x="438" y="72" font-size="18" font-weight="700">Converge Protocol</text>
+    <text x="961" y="72" font-size="18" font-weight="700">Agent Host</text>
+  </g>
+  <g>
+    <rect x="70" y="115" width="220" height="290" rx="18" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="105" y="160" fill="#0f172a" font-size="24" font-weight="700" font-family="Inter, sans-serif">Fuzzy request</text>
+    <text x="105" y="203" fill="#334155" font-size="18" font-family="Inter, sans-serif">low expression</text>
+    <text x="105" y="235" fill="#334155" font-size="18" font-family="Inter, sans-serif">mixed context</text>
+    <text x="105" y="267" fill="#334155" font-size="18" font-family="Inter, sans-serif">current claims</text>
+    <text x="105" y="299" fill="#334155" font-size="18" font-family="Inter, sans-serif">proof pressure</text>
+  </g>
+  <g>
+    <rect x="370" y="85" width="460" height="350" rx="24" fill="#0b1220"/>
+    <text x="420" y="135" fill="#ffffff" font-size="28" font-weight="800" font-family="Inter, sans-serif">Intent Layer</text>
+    <g font-family="Inter, sans-serif" font-size="17" font-weight="700">
+      <rect x="420" y="170" width="160" height="46" rx="8" fill="#e0f2fe"/>
+      <text x="443" y="199" fill="#075985">Intent</text>
+      <rect x="610" y="170" width="170" height="46" rx="8" fill="#dcfce7"/>
+      <text x="633" y="199" fill="#166534">Context</text>
+      <rect x="420" y="238" width="160" height="46" rx="8" fill="#fef3c7"/>
+      <text x="443" y="267" fill="#92400e">Evidence</text>
+      <rect x="610" y="238" width="170" height="46" rx="8" fill="#ede9fe"/>
+      <text x="633" y="267" fill="#5b21b6">Decision</text>
+      <rect x="420" y="306" width="160" height="46" rx="8" fill="#fee2e2"/>
+      <text x="443" y="335" fill="#991b1b">Boundary</text>
+      <rect x="610" y="306" width="170" height="46" rx="8" fill="#f1f5f9"/>
+      <text x="633" y="335" fill="#334155">Output</text>
+    </g>
+    <text x="420" y="392" fill="#cbd5e1" font-size="18" font-family="Inter, sans-serif">H0-H4 proof tiers keep claims scoped.</text>
+  </g>
+  <g>
+    <rect x="910" y="115" width="220" height="290" rx="18" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="948" y="160" fill="#0f172a" font-size="24" font-weight="700" font-family="Inter, sans-serif">Execution</text>
+    <text x="948" y="203" fill="#334155" font-size="18" font-family="Inter, sans-serif">Codex</text>
+    <text x="948" y="235" fill="#334155" font-size="18" font-family="Inter, sans-serif">Claude Code</text>
+    <text x="948" y="267" fill="#334155" font-size="18" font-family="Inter, sans-serif">Cursor</text>
+    <text x="948" y="299" fill="#334155" font-size="18" font-family="Inter, sans-serif">opencode</text>
+    <text x="948" y="331" fill="#334155" font-size="18" font-family="Inter, sans-serif">future hosts</text>
+  </g>
+  <g fill="#0f172a" font-family="Inter, sans-serif" font-size="17" font-weight="700">
+    <rect x="485" y="24" width="230" height="52" rx="12" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="524" y="57">IntentBench</text>
+    <rect x="482" y="444" width="236" height="52" rx="12" fill="#ffffff" stroke="#94a3b8"/>
+    <text x="516" y="477">Native proof</text>
+  </g>
+</svg>

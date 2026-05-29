@@ -8,6 +8,7 @@
 - Adds H3 native interaction proof schema, runpack builder, validator, and `converge native-proof`.
 - Adds IntentBench manifest validation, runpack builder, result summarization, and `converge benchmark`.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
+- Adds machine-readable before/after gallery examples, a static docs site, and gallery/site validation in repository verification.
 
 ## 0.1.0 - 2026-05-28
 

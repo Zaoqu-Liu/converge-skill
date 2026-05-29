@@ -42,6 +42,7 @@ It includes:
 - a machine-readable host adapter registry that drives `doctor`, install target selection, release checks, and TSV drift validation
 - H3 native interaction proof packets for real native question UI/tool evidence
 - IntentBench benchmark manifests and runpacks for before/after pass/fail comparison by coverage axis
+- before/after gallery data and a static docs site that make Converge behavior legible before installation
 - eval cases, coverage matrix, response-eval tools, release checks, and install sync scripts
 
 ## Support Claims
@@ -136,6 +137,12 @@ converge doctor
 
 The verifier runs the Converge structural validator, eval-suite checks, coverage matrix, response-eval self-tests, smoke packet generation, script compilation, and release gate without requiring user-local install directories.
 
+Validate the public-facing gallery and static docs site:
+
+```bash
+python3 scripts/check_gallery_site.py
+```
+
 For local install consistency across supported hosts:
 
 ```bash
@@ -150,11 +157,26 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 ├── protocol/                 # Converge Protocol v1 schemas and examples
 ├── converge/                 # reference CLI/runtime
 ├── intentbench/              # IntentBench manifest and benchmark docs
-├── gallery/                  # before/after demo plan
+├── gallery/                  # before/after examples and machine-readable data
+├── site/                     # static docs site for 30-second product comprehension
 ├── docs/                     # repository-level install, host, and evaluation docs
 ├── scripts/verify.py         # repository validation entrypoint
 └── .github/workflows/        # CI validation
 ```
+
+## Gallery And Docs Site
+
+- [gallery/examples.json](gallery/examples.json): machine-readable before/after examples tied to eval cases and proof boundaries.
+- [gallery/README.md](gallery/README.md): gallery maintenance notes.
+- [site/index.html](site/index.html): static documentation site that renders the examples and links to the protocol, install, host support, and evaluation docs.
+
+Serve the site from the repository root so the browser can load `gallery/examples.json`:
+
+```bash
+python3 -m http.server 8765
+```
+
+Then open `http://localhost:8765/site/`.
 
 ## Evidence Files
 

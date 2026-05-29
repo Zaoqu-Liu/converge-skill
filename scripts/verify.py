@@ -45,6 +45,12 @@ REQUIRED_ROOT_FILES = [
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
+    "gallery/examples.json",
+    "site/index.html",
+    "site/styles.css",
+    "site/app.js",
+    "site/assets/protocol-map.svg",
+    "scripts/check_gallery_site.py",
     ".github/workflows/validate.yml",
 ]
 GENERATED_PATTERNS = {
@@ -121,6 +127,7 @@ def main() -> int:
     run([python, str(SKILL_ROOT / "scripts" / "check_intentbench.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "summarize_intentbench.py"), "--self-test"])
     run([python, "-m", "converge", "benchmark", "--validate"])
+    run([python, str(ROOT / "scripts" / "check_gallery_site.py")])
     run(
         [
             python,
