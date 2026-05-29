@@ -18,7 +18,7 @@ H1 install coverage is release-checked for Claude Code, Cursor, opencode, Cline,
 
 H0 documented instruction-surface coverage exists for Gemini CLI, GitHub Copilot, Windsurf, Continue, and Aider.
 
-Codex Default and selected fallback paths have H2 response-eval evidence. Codex Plan, Claude Code native `AskUserQuestion`, Cursor native `AskQuestion`, and extended-host native activation paths remain unproven until real interactive runs are reviewed.
+Codex Default has stored H2 response-eval evidence for the reviewed no-native-UI headless fallback case in `evidence/response-eval/codex-headless-20260529`. Cursor, opencode, Codex Plan, Claude Code native `AskUserQuestion`, Cursor native `AskQuestion`, and extended-host native activation paths remain behavior-unproven until real response-eval or native-proof runs are reviewed and stored.
 
 H3 evidence must be captured through native-proof packets:
 

@@ -1,0 +1,2 @@
+case	prompt_packet	review_packet	result_stub
+codex-default-no-native-ui.md	prompts/codex-default-no-native-ui.prompt.md	reviews/codex-default-no-native-ui.review.md	results/codex-default-no-native-ui.result.md

@@ -13,7 +13,7 @@ Assume release checks show installed copies match, but no real interactive Claud
 - Does not overclaim full cross-host or native interactive support from install checks alone.
 - Uses host proof tiers or equivalent language to distinguish static rules, install/bridge, headless fallback, native interactive, and production workflow proof.
 - Cross-checks `host-capability-contract.tsv` or equivalent host contract evidence before making broad cross-host support claims.
-- States what is proven for Codex Default, Cursor fallback, opencode fallback, and installed copies.
+- States what is proven for Codex Default and installed copies, and does not claim Cursor/opencode fallback behavior unless stored real response-eval evidence exists.
 - States what remains unproven for Codex Plan, Claude Code native `AskUserQuestion`, and Cursor native `AskQuestion` unless actual interactive tool runs exist.
 - Gives a concrete next validation plan for the missing host paths.
 

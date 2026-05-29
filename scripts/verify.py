@@ -49,6 +49,14 @@ REQUIRED_ROOT_FILES = [
     "compatible/examples/research-route-skill/eval-cases/low-expression-route.md",
     "compatible/examples/research-route-skill/eval-cases/current-route.md",
     "compatible/examples/research-route-skill/eval-cases/proof-boundary.md",
+    "evidence/README.md",
+    "evidence/response-eval/codex-headless-20260529/README.md",
+    "evidence/response-eval/codex-headless-20260529/RUNBOOK.md",
+    "evidence/response-eval/codex-headless-20260529/manifest.tsv",
+    "evidence/response-eval/codex-headless-20260529/prompts/codex-default-no-native-ui.prompt.md",
+    "evidence/response-eval/codex-headless-20260529/reviews/codex-default-no-native-ui.review.md",
+    "evidence/response-eval/codex-headless-20260529/responses/codex-default-no-native-ui.response.md",
+    "evidence/response-eval/codex-headless-20260529/results/codex-default-no-native-ui.result.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -137,6 +145,16 @@ def main() -> int:
     run([python, "-m", "converge", "benchmark", "--validate"])
     run([python, str(ROOT / "scripts" / "check_converge_compatible.py"), "--self-test"])
     run([python, "-m", "converge", "compatible", "compatible/examples"])
+    run(
+        [
+            python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-20260529" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
     run([python, str(ROOT / "scripts" / "check_gallery_site.py")])
     run(
         [

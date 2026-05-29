@@ -11,18 +11,18 @@ This ledger records what Converge can honestly claim for each host. Use it with 
 - Adapter registry coverage: `host-adapters.json` machine-checks install target keys, skill anchors, bridge files, interaction surfaces, proof tiers, and eval hooks.
 - Contract coverage: `host-capability-contract.tsv` machine-checks each host profile against source anchors, install surfaces, native question surfaces, fallback behavior, current claim tier, eval case, and H3 boundary.
 - Install coverage: release checks compare canonical source against installed copies for Claude Code, Cursor, opencode, Cline, and Google Antigravity.
-- Behavior coverage: 36 of 39 real response-eval cases are reviewed as Pass with 0 Fail.
-- Missing behavior evidence: the remaining 3 cases require real native interactive question UI and must not be filled from CLI/headless fallback output.
+- Artifacted behavior coverage: 1 of 40 real response-eval cases is stored in `evidence/response-eval/codex-headless-20260529` and reviewed as Pass with 0 Fail.
+- Missing behavior evidence: the remaining 39 cases are not yet stored as real response-eval results; native interactive question UI cases must not be filled from CLI/headless fallback output.
 
 ## Host Ledger
 
 | Host | Highest Current Claim | Evidence | H3 Native Interaction Status | Claim Boundary |
 |---|---|---|---|---|
-| Codex Default | H2 fallback-tested | `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, release validators | Not applicable; default mode has no `request_user_input` | Can claim Codex Default fallback behavior, not Plan native UI. |
+| Codex Default | H2 fallback-tested | `evidence/response-eval/codex-headless-20260529/results/codex-default-no-native-ui.result.md` validates with `--require-real-results`; `codex-default-choice-survey-trap.md` remains unfilled | Not applicable; default mode has no `request_user_input` | Can claim Codex Default fallback behavior for the reviewed no-native-UI case, not full Codex coverage. |
 | Codex Plan | H0 documented | `codex-plan-native-question-ui.md`, `host-native-interaction-runbook.md` | H3 status: Unproven in this environment | Can claim documented Plan Mode rules only until a real Plan Mode run uses `request_user_input`. |
 | Claude Code | H1 installed | Installed copy matches canonical source; `claude-native-question-bridge.md` documents expected native behavior | H3 status: Unproven in this environment | Can claim Claude Code install/bridge coverage, not native `AskUserQuestion` behavior. |
-| Cursor | H1 installed plus H2 fallback-tested | Installed copy and `~/.cursor/rules/converge.mdc` match canonical bridge; Cursor fallback case reviewed | H3 status: Unproven in this environment | Can claim Cursor install/bridge and fallback handling, not native `AskQuestion` behavior. |
-| opencode | H1 installed plus H2 fallback-tested | Installed copy matches canonical source; `opencode-capability-adapter.md` reviewed | No specific native question tool claimed | Can claim opencode install and capability-based fallback handling. |
+| Cursor | H1 installed | Installed copy and `~/.cursor/rules/converge.mdc` match canonical bridge; no stored real Cursor fallback result is present in this repository | H3 status: Unproven in this environment | Can claim Cursor install/bridge coverage, not fallback behavior or native `AskQuestion` behavior. |
+| opencode | H1 installed | Installed copy matches canonical source; no stored real opencode fallback result is present in this repository | No specific native question tool claimed | Can claim opencode installed skill coverage, not behavior-level fallback validation. |
 | Cline | H1 installed | Installed copy matches canonical source after release check; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim Cline installed skill coverage, not activation/native question behavior. |
 | Google Antigravity | H1 installed | Installed copy matches canonical source after release check; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim Antigravity installed skill coverage, not activation/native question behavior. |
 | Gemini CLI | H0 documented | `host-source-evidence.md` records `GEMINI.md`/context-file docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented context-file bridge rules only. |
@@ -40,14 +40,14 @@ These must remain missing until reviewed in a real interactive host:
 - `claude-native-question-bridge.md`
 - `cursor-native-question-bridge.md`
 
-Extended hosts such as Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, and Aider also need real host runs before any H2/H3/H4 claim.
+Cursor, opencode, and extended hosts such as Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, and Aider also need stored real host or headless/fallback runs before any H2/H3/H4 claim.
 
 ## Reporting Language
 
 Use scoped claims:
 
 ```text
-Converge is installed and release-checked for Claude Code, Cursor, and opencode. It is headless/fallback-tested for the reviewed non-native paths. Native interactive question paths for Codex Plan, Claude Code, and Cursor remain H3-unproven until real interactive runs capture the native question UI being used correctly.
+Converge is installed and release-checked for Claude Code, Cursor, opencode, Cline, and Google Antigravity. It has one stored real Codex Default headless response-eval pass for the no-native-UI fallback case. Native interactive question paths for Codex Plan, Claude Code, and Cursor remain H3-unproven until real interactive runs capture the native question UI being used correctly.
 ```
 
 Do not say:

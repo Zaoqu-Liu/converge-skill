@@ -166,7 +166,7 @@
         "fallback_surface": "short textual fallback"
       },
       "proof": {
-        "current_claim": "H1 installed plus H2 fallback-tested",
+        "current_claim": "H1 installed",
         "eval_case": "cursor-native-question-bridge.md",
         "h3_boundary": "requires real Cursor run with AskQuestion used correctly"
       }
@@ -201,7 +201,7 @@
         "fallback_surface": "capability fallback"
       },
       "proof": {
-        "current_claim": "H1 installed plus H2 fallback-tested",
+        "current_claim": "H1 installed",
         "eval_case": "opencode-capability-adapter.md",
         "h3_boundary": "no specific native question tool claimed until active tools expose one"
       }

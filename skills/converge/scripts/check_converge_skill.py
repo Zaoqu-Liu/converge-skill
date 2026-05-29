@@ -267,7 +267,7 @@ def check_host_support_ledger(errors: list[str]) -> None:
             errors.append(f"host-support-ledger.md missing native case: {case_name}")
 
     required_phrases = [
-        "36 of 39 real response-eval cases are reviewed as Pass with 0 Fail",
+        "1 of 40 real response-eval cases is stored in `evidence/response-eval/codex-headless-20260529` and reviewed as Pass with 0 Fail",
         "host-capability-contract.tsv",
         "H3 status: Unproven in this environment",
         "Do not say",

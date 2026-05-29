@@ -14,6 +14,7 @@ This runs:
 - `skills/converge/scripts/check_converge_eval_suite.py --min-cases-per-tag 2`
 - `skills/converge/scripts/check_converge_coverage_matrix.py`
 - response-eval validator self-tests
+- stored Codex headless response-eval evidence validation with `--require-real-results`
 - summary and batch selector self-tests
 - native-proof validator self-tests
 - IntentBench validator self-tests and manifest validation
@@ -51,6 +52,19 @@ python3 skills/converge/scripts/check_converge_response_eval.py RESULTS_DIR \
 ```
 
 Do not use synthetic release-smoke results as proof of real behavior.
+
+## Stored Response-Eval Evidence
+
+The repository contains a scoped real Codex headless evidence seed:
+
+```bash
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-20260529/results \
+  --root skills/converge \
+  --require-real-results
+```
+
+This proves only the stored `codex-default-no-native-ui.md` H2 fallback case. It is not full benchmark proof and does not promote Cursor, Claude Code, or native question UI paths.
 
 ## Native Interaction Evidence
 

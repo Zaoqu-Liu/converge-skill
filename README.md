@@ -42,6 +42,7 @@ It includes:
 - a machine-readable host adapter registry that drives `doctor`, install target selection, release checks, and TSV drift validation
 - H3 native interaction proof packets for real native question UI/tool evidence
 - IntentBench benchmark manifests and runpacks for before/after pass/fail comparison by coverage axis
+- stored evidence artifacts for scoped real response-eval claims
 - Converge-compatible manifests and validation fixtures for third-party skills, rules, workflows, prompt packs, and host adapters
 - before/after gallery data and a static docs site that make Converge behavior legible before installation
 - eval cases, coverage matrix, response-eval tools, release checks, and install sync scripts
@@ -135,6 +136,15 @@ python3 -m converge compatible compatible/examples
 python3 scripts/check_converge_compatible.py compatible/examples/research-route-skill
 ```
 
+Validate the stored Codex headless evidence seed:
+
+```bash
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-20260529/results \
+  --root skills/converge \
+  --require-real-results
+```
+
 For an installed console command:
 
 ```bash
@@ -165,6 +175,7 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 ├── protocol/                 # Converge Protocol v1 schemas and examples
 ├── converge/                 # reference CLI/runtime
 ├── compatible/               # Converge-compatible manifest examples and fixtures
+├── evidence/                 # stored response-eval/native-proof evidence artifacts
 ├── intentbench/              # IntentBench manifest and benchmark docs
 ├── gallery/                  # before/after examples and machine-readable data
 ├── site/                     # static docs site for 30-second product comprehension
