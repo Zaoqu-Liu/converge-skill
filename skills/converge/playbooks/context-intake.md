@@ -46,4 +46,32 @@ Use this only when context complexity matters:
 [Recommendation or next action.]
 ```
 
+For diagnosis requests over screenshots, PRDs, logs, traces, repos, or other mixed evidence, use a tighter artifact diagnosis pattern:
+
+```markdown
+**Input Inventory**
+- User text:
+- Inspected artifacts:
+- Unavailable:
+
+**Observed Facts**
+- Screenshot/UI:
+- PRD/spec:
+- Log/trace/repo evidence:
+
+**Contradictions**
+- [Where user interpretation, UI state, spec, and logs disagree.]
+
+**I Infer**
+- [The likely meaning, clearly labeled as inference.]
+
+**True Problem**
+- [The strongest current diagnosis and why it beats alternatives.]
+
+**Recommended Next Fix/Check**
+- [The next concrete repair or validation step.]
+```
+
+If the inspected artifacts already support a strong diagnosis, name it before asking follow-up questions. Ask only for missing data that would change the fix, severity, or owner.
+
 Do not show the inventory for trivial tasks unless it prevents confusion.

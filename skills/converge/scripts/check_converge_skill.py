@@ -90,6 +90,7 @@ REQUIRED_SKILL_PHRASES = [
     "Source/Link",
     "Context Intake",
     "Input Inventory",
+    "Artifact Diagnosis Pattern",
     "Context Trust Boundary",
     "Verification & Evolution",
     "Proof check",

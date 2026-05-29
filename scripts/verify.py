@@ -164,6 +164,7 @@ def main() -> int:
         ]
     )
     run([python, str(SKILL_ROOT / "scripts" / "check_converge_coverage_matrix.py")])
+    run([python, str(SKILL_ROOT / "scripts" / "build_converge_response_eval.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "summarize_converge_response_eval.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "select_converge_response_eval_batch.py"), "--self-test"])

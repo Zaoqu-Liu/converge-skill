@@ -12,6 +12,7 @@
 - Expands stored Codex headless response-eval evidence to include Codex Default choice-survey fallback and host proof-boundary discipline cases.
 - Adds a web-assisted Technology Route response-eval pass for source-backed current agent-framework decisions.
 - Adds a low-expression ideation response-eval pass and tightens the skill to end vague ideation with an explicit route question.
+- Tightens mixed-artifact diagnosis behavior and adds response-eval builder self-tests for copied artifacts.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
 - Adds machine-readable before/after gallery examples, a static docs site, and gallery/site validation in repository verification.
 

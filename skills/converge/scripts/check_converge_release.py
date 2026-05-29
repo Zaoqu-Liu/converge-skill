@@ -58,6 +58,7 @@ def run_skill_validators(root: Path) -> list[CheckResult]:
             "2",
         ],
         [sys.executable, str(root / "scripts" / "check_converge_coverage_matrix.py")],
+        [sys.executable, str(root / "scripts" / "build_converge_response_eval.py"), "--self-test"],
         [sys.executable, str(root / "scripts" / "check_converge_response_eval.py"), "--self-test"],
         [sys.executable, str(root / "scripts" / "summarize_converge_response_eval.py"), "--self-test"],
         [sys.executable, str(root / "scripts" / "select_converge_response_eval_batch.py"), "--self-test"],

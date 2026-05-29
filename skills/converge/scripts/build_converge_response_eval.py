@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import shutil
 import sys
+import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -348,14 +349,75 @@ def build(root: Path, out: Path, selected: str | None, skill_path: str, with_res
     return rows
 
 
+def self_test(root: Path = ROOT) -> list[str]:
+    errors: list[str] = []
+    with tempfile.TemporaryDirectory(prefix="converge-response-eval-selftest-") as tmp:
+        out = Path(tmp) / "runpack"
+        rows = build(
+            root=root,
+            out=out,
+            selected="mixed-artifact-intake.md",
+            skill_path="SKILL.md",
+            with_result_stubs=True,
+        )
+        expected_files = [
+            out / "prompts" / "mixed-artifact-intake.prompt.md",
+            out / "reviews" / "mixed-artifact-intake.review.md",
+            out / "results" / "mixed-artifact-intake.result.md",
+            out / "artifacts" / "mixed-artifact-intake" / "screenshot.txt",
+            out / "artifacts" / "mixed-artifact-intake" / "prd.md",
+            out / "artifacts" / "mixed-artifact-intake" / "error.log",
+            out / "RUNBOOK.md",
+            out / "manifest.tsv",
+        ]
+        for path in expected_files:
+            if not path.is_file():
+                errors.append(f"self-test missing expected file: {path.relative_to(out)}")
+        if len(rows) != 1:
+            errors.append(f"self-test expected one manifest row, found {len(rows)}")
+
+        prompt_path = out / "prompts" / "mixed-artifact-intake.prompt.md"
+        if prompt_path.is_file():
+            prompt = prompt_path.read_text(encoding="utf-8")
+            required_prompt_phrases = [
+                "artifacts/mixed-artifact-intake/screenshot.txt",
+                "artifacts/mixed-artifact-intake/prd.md",
+                "artifacts/mixed-artifact-intake/error.log",
+                "Inspect them with available file/image tools before judging the issue.",
+            ]
+            for phrase in required_prompt_phrases:
+                if phrase not in prompt:
+                    errors.append(f"self-test prompt missing phrase: {phrase}")
+
+        copied_log = out / "artifacts" / "mixed-artifact-intake" / "error.log"
+        if copied_log.is_file() and "Cannot read properties of undefined" not in copied_log.read_text(encoding="utf-8"):
+            errors.append("self-test copied log did not preserve source content")
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
-    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--out", type=Path)
     parser.add_argument("--case", help="Eval case filename or stem. Defaults to all cases.")
     parser.add_argument("--skill-path", default=str(ROOT / "SKILL.md"))
     parser.add_argument("--with-result-stubs", action="store_true")
+    parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
+
+    if args.self_test:
+        errors = self_test(args.root)
+        if errors:
+            print("Converge response-eval builder self-test failed:")
+            for error in errors:
+                print(f"- {error}")
+            return 1
+        print("Converge response-eval builder self-test passed.")
+        return 0
+
+    if args.out is None:
+        print("--out is required unless --self-test is used")
+        return 1
 
     built = build(args.root, args.out, args.case, args.skill_path, args.with_result_stubs)
     print(f"Built {len(built)} response-eval packet(s) in {args.out}")
