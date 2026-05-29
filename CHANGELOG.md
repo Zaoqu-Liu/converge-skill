@@ -10,6 +10,7 @@
 - Adds Converge-compatible manifest fixtures, validator, and `converge compatible`.
 - Adds stored Codex headless response-eval evidence and downgrades unsupported host H2 claims to match available proof.
 - Expands stored Codex headless response-eval evidence to include Codex Default choice-survey fallback and host proof-boundary discipline cases.
+- Adds a web-assisted Technology Route response-eval pass for source-backed current agent-framework decisions.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
 - Adds machine-readable before/after gallery examples, a static docs site, and gallery/site validation in repository verification.
 

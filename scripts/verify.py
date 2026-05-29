@@ -71,6 +71,13 @@ REQUIRED_ROOT_FILES = [
     "evidence/response-eval/codex-headless-host-proof-20260529/reviews/host-support-proof-boundary.review.md",
     "evidence/response-eval/codex-headless-host-proof-20260529/responses/host-support-proof-boundary.response.md",
     "evidence/response-eval/codex-headless-host-proof-20260529/results/host-support-proof-boundary.result.md",
+    "evidence/response-eval/codex-web-tech-route-20260529/README.md",
+    "evidence/response-eval/codex-web-tech-route-20260529/RUNBOOK.md",
+    "evidence/response-eval/codex-web-tech-route-20260529/manifest.tsv",
+    "evidence/response-eval/codex-web-tech-route-20260529/prompts/technology-route-current-stack.prompt.md",
+    "evidence/response-eval/codex-web-tech-route-20260529/reviews/technology-route-current-stack.review.md",
+    "evidence/response-eval/codex-web-tech-route-20260529/responses/technology-route-current-stack.response.md",
+    "evidence/response-eval/codex-web-tech-route-20260529/results/technology-route-current-stack.result.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -184,6 +191,16 @@ def main() -> int:
             python,
             str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-host-proof-20260529" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-web-tech-route-20260529" / "results"),
             "--root",
             str(SKILL_ROOT),
             "--require-real-results",
