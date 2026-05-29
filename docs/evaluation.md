@@ -55,16 +55,24 @@ Do not use synthetic release-smoke results as proof of real behavior.
 
 ## Stored Response-Eval Evidence
 
-The repository contains a scoped real Codex headless evidence seed:
+The repository contains scoped real Codex headless evidence runs:
 
 ```bash
 python3 skills/converge/scripts/check_converge_response_eval.py \
   evidence/response-eval/codex-headless-20260529/results \
   --root skills/converge \
   --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-choice-20260529/results \
+  --root skills/converge \
+  --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-host-proof-20260529/results \
+  --root skills/converge \
+  --require-real-results
 ```
 
-This proves only the stored `codex-default-no-native-ui.md` H2 fallback case. It is not full benchmark proof and does not promote Cursor, Claude Code, or native question UI paths.
+These prove only the stored `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, and `host-support-proof-boundary.md` cases. They are not full benchmark proof and do not promote Cursor, Claude Code, or native question UI paths.
 
 ## Native Interaction Evidence
 

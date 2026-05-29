@@ -57,6 +57,20 @@ REQUIRED_ROOT_FILES = [
     "evidence/response-eval/codex-headless-20260529/reviews/codex-default-no-native-ui.review.md",
     "evidence/response-eval/codex-headless-20260529/responses/codex-default-no-native-ui.response.md",
     "evidence/response-eval/codex-headless-20260529/results/codex-default-no-native-ui.result.md",
+    "evidence/response-eval/codex-headless-choice-20260529/README.md",
+    "evidence/response-eval/codex-headless-choice-20260529/RUNBOOK.md",
+    "evidence/response-eval/codex-headless-choice-20260529/manifest.tsv",
+    "evidence/response-eval/codex-headless-choice-20260529/prompts/codex-default-choice-survey-trap.prompt.md",
+    "evidence/response-eval/codex-headless-choice-20260529/reviews/codex-default-choice-survey-trap.review.md",
+    "evidence/response-eval/codex-headless-choice-20260529/responses/codex-default-choice-survey-trap.response.md",
+    "evidence/response-eval/codex-headless-choice-20260529/results/codex-default-choice-survey-trap.result.md",
+    "evidence/response-eval/codex-headless-host-proof-20260529/README.md",
+    "evidence/response-eval/codex-headless-host-proof-20260529/RUNBOOK.md",
+    "evidence/response-eval/codex-headless-host-proof-20260529/manifest.tsv",
+    "evidence/response-eval/codex-headless-host-proof-20260529/prompts/host-support-proof-boundary.prompt.md",
+    "evidence/response-eval/codex-headless-host-proof-20260529/reviews/host-support-proof-boundary.review.md",
+    "evidence/response-eval/codex-headless-host-proof-20260529/responses/host-support-proof-boundary.response.md",
+    "evidence/response-eval/codex-headless-host-proof-20260529/results/host-support-proof-boundary.result.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -150,6 +164,26 @@ def main() -> int:
             python,
             str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-20260529" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-choice-20260529" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-host-proof-20260529" / "results"),
             "--root",
             str(SKILL_ROOT),
             "--require-real-results",

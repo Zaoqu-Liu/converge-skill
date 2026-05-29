@@ -12,3 +12,5 @@ Evidence rules:
 Current stored evidence:
 
 - `response-eval/codex-headless-20260529`: one real Codex headless response-eval pass for `codex-default-no-native-ui.md`.
+- `response-eval/codex-headless-choice-20260529`: one real Codex headless response-eval pass for `codex-default-choice-survey-trap.md`.
+- `response-eval/codex-headless-host-proof-20260529`: one real Codex headless response-eval pass for `host-support-proof-boundary.md`.

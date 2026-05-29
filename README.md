@@ -136,11 +136,19 @@ python3 -m converge compatible compatible/examples
 python3 scripts/check_converge_compatible.py compatible/examples/research-route-skill
 ```
 
-Validate the stored Codex headless evidence seed:
+Validate the stored Codex headless evidence runs:
 
 ```bash
 python3 skills/converge/scripts/check_converge_response_eval.py \
   evidence/response-eval/codex-headless-20260529/results \
+  --root skills/converge \
+  --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-choice-20260529/results \
+  --root skills/converge \
+  --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-host-proof-20260529/results \
   --root skills/converge \
   --require-real-results
 ```
