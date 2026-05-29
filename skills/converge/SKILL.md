@@ -44,7 +44,7 @@ Host-specific bridges:
 - Unknown hosts: map capabilities first, then run the core loop. Never invent a host tool from a familiar product name.
 - User-facing host language should stay local to the active host. Do not list unrelated host-specific tool names in the answer unless debugging an explicit cross-host failure; say `native question UI is unavailable` instead.
 
-Support claims must use the proof tiers in `host-adapter-matrix.md`. Do not claim a host's native interactive path is proven from install checks or headless fallback evals.
+Support claims must use the proof tiers in `host-adapter-matrix.md` and the machine-readable source of truth in `host-adapters.json`. Keep `host-capability-contract.tsv`, `host-support-ledger.md`, installers, and validators aligned with that registry. Do not claim a host's native interactive path is proven from install checks or headless fallback evals.
 
 ## Indispensability Principles
 
@@ -368,6 +368,7 @@ Load only the resource needed for the current task:
 - `templates/output-template.md`: output profiles and `converge-docs/` skeletons.
 - `templates/converge-state.md`: state persistence format.
 - `dev-handoff-guide.md`: implementation-ready handoff after Converge Docs.
+- `host-adapters.json`: machine-readable host adapter registry that drives install target selection, doctor output, proof tier validation, and TSV drift checks.
 - `host-source-evidence.md`: latest checked external host documentation for Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, and Aider adapter paths.
 - `host-capability-contract.tsv`: machine-checkable host contract linking each host profile to source anchors, install surfaces, question surfaces, fallback behavior, current claim tier, eval case, and H3 boundary.
 - `host-adapter-matrix.md`: cross-host capability matrix and proof tiers for Codex, Claude Code, Cursor, opencode, and unknown hosts.
@@ -383,7 +384,8 @@ Load only the resource needed for the current task:
 - `scripts/check_converge_response_eval.py`: validates filled response-eval result files, including optional all-case coverage.
 - `scripts/summarize_converge_response_eval.py`: summarizes response-eval progress, invalid results, gate failures, failure tags, and reviewed coverage while the full eval set is being filled.
 - `scripts/select_converge_response_eval_batch.py`: chooses deterministic pilot, next-cover, failed/invalid, or full response-eval batches from the coverage matrix.
-- `scripts/sync_converge_install.py`: syncs the canonical skill to Claude Code, Cursor, and opencode user skill directories, installs the Cursor rule bridge, and creates backups.
+- `scripts/host_adapter_registry.py`: shared registry reader for install and release scripts.
+- `scripts/sync_converge_install.py`: syncs the canonical skill to registry-declared user skill directories, installs required bridge files such as the Cursor rule bridge, and creates backups.
 - `scripts/check_converge_release.py`: runs structural, eval-suite, response-eval smoke, install consistency, Cursor rule bridge, and script compile checks.
 - `eval-cases/opencode-capability-adapter.md`: forward-tests opencode capability-based host adaptation without Codex/Cursor/Claude tool hallucination.
 

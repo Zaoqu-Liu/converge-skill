@@ -1,0 +1,64 @@
+{
+  "protocol_version": "1.0",
+  "registry_version": "2026-05-29",
+  "description": "Minimal example host adapter registry.",
+  "proof_tiers": {
+    "H0": {
+      "name": "static-rule-coverage",
+      "evidence_required": "Documented host or capability boundary.",
+      "claim_allowed": "Rules are documented."
+    },
+    "H1": {
+      "name": "install-bridge-coverage",
+      "evidence_required": "Installed copy or bridge matches canonical source.",
+      "claim_allowed": "Host is installed or bridged."
+    },
+    "H2": {
+      "name": "headless-fallback-behavior",
+      "evidence_required": "Headless response-eval passes.",
+      "claim_allowed": "Fallback behavior is tested."
+    },
+    "H3": {
+      "name": "native-interactive-behavior",
+      "evidence_required": "Native interactive run uses the host question UI correctly.",
+      "claim_allowed": "Native interactive path is tested."
+    },
+    "H4": {
+      "name": "production-workflow-coverage",
+      "evidence_required": "Multiple production-like tasks pass with scoped proof.",
+      "claim_allowed": "Production-like workflow coverage is tested."
+    }
+  },
+  "hosts": [
+    {
+      "host_id": "cursor",
+      "display_name": "Cursor",
+      "source_anchor": "Cursor",
+      "source_urls": ["https://docs.cursor.com/context/rules"],
+      "instruction_surfaces": ["~/.cursor/rules/converge.mdc", "~/.cursor/skills/converge/SKILL.md"],
+      "install": {
+        "target_key": "cursor",
+        "copy_skill": true,
+        "anchor_label": "~/.cursor/skills/converge plus ~/.cursor/rules/converge.mdc",
+        "anchors": ["~/.cursor/skills/converge"],
+        "bridge_files": [
+          {
+            "path": "~/.cursor/rules/converge.mdc",
+            "kind": "cursor-rule",
+            "required_for_h1": true
+          }
+        ]
+      },
+      "interaction": {
+        "native_question_surface": "AskQuestion when present",
+        "native_question_tool": "AskQuestion",
+        "fallback_surface": "short textual fallback"
+      },
+      "proof": {
+        "current_claim": "H1 installed plus H2 fallback-tested",
+        "eval_case": "cursor-native-question-bridge.md",
+        "h3_boundary": "requires real Cursor run with AskQuestion used correctly"
+      }
+    }
+  ]
+}

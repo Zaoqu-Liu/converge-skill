@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import re
 import sys
 from pathlib import Path
@@ -13,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_FILES = [
     "SKILL.md",
+    "host-adapters.json",
     "reference.md",
     "examples.md",
     "eval-rubric.md",
@@ -44,6 +46,7 @@ REQUIRED_FILES = [
     "scripts/check_converge_response_eval.py",
     "scripts/summarize_converge_response_eval.py",
     "scripts/select_converge_response_eval_batch.py",
+    "scripts/host_adapter_registry.py",
     "scripts/sync_converge_install.py",
     "scripts/check_converge_release.py",
 ]
@@ -67,6 +70,7 @@ REQUIRED_SKILL_PHRASES = [
     "Host Adapter Protocol",
     "host-adapter-matrix.md",
     "host-capability-contract.tsv",
+    "host-adapters.json",
     "host-source-evidence.md",
     "host-support-ledger.md",
     "Progressive completion rules",
@@ -90,6 +94,7 @@ REQUIRED_SKILL_PHRASES = [
     "scripts/check_converge_coverage_matrix.py",
     "scripts/build_converge_response_eval.py",
     "scripts/check_converge_response_eval.py",
+    "scripts/host_adapter_registry.py",
     "scripts/sync_converge_install.py",
     "scripts/check_converge_release.py",
 ]
@@ -291,9 +296,103 @@ def check_host_source_evidence(errors: list[str]) -> None:
     for url in required_urls:
         if url not in text:
             errors.append(f"host-source-evidence.md missing source URL: {url}")
-    for phrase in ("Last checked: 2026-05-28", "Claims Not Allowed From Source Evidence Alone", "Refresh Triggers"):
+    for phrase in ("Last checked: 2026-05-29", "Claims Not Allowed From Source Evidence Alone", "Refresh Triggers"):
         if phrase not in text:
             errors.append(f"host-source-evidence.md missing required phrase: {phrase}")
+
+
+def check_host_adapter_registry(errors: list[str]) -> None:
+    try:
+        registry = json.loads(read("host-adapters.json"))
+    except json.JSONDecodeError as exc:
+        errors.append(f"host-adapters.json invalid JSON: {exc}")
+        return
+    if not isinstance(registry, dict):
+        errors.append("host-adapters.json must contain a JSON object")
+        return
+    if registry.get("protocol_version") != "1.0":
+        errors.append("host-adapters.json protocol_version must be 1.0")
+    if not isinstance(registry.get("registry_version"), str):
+        errors.append("host-adapters.json registry_version must be a string")
+
+    proof_tiers = registry.get("proof_tiers", {})
+    if not isinstance(proof_tiers, dict):
+        errors.append("host-adapters.json proof_tiers must be an object")
+        proof_tiers = {}
+    for tier in ("H0", "H1", "H2", "H3", "H4"):
+        if tier not in proof_tiers:
+            errors.append(f"host-adapters.json missing proof tier: {tier}")
+
+    hosts = registry.get("hosts", [])
+    if not isinstance(hosts, list) or not hosts:
+        errors.append("host-adapters.json hosts must be a non-empty list")
+        return
+    if len(hosts) < 10:
+        errors.append("host-adapters.json should cover mainstream hosts")
+
+    eval_cases = {case.name for case in (ROOT / "eval-cases").glob("*.md")}
+    source_evidence = read("host-source-evidence.md")
+    contract_rows = {
+        row["host_id"]: row
+        for row in csv.DictReader(read("host-capability-contract.tsv").splitlines(), delimiter="\t")
+    }
+    seen: set[str] = set()
+    for host in hosts:
+        if not isinstance(host, dict):
+            errors.append("host-adapters.json host entry must be an object")
+            continue
+        host_id = str(host.get("host_id", ""))
+        if not host_id:
+            errors.append("host-adapters.json host missing host_id")
+            continue
+        if host_id in seen:
+            errors.append(f"host-adapters.json duplicate host_id: {host_id}")
+        seen.add(host_id)
+
+        install = host.get("install", {})
+        interaction = host.get("interaction", {})
+        proof = host.get("proof", {})
+        if not isinstance(install, dict) or not isinstance(interaction, dict) or not isinstance(proof, dict):
+            errors.append(f"host-adapters.json {host_id} install/interaction/proof must be objects")
+            continue
+
+        current_claim = str(proof.get("current_claim", ""))
+        if not re.match(r"^H[0-4]\b", current_claim):
+            errors.append(f"host-adapters.json {host_id} current_claim must start with H0-H4")
+        eval_case = str(proof.get("eval_case", ""))
+        if eval_case not in eval_cases:
+            errors.append(f"host-adapters.json {host_id} eval_case missing: {eval_case}")
+        source_anchor = str(host.get("source_anchor", ""))
+        if source_anchor != "none" and source_anchor not in source_evidence:
+            errors.append(f"host-adapters.json {host_id} source_anchor not in source evidence")
+        if install.get("copy_skill") is True and not install.get("anchors"):
+            errors.append(f"host-adapters.json {host_id} copy_skill requires anchors")
+
+        contract_row = contract_rows.get(host_id)
+        if contract_row is None:
+            errors.append(f"host-capability-contract.tsv missing registry host: {host_id}")
+            continue
+        derived = {
+            "host_id": host_id,
+            "display_name": str(host.get("display_name", "")),
+            "source_anchor": source_anchor,
+            "install_anchor": str(install.get("anchor_label", "")),
+            "native_question_surface": str(interaction.get("native_question_surface", "")),
+            "fallback_surface": str(interaction.get("fallback_surface", "")),
+            "current_claim": current_claim,
+            "eval_case": eval_case,
+            "h3_boundary": str(proof.get("h3_boundary", "")),
+        }
+        for key, expected in derived.items():
+            actual = contract_row.get(key, "")
+            if actual != expected:
+                errors.append(
+                    f"host-capability-contract.tsv drift for {host_id}.{key}: "
+                    f"expected {expected!r}, got {actual!r}"
+                )
+
+    for host_id in sorted(set(contract_rows) - seen):
+        errors.append(f"host-adapters.json missing TSV host: {host_id}")
 
 
 def check_host_capability_contract(errors: list[str]) -> None:
@@ -460,6 +559,7 @@ def main() -> int:
     check_output_directory(errors)
     check_output_profile_consistency(errors)
     check_host_source_evidence(errors)
+    check_host_adapter_registry(errors)
     check_host_capability_contract(errors)
     check_host_support_ledger(errors)
     check_eval_suite_harness(errors)

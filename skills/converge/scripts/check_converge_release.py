@@ -12,29 +12,10 @@ import subprocess
 import sys
 import tempfile
 
+from host_adapter_registry import CURSOR_RULE_TEXT, cursor_rule_path, install_targets, parse_targets
+
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TARGETS = {
-    "claude": Path.home() / ".claude" / "skills" / "converge",
-    "cursor": Path.home() / ".cursor" / "skills" / "converge",
-    "opencode": Path.home() / ".config" / "opencode" / "skills" / "converge",
-    "cline": Path.home() / ".cline" / "skills" / "converge",
-    "antigravity": Path.home() / ".gemini" / "antigravity" / "skills" / "converge",
-}
-CURSOR_RULE_PATH = Path.home() / ".cursor" / "rules" / "converge.mdc"
-CURSOR_RULE_TEXT = """---
-description: "Converge intent reconstruction. Use when the user asks to think through fuzzy work, clarify an idea, make a decision, draft a plan, evaluate a technical route, or explicitly invokes converge."
-alwaysApply: false
----
-
-# Converge - Owner-Mode Intent Reconstruction
-
-Read `~/.cursor/skills/converge/SKILL.md` and follow that skill when Converge is relevant.
-
-Use Converge to reconstruct intent, inspect accessible context, verify drift-prone claims when needed, make an owner recommendation, and produce the next usable reply, plan, decision, or artifact.
-
-For simple direct tasks, use the skill's Universal Intent Guard briefly, then execute the task instead of adding ceremony.
-"""
 IGNORED_NAMES = {".DS_Store"}
 IGNORED_PARTS = {"__pycache__", ".git"}
 
@@ -44,16 +25,6 @@ class CheckResult:
     name: str
     ok: bool
     detail: str
-
-
-def parse_targets(value: str) -> list[str]:
-    if value == "all":
-        return list(DEFAULT_TARGETS)
-    names = [item.strip() for item in value.split(",") if item.strip()]
-    unknown = [name for name in names if name not in DEFAULT_TARGETS]
-    if unknown:
-        raise ValueError(f"unknown target(s): {', '.join(unknown)}")
-    return names
 
 
 def ignored(path: Path) -> bool:
@@ -104,13 +75,16 @@ def compile_scripts(root: Path) -> CheckResult:
         return CheckResult(f"compile scripts in {root}", False, str(exc))
 
 
-def check_cursor_rule_bridge() -> CheckResult:
-    if not CURSOR_RULE_PATH.is_file():
-        return CheckResult("cursor rule bridge", False, f"missing: {CURSOR_RULE_PATH}")
-    actual = CURSOR_RULE_PATH.read_text(encoding="utf-8")
+def check_cursor_rule_bridge(source: Path) -> CheckResult:
+    path = cursor_rule_path(source)
+    if path is None:
+        return CheckResult("cursor rule bridge", False, "cursor bridge path missing from host-adapters.json")
+    if not path.is_file():
+        return CheckResult("cursor rule bridge", False, f"missing: {path}")
+    actual = path.read_text(encoding="utf-8")
     if actual != CURSOR_RULE_TEXT:
-        return CheckResult("cursor rule bridge", False, f"stale or changed: {CURSOR_RULE_PATH}")
-    return CheckResult("cursor rule bridge", True, str(CURSOR_RULE_PATH))
+        return CheckResult("cursor rule bridge", False, f"stale or changed: {path}")
+    return CheckResult("cursor rule bridge", True, str(path))
 
 
 def compare_tree(source: Path, target: Path, name: str) -> CheckResult:
@@ -246,14 +220,15 @@ def release_checks(
     results.extend(response_eval_results_check(source, response_results_dir, require_response_results))
 
     if not skip_installs:
+        installed_targets = install_targets(source)
         for name in targets:
-            target = DEFAULT_TARGETS[name]
+            target = installed_targets[name]
             results.append(compare_tree(source, target, name))
             if target.is_dir():
                 results.extend(run_skill_validators(target))
                 results.append(compile_scripts(target))
             if name == "cursor":
-                results.append(check_cursor_rule_bridge())
+                results.append(check_cursor_rule_bridge(source))
     return results
 
 
@@ -268,7 +243,7 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        targets = parse_targets(args.targets)
+        targets = parse_targets(args.targets, install_targets(args.source))
         results = release_checks(
             args.source,
             targets,

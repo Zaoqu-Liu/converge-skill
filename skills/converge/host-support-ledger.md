@@ -1,13 +1,14 @@
 # Host Support Ledger
 
-Last reviewed: 2026-05-28
+Last reviewed: 2026-05-29
 
-This ledger records what Converge can honestly claim for each host. Use it with `host-adapter-matrix.md` and `host-native-interaction-runbook.md`.
+This ledger records what Converge can honestly claim for each host. Use it with `host-adapters.json`, `host-adapter-matrix.md`, and `host-native-interaction-runbook.md`.
 
 ## Current Global Evidence
 
 - Static coverage: `SKILL.md`, `host-adapter-matrix.md`, `host-native-interaction-runbook.md`, and host-specific eval cases cover Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, Aider, and unknown hosts.
 - Source coverage: `host-source-evidence.md` records the current official host documentation checked for Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, Aider, and Roo Code status boundaries.
+- Adapter registry coverage: `host-adapters.json` machine-checks install target keys, skill anchors, bridge files, interaction surfaces, proof tiers, and eval hooks.
 - Contract coverage: `host-capability-contract.tsv` machine-checks each host profile against source anchors, install surfaces, native question surfaces, fallback behavior, current claim tier, eval case, and H3 boundary.
 - Install coverage: release checks compare canonical source against installed copies for Claude Code, Cursor, opencode, Cline, and Google Antigravity.
 - Behavior coverage: 36 of 39 real response-eval cases are reviewed as Pass with 0 Fail.
@@ -25,9 +26,9 @@ This ledger records what Converge can honestly claim for each host. Use it with 
 | Cline | H1 installed | Installed copy matches canonical source after release check; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim Cline installed skill coverage, not activation/native question behavior. |
 | Google Antigravity | H1 installed | Installed copy matches canonical source after release check; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim Antigravity installed skill coverage, not activation/native question behavior. |
 | Gemini CLI | H0 documented | `host-source-evidence.md` records `GEMINI.md`/context-file docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented context-file bridge rules only. |
-| GitHub Copilot | H0 documented | `host-source-evidence.md` records repository instruction docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented repository-instruction bridge rules only. |
+| GitHub Copilot | H0 documented | `host-source-evidence.md` records repository instruction docs, including `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` alternatives; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented repository-instruction bridge rules only. |
 | Windsurf Cascade | H0 documented | `host-source-evidence.md` records rule docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented rule bridge rules only. |
-| Continue | H0 documented | `host-source-evidence.md` records local/hub rule docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented rule bridge rules only. |
+| Continue | H0 documented | `host-source-evidence.md` records local, global, and hub rule docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented rule bridge rules only. |
 | Aider | H0 documented | `host-source-evidence.md` records `CONVENTIONS.md` docs; `extended-host-capability-boundary.md` covers claim boundaries | H3 status: Unproven in this environment | Can claim documented convention-file bridge rules only. |
 | Unknown or future host | H0 capability model | `host-adapter-matrix.md` capability map | H3 status: Unproven until a native tool is observed | Can claim capability-based rules, not brand-specific support. |
 

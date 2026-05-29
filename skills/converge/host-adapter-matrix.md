@@ -1,6 +1,6 @@
 # Host Adapter Matrix
 
-Converge supports agent hosts by capability, not by product branding. Use this matrix before claiming support, choosing question UX, or syncing installed copies. Use `host-source-evidence.md` before changing host install paths or support claims, and keep `host-capability-contract.tsv` aligned whenever host profiles, install surfaces, question surfaces, current claim tiers, or eval cases change.
+Converge supports agent hosts by capability, not by product branding. Use this matrix before claiming support, choosing question UX, or syncing installed copies. `host-adapters.json` is the machine-readable source of truth for host IDs, install surfaces, interaction boundaries, proof tiers, and eval hooks. Use `host-source-evidence.md` before changing host install paths or support claims, and keep `host-capability-contract.tsv` aligned whenever host profiles, install surfaces, question surfaces, current claim tiers, or eval cases change.
 
 ## Capability Map
 
@@ -22,14 +22,14 @@ Converge supports agent hosts by capability, not by product branding. Use this m
 | Codex Default | Active skills plus `AGENTS.md` | No `request_user_input`; natural-language fallback only | Canonical source under `.agents/skills/converge` | Do not render Cursor-style letter-coded chooser UI. |
 | Codex Plan | Active skills plus Plan Mode tools | `request_user_input` if present | Same canonical skill | Native UI support requires an actual Plan Mode run. |
 | Claude Code | `~/.claude/skills/converge/SKILL.md`, project rules | `AskUserQuestion` only if present | Sync installed skill to `~/.claude/skills/converge` | Headless `claude -p` is not proof of native interactive UI. |
-| Cursor | `~/.cursor/skills/converge/SKILL.md`, `.cursor/rules/converge.mdc` | `AskQuestion` only if present | Sync skill and Cursor rule bridge | CLI auth/headless failures prove only runtime limitation, not interactive support. |
+| Cursor | `~/.cursor/skills/converge/SKILL.md`, `.cursor/rules/converge.mdc`, `AGENTS.md` | `AskQuestion` only if present | Sync skill and Cursor rule bridge | CLI auth/headless failures prove only runtime limitation, not interactive support. |
 | opencode | `~/.config/opencode/skills/converge/SKILL.md`, `AGENTS.md`, `opencode.json` | Native question UI only if active tools expose it | Sync skill to `~/.config/opencode/skills/converge` | Respect `permission` entries such as `edit`, `webfetch`, and `websearch`. |
 | Cline | `~/.cline/skills/converge/SKILL.md` | Native question UI only if active tools expose it | Sync skill to `~/.cline/skills/converge` | H1 install coverage only until a real Cline run proves activation behavior. |
 | Google Antigravity | `~/.gemini/antigravity/skills/converge/SKILL.md` | Native question UI only if active tools expose it | Sync skill to `~/.gemini/antigravity/skills/converge` | H1 install coverage only until a real Antigravity run proves activation behavior. |
 | Gemini CLI | `GEMINI.md` or configured context files | No native Converge question UI claimed | Documented context-file bridge only | H0 rule/context coverage until a real CLI run proves behavior. |
-| GitHub Copilot | `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `AGENTS.md` | No native Converge question UI claimed | Repository instruction bridge only | H0 rule/instruction coverage until a real Copilot run proves behavior. |
+| GitHub Copilot | `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` | No native Converge question UI claimed | Repository instruction bridge only | H0 rule/instruction coverage until a real Copilot run proves behavior. |
 | Windsurf Cascade | Global/workspace rules | No native Converge question UI claimed | Rule bridge only | H0 rule coverage until a real Cascade run proves behavior. |
-| Continue | `.continue/rules` or hub rules | No native Converge question UI claimed | Rule bridge only | H0 rule coverage until a real Continue run proves behavior. |
+| Continue | `.continue/rules`, `~/.continue/rules`, or hub rules | No native Converge question UI claimed | Rule bridge only | H0 rule coverage until a real Continue run proves behavior. |
 | Aider | `CONVENTIONS.md` added to chat | No native Converge question UI claimed | Convention-file bridge only | H0 context coverage until a real aider run proves behavior. |
 | Unknown host | Active instructions and tool manifest | Capability-based fallback | No assumed install path | Map instruction, interaction, tool, and safety surfaces first. |
 

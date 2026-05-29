@@ -32,13 +32,14 @@ skills/converge/SKILL.md
 It includes:
 
 - an owner-mode intent reconstruction protocol
-- Converge Protocol v1 schemas for run state, host capability, eval results, and compatible manifests
+- Converge Protocol v1 schemas for run state, host capability, host adapter registry, eval results, and compatible manifests
 - a reference `converge` CLI/runtime for validation, host doctor checks, install, pack, eval, and release gates
 - low-friction modes for simple tasks and deep modes for ambiguous work
 - evidence gates for current technical decisions
 - high-risk boundaries for medical, legal, financial, security, compliance, and irreversible decisions
 - context intake rules for files, screenshots, links, repos, configs, and instruction-bearing artifacts
 - cross-host adapter rules for Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, Aider, and unknown future hosts
+- a machine-readable host adapter registry that drives `doctor`, install target selection, release checks, and TSV drift validation
 - eval cases, coverage matrix, response-eval tools, release checks, and install sync scripts
 
 ## Support Claims
@@ -144,13 +145,14 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 
 Start here when changing support claims:
 
+- `skills/converge/host-adapters.json`
 - `skills/converge/host-source-evidence.md`
 - `skills/converge/host-capability-contract.tsv`
 - `skills/converge/host-adapter-matrix.md`
 - `skills/converge/host-support-ledger.md`
 - `skills/converge/host-native-interaction-runbook.md`
 
-Any change to host support should update the source evidence, capability contract, eval coverage, and release checks together.
+Any change to host support should update the adapter registry, source evidence, capability contract, eval coverage, and release checks together. The protocol validator fails if `host-adapters.json` and `host-capability-contract.tsv` drift.
 
 ## Protocol And Runtime
 

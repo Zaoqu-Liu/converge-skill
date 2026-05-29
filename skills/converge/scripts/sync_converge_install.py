@@ -10,29 +10,10 @@ from pathlib import Path
 import shutil
 import sys
 
+from host_adapter_registry import CURSOR_RULE_TEXT, cursor_rule_path, install_targets, parse_targets
+
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TARGETS = {
-    "claude": Path.home() / ".claude" / "skills" / "converge",
-    "cursor": Path.home() / ".cursor" / "skills" / "converge",
-    "opencode": Path.home() / ".config" / "opencode" / "skills" / "converge",
-    "cline": Path.home() / ".cline" / "skills" / "converge",
-    "antigravity": Path.home() / ".gemini" / "antigravity" / "skills" / "converge",
-}
-CURSOR_RULE_PATH = Path.home() / ".cursor" / "rules" / "converge.mdc"
-CURSOR_RULE_TEXT = """---
-description: "Converge intent reconstruction. Use when the user asks to think through fuzzy work, clarify an idea, make a decision, draft a plan, evaluate a technical route, or explicitly invokes converge."
-alwaysApply: false
----
-
-# Converge - Owner-Mode Intent Reconstruction
-
-Read `~/.cursor/skills/converge/SKILL.md` and follow that skill when Converge is relevant.
-
-Use Converge to reconstruct intent, inspect accessible context, verify drift-prone claims when needed, make an owner recommendation, and produce the next usable reply, plan, decision, or artifact.
-
-For simple direct tasks, use the skill's Universal Intent Guard briefly, then execute the task instead of adding ceremony.
-"""
 
 
 @dataclass(frozen=True)
@@ -59,7 +40,9 @@ def count_files(path: Path) -> int:
 def validate_source(source: Path) -> None:
     required = [
         "SKILL.md",
+        "host-adapters.json",
         "agents/openai.yaml",
+        "scripts/host_adapter_registry.py",
         "scripts/check_converge_skill.py",
         "scripts/check_converge_eval_suite.py",
         "scripts/check_converge_coverage_matrix.py",
@@ -110,32 +93,22 @@ def sync_one(source: Path, name: str, target: Path, backup_root: Path, dry_run: 
     )
 
 
-def sync_cursor_rule(backup_root: Path, dry_run: bool) -> RuleResult:
-    existing = CURSOR_RULE_PATH.read_text(encoding="utf-8") if CURSOR_RULE_PATH.is_file() else None
+def sync_cursor_rule(path: Path, backup_root: Path, dry_run: bool) -> RuleResult:
+    existing = path.read_text(encoding="utf-8") if path.is_file() else None
     changed = existing != CURSOR_RULE_TEXT
     backup_path: Path | None = None
 
     if dry_run or not changed:
-        return RuleResult(path=CURSOR_RULE_PATH, backup=None, changed=changed, dry_run=dry_run)
+        return RuleResult(path=path, backup=None, changed=changed, dry_run=dry_run)
 
-    CURSOR_RULE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    if CURSOR_RULE_PATH.exists() or CURSOR_RULE_PATH.is_symlink():
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() or path.is_symlink():
         backup_root.mkdir(parents=True, exist_ok=True)
-        backup_path = backup_root / "cursor-rule" / CURSOR_RULE_PATH.name
+        backup_path = backup_root / "cursor-rule" / path.name
         backup_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(CURSOR_RULE_PATH, backup_path)
-    CURSOR_RULE_PATH.write_text(CURSOR_RULE_TEXT, encoding="utf-8")
-    return RuleResult(path=CURSOR_RULE_PATH, backup=backup_path, changed=True, dry_run=False)
-
-
-def parse_targets(value: str) -> list[str]:
-    if value == "all":
-        return list(DEFAULT_TARGETS)
-    names = [item.strip() for item in value.split(",") if item.strip()]
-    unknown = [name for name in names if name not in DEFAULT_TARGETS]
-    if unknown:
-        raise ValueError(f"unknown target(s): {', '.join(unknown)}")
-    return names
+        shutil.copy2(path, backup_path)
+    path.write_text(CURSOR_RULE_TEXT, encoding="utf-8")
+    return RuleResult(path=path, backup=backup_path, changed=True, dry_run=False)
 
 
 def main() -> int:
@@ -156,12 +129,14 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        target_names = parse_targets(args.targets)
+        targets = install_targets(args.source)
+        target_names = parse_targets(args.targets, targets)
         results = [
-            sync_one(args.source, name, DEFAULT_TARGETS[name], args.backup_root, args.dry_run)
+            sync_one(args.source, name, targets[name], args.backup_root, args.dry_run)
             for name in target_names
         ]
-        rule_result = sync_cursor_rule(args.backup_root, args.dry_run) if "cursor" in target_names else None
+        rule_path = cursor_rule_path(args.source)
+        rule_result = sync_cursor_rule(rule_path, args.backup_root, args.dry_run) if "cursor" in target_names and rule_path else None
     except Exception as exc:
         print(f"Converge sync failed: {exc}")
         return 1

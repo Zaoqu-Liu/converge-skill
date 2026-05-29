@@ -15,6 +15,7 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 ## Evidence Checks
 
 - `skills/converge/host-source-evidence.md` is current for changed host claims.
+- `skills/converge/host-adapters.json` contains every supported host and matches install/release behavior.
 - `skills/converge/host-capability-contract.tsv` contains every supported host.
 - `skills/converge/host-support-ledger.md` uses proof-tiered language.
 - `skills/converge/eval-coverage.tsv` covers every required host, context, evidence, risk, trigger, and output surface.

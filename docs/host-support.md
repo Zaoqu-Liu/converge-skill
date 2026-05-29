@@ -24,10 +24,11 @@ Codex Default and selected fallback paths have H2 response-eval evidence. Codex 
 
 Use these files before changing host support:
 
+- `skills/converge/host-adapters.json`
 - `skills/converge/host-source-evidence.md`
 - `skills/converge/host-capability-contract.tsv`
 - `skills/converge/host-adapter-matrix.md`
 - `skills/converge/host-support-ledger.md`
 - `skills/converge/host-native-interaction-runbook.md`
 
-Do not promote a host claim by editing prose only. Update the contract, eval coverage, and validation evidence together.
+Do not promote a host claim by editing prose only. Update the adapter registry, TSV contract, eval coverage, and validation evidence together. `converge validate --protocol-only` fails if the registry drifts from the TSV contract.

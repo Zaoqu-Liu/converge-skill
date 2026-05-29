@@ -4,8 +4,7 @@
 from __future__ import annotations
 
 import argparse
-import csv
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 import json
 import os
 from pathlib import Path
@@ -13,17 +12,19 @@ import shutil
 import subprocess
 import sys
 
+from .hosts import doctor_rows, validate_registry
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "skills" / "converge"
 PROTOCOL_ROOT = ROOT / "protocol"
 SCHEMA_ROOT = PROTOCOL_ROOT / "schemas"
 EXAMPLE_ROOT = PROTOCOL_ROOT / "examples"
-HOST_CONTRACT = SKILL_ROOT / "host-capability-contract.tsv"
 
 REQUIRED_SCHEMAS = {
     "converge-run.schema.json": ["protocol_version", "intent", "context", "decision", "evidence", "interaction", "output", "proof"],
     "host-capability.schema.json": ["protocol_version", "hosts"],
+    "host-adapter-registry.schema.json": ["protocol_version", "registry_version", "proof_tiers", "hosts"],
     "eval-result.schema.json": ["protocol_version", "case", "verdict", "host", "evidence", "failure_tags"],
     "converge-compatible-manifest.schema.json": [
         "converge_protocol",
@@ -39,32 +40,10 @@ REQUIRED_SCHEMAS = {
 EXAMPLE_TO_SCHEMA = {
     "converge-run.example.json": "converge-run.schema.json",
     "host-capability.example.json": "host-capability.schema.json",
+    "host-adapter-registry.example.json": "host-adapter-registry.schema.json",
     "eval-result.example.json": "eval-result.schema.json",
     "converge-compatible-manifest.example.json": "converge-compatible-manifest.schema.json",
 }
-
-INSTALL_HOST_IDS = {
-    "claude-code",
-    "cursor",
-    "opencode",
-    "cline",
-    "antigravity",
-}
-INSTALL_ALIASES = {
-    "codex-default": [Path("~/.agents/skills/converge").expanduser(), Path("~/.codex/skills/converge").expanduser()],
-    "codex-plan": [Path("~/.agents/skills/converge").expanduser(), Path("~/.codex/skills/converge").expanduser()],
-}
-
-
-@dataclass(frozen=True)
-class HostDoctor:
-    host_id: str
-    display_name: str
-    current_claim: str
-    install_anchor: str
-    installed: bool
-    eval_case: str
-    h3_boundary: str
 
 
 def load_json(path: Path) -> dict[str, object]:
@@ -105,56 +84,8 @@ def validate_protocol_files() -> list[str]:
         required = REQUIRED_SCHEMAS[schema_name]
         errors.extend(validate_required_keys(example, required, example_name))
 
-    rows = read_host_contract()
-    if len(rows) < 10:
-        errors.append("host capability contract should cover mainstream hosts")
-    for row in rows:
-        claim = row.get("current_claim", "")
-        if not claim.startswith(("H0", "H1", "H2", "H3", "H4")):
-            errors.append(f"{row.get('host_id', '<unknown>')}: current_claim must start with H0-H4")
+    errors.extend(validate_registry(SKILL_ROOT))
     return errors
-
-
-def read_host_contract() -> list[dict[str, str]]:
-    with HOST_CONTRACT.open(encoding="utf-8") as handle:
-        return list(csv.DictReader(handle, delimiter="\t"))
-
-
-def expand_anchor(anchor: str) -> Path | None:
-    for fragment in anchor.replace(" or ", " plus ").split(" plus "):
-        fragment = fragment.strip()
-        if fragment.startswith("~/"):
-            return Path(fragment).expanduser()
-    return None
-
-
-def has_installed_skill(path: Path) -> bool:
-    return (path / "SKILL.md").is_file() if path.is_dir() else path.is_file()
-
-
-def doctor_rows() -> list[HostDoctor]:
-    rows: list[HostDoctor] = []
-    for row in read_host_contract():
-        host_id = row["host_id"]
-        install_anchor = row["install_anchor"]
-        install_path = expand_anchor(install_anchor)
-        installed = False
-        if install_path is not None:
-            installed = has_installed_skill(install_path)
-        if not installed:
-            installed = any(has_installed_skill(path) for path in INSTALL_ALIASES.get(host_id, []))
-        rows.append(
-            HostDoctor(
-                host_id=host_id,
-                display_name=row["display_name"],
-                current_claim=row["current_claim"],
-                install_anchor=install_anchor,
-                installed=installed,
-                eval_case=row["eval_case"],
-                h3_boundary=row["h3_boundary"],
-            )
-        )
-    return rows
 
 
 def run(command: list[str]) -> int:
@@ -185,7 +116,10 @@ def cmd_doctor(args: argparse.Namespace) -> int:
     print("Converge host doctor")
     for row in rows:
         marker = "installed" if row.installed else "not-installed"
-        print(f"- {row.host_id}: {row.current_claim}; {marker}; eval={row.eval_case}")
+        missing = ""
+        if row.missing_install_evidence and row.proof_tier != "H0":
+            missing = "; missing=" + " | ".join(row.missing_install_evidence)
+        print(f"- {row.host_id}: {row.current_claim}; {marker}{missing}; eval={row.eval_case}")
     return 0
 
 

@@ -10,7 +10,7 @@ Run:
 python3 skills/converge/scripts/sync_converge_install.py
 ```
 
-This syncs the canonical tree to:
+Install targets are derived from `skills/converge/host-adapters.json`. Today this syncs the canonical tree to:
 
 | Host | Target |
 |---|---|
@@ -37,9 +37,9 @@ Some hosts do not currently have a verified Converge `SKILL.md` install surface 
 | Host | Documented bridge surface |
 |---|---|
 | Gemini CLI | `GEMINI.md` or configured context files |
-| GitHub Copilot | `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `AGENTS.md` |
+| GitHub Copilot | `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `AGENTS.md`, `CLAUDE.md`, or `GEMINI.md` |
 | Windsurf Cascade | global/workspace rules |
-| Continue | `.continue/rules` or hub rules |
+| Continue | `.continue/rules`, `~/.continue/rules`, or hub rules |
 | Aider | `CONVENTIONS.md` added to chat |
 
 These are H0 documented instruction surfaces until real host runs prove stronger behavior.

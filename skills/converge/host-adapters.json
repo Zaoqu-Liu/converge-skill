@@ -1,0 +1,456 @@
+{
+  "protocol_version": "1.0",
+  "registry_version": "2026-05-29",
+  "description": "Machine-readable Converge host adapter registry. This is the source of truth for install surfaces, interaction boundaries, proof tiers, and eval hooks.",
+  "proof_tiers": {
+    "H0": {
+      "name": "static-rule-coverage",
+      "evidence_required": "Host or capability rule is documented against current source evidence and covered by an eval case.",
+      "claim_allowed": "Converge has documented rules for this host or capability."
+    },
+    "H1": {
+      "name": "install-bridge-coverage",
+      "evidence_required": "Installed copy or bridge file matches the canonical source and release checks pass.",
+      "claim_allowed": "Converge is installed or bridged for this host."
+    },
+    "H2": {
+      "name": "headless-fallback-behavior",
+      "evidence_required": "Real response-eval output in CLI, headless, or non-interactive mode passes.",
+      "claim_allowed": "Converge handles this host's fallback mode."
+    },
+    "H3": {
+      "name": "native-interactive-behavior",
+      "evidence_required": "Real host run with native question UI/tool available and used correctly.",
+      "claim_allowed": "Converge handles this host's native interactive question path."
+    },
+    "H4": {
+      "name": "production-workflow-coverage",
+      "evidence_required": "Multiple real tasks across files, tools, research, and editing pass with scoped proof.",
+      "claim_allowed": "Converge is validated for this host in production-like workflows."
+    }
+  },
+  "hosts": [
+    {
+      "host_id": "codex-default",
+      "display_name": "Codex Default",
+      "source_anchor": "Codex",
+      "source_urls": [
+        "https://developers.openai.com/codex/skills",
+        "https://developers.openai.com/codex/guides/agents-md"
+      ],
+      "instruction_surfaces": [
+        "active skills",
+        "AGENTS.md",
+        "~/.agents/skills/converge",
+        "~/.codex/skills/converge"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": "~/.agents/skills/converge",
+        "anchors": [
+          "~/.agents/skills/converge",
+          "~/.codex/skills/converge"
+        ],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "none in default mode",
+        "native_question_tool": null,
+        "fallback_surface": "natural-language fallback"
+      },
+      "proof": {
+        "current_claim": "H2 fallback-tested",
+        "eval_case": "codex-default-no-native-ui.md",
+        "h3_boundary": "not applicable because default mode has no request_user_input"
+      }
+    },
+    {
+      "host_id": "codex-plan",
+      "display_name": "Codex Plan",
+      "source_anchor": "Codex",
+      "source_urls": [
+        "https://developers.openai.com/codex/skills",
+        "https://developers.openai.com/codex/guides/agents-md"
+      ],
+      "instruction_surfaces": [
+        "active skills",
+        "AGENTS.md",
+        "~/.agents/skills/converge",
+        "~/.codex/skills/converge"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": "~/.agents/skills/converge",
+        "anchors": [
+          "~/.agents/skills/converge",
+          "~/.codex/skills/converge"
+        ],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "request_user_input when present in Plan Mode",
+        "native_question_tool": "request_user_input",
+        "fallback_surface": "mark unavailable and use concise fallback"
+      },
+      "proof": {
+        "current_claim": "H0 documented",
+        "eval_case": "codex-plan-native-question-ui.md",
+        "h3_boundary": "requires real Plan Mode run with request_user_input used correctly"
+      }
+    },
+    {
+      "host_id": "claude-code",
+      "display_name": "Claude Code",
+      "source_anchor": "Claude Code",
+      "source_urls": [
+        "https://code.claude.com/docs/en/skills"
+      ],
+      "instruction_surfaces": [
+        "~/.claude/skills/converge/SKILL.md",
+        ".claude/skills/converge/SKILL.md",
+        "project rules"
+      ],
+      "install": {
+        "target_key": "claude",
+        "copy_skill": true,
+        "anchor_label": "~/.claude/skills/converge",
+        "anchors": [
+          "~/.claude/skills/converge"
+        ],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "AskUserQuestion when present",
+        "native_question_tool": "AskUserQuestion",
+        "fallback_surface": "short textual fallback"
+      },
+      "proof": {
+        "current_claim": "H1 installed",
+        "eval_case": "claude-native-question-bridge.md",
+        "h3_boundary": "requires real Claude Code run with AskUserQuestion used correctly"
+      }
+    },
+    {
+      "host_id": "cursor",
+      "display_name": "Cursor",
+      "source_anchor": "Cursor",
+      "source_urls": [
+        "https://docs.cursor.com/context/rules"
+      ],
+      "instruction_surfaces": [
+        "~/.cursor/skills/converge/SKILL.md",
+        "~/.cursor/rules/converge.mdc",
+        ".cursor/rules/*.mdc",
+        "AGENTS.md"
+      ],
+      "install": {
+        "target_key": "cursor",
+        "copy_skill": true,
+        "anchor_label": "~/.cursor/skills/converge plus ~/.cursor/rules/converge.mdc",
+        "anchors": [
+          "~/.cursor/skills/converge"
+        ],
+        "bridge_files": [
+          {
+            "path": "~/.cursor/rules/converge.mdc",
+            "kind": "cursor-rule",
+            "required_for_h1": true
+          }
+        ]
+      },
+      "interaction": {
+        "native_question_surface": "AskQuestion when present",
+        "native_question_tool": "AskQuestion",
+        "fallback_surface": "short textual fallback"
+      },
+      "proof": {
+        "current_claim": "H1 installed plus H2 fallback-tested",
+        "eval_case": "cursor-native-question-bridge.md",
+        "h3_boundary": "requires real Cursor run with AskQuestion used correctly"
+      }
+    },
+    {
+      "host_id": "opencode",
+      "display_name": "opencode",
+      "source_anchor": "opencode",
+      "source_urls": [
+        "https://opencode.ai/docs/skills/"
+      ],
+      "instruction_surfaces": [
+        "~/.config/opencode/skills/converge/SKILL.md",
+        ".opencode/skills/converge/SKILL.md",
+        "~/.claude/skills/converge/SKILL.md",
+        "~/.agents/skills/converge/SKILL.md",
+        "AGENTS.md",
+        "opencode.json"
+      ],
+      "install": {
+        "target_key": "opencode",
+        "copy_skill": true,
+        "anchor_label": "~/.config/opencode/skills/converge",
+        "anchors": [
+          "~/.config/opencode/skills/converge"
+        ],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "only if active tools expose one",
+        "native_question_tool": null,
+        "fallback_surface": "capability fallback"
+      },
+      "proof": {
+        "current_claim": "H1 installed plus H2 fallback-tested",
+        "eval_case": "opencode-capability-adapter.md",
+        "h3_boundary": "no specific native question tool claimed until active tools expose one"
+      }
+    },
+    {
+      "host_id": "cline",
+      "display_name": "Cline",
+      "source_anchor": "Cline",
+      "source_urls": [
+        "https://docs.cline.bot/customization/skills"
+      ],
+      "instruction_surfaces": [
+        "~/.cline/skills/converge/SKILL.md",
+        ".cline/skills/converge/SKILL.md",
+        ".clinerules/skills/converge/SKILL.md",
+        ".claude/skills/converge/SKILL.md"
+      ],
+      "install": {
+        "target_key": "cline",
+        "copy_skill": true,
+        "anchor_label": "~/.cline/skills/converge",
+        "anchors": [
+          "~/.cline/skills/converge"
+        ],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "only if active tools expose one",
+        "native_question_tool": "use_skill",
+        "fallback_surface": "capability fallback"
+      },
+      "proof": {
+        "current_claim": "H1 installed",
+        "eval_case": "extended-host-capability-boundary.md",
+        "h3_boundary": "requires real Cline run with use_skill or native skill activation evidence"
+      }
+    },
+    {
+      "host_id": "antigravity",
+      "display_name": "Google Antigravity",
+      "source_anchor": "Google Antigravity",
+      "source_urls": [
+        "https://antigravity.google/docs/skills"
+      ],
+      "instruction_surfaces": [
+        "~/.gemini/antigravity/skills/converge/SKILL.md",
+        "<workspace-root>/.agents/skills/converge/SKILL.md"
+      ],
+      "install": {
+        "target_key": "antigravity",
+        "copy_skill": true,
+        "anchor_label": "~/.gemini/antigravity/skills/converge",
+        "anchors": [
+          "~/.gemini/antigravity/skills/converge"
+        ],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "only if active tools expose one",
+        "native_question_tool": null,
+        "fallback_surface": "capability fallback"
+      },
+      "proof": {
+        "current_claim": "H1 installed",
+        "eval_case": "extended-host-capability-boundary.md",
+        "h3_boundary": "requires real Antigravity run with skill activation evidence"
+      }
+    },
+    {
+      "host_id": "gemini-cli",
+      "display_name": "Gemini CLI",
+      "source_anchor": "Gemini CLI",
+      "source_urls": [
+        "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/docs/cli/configuration.md"
+      ],
+      "instruction_surfaces": [
+        "GEMINI.md",
+        "configured contextFileName",
+        "AGENTS.md when configured"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": "GEMINI.md or configured contextFileName",
+        "anchors": [],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "active CLI only; no Converge native question UI claimed",
+        "native_question_tool": null,
+        "fallback_surface": "textual fallback"
+      },
+      "proof": {
+        "current_claim": "H0 documented",
+        "eval_case": "extended-host-capability-boundary.md",
+        "h3_boundary": "requires real Gemini CLI run with context file loaded and behavior reviewed"
+      }
+    },
+    {
+      "host_id": "github-copilot",
+      "display_name": "GitHub Copilot",
+      "source_anchor": "GitHub Copilot",
+      "source_urls": [
+        "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions"
+      ],
+      "instruction_surfaces": [
+        ".github/copilot-instructions.md",
+        ".github/instructions/*.instructions.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": ".github/copilot-instructions.md, .github/instructions/*.instructions.md, AGENTS.md, CLAUDE.md, or GEMINI.md",
+        "anchors": [],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "active Copilot feature only; no Converge native question UI claimed",
+        "native_question_tool": null,
+        "fallback_surface": "repository instruction fallback"
+      },
+      "proof": {
+        "current_claim": "H0 documented",
+        "eval_case": "extended-host-capability-boundary.md",
+        "h3_boundary": "requires real Copilot agent/chat run with repository instructions loaded and behavior reviewed"
+      }
+    },
+    {
+      "host_id": "windsurf",
+      "display_name": "Windsurf Cascade",
+      "source_anchor": "Windsurf",
+      "source_urls": [
+        "https://windsurf.com/university/general-education/creating-modifying-rules"
+      ],
+      "instruction_surfaces": [
+        "global rules",
+        "workspace rules",
+        "manual rule activation",
+        "model-decision rule activation"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": "Cascade rules or workspace/global rules",
+        "anchors": [],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "active Cascade UI only; no Converge native question UI claimed",
+        "native_question_tool": null,
+        "fallback_surface": "rule fallback"
+      },
+      "proof": {
+        "current_claim": "H0 documented",
+        "eval_case": "extended-host-capability-boundary.md",
+        "h3_boundary": "requires real Cascade run with rule applied and behavior reviewed"
+      }
+    },
+    {
+      "host_id": "continue",
+      "display_name": "Continue",
+      "source_anchor": "Continue",
+      "source_urls": [
+        "https://docs.continue.dev/customize/rules"
+      ],
+      "instruction_surfaces": [
+        ".continue/rules",
+        "~/.continue/rules",
+        "Hub rules",
+        "config.yaml rules"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": ".continue/rules, ~/.continue/rules, or hub rules",
+        "anchors": [],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "active Continue UI only; no Converge native question UI claimed",
+        "native_question_tool": null,
+        "fallback_surface": "rule fallback"
+      },
+      "proof": {
+        "current_claim": "H0 documented",
+        "eval_case": "extended-host-capability-boundary.md",
+        "h3_boundary": "requires real Continue Agent or Chat run with rule applied and behavior reviewed"
+      }
+    },
+    {
+      "host_id": "aider",
+      "display_name": "Aider",
+      "source_anchor": "Aider",
+      "source_urls": [
+        "https://aider.chat/docs/usage/conventions.html"
+      ],
+      "instruction_surfaces": [
+        "CONVENTIONS.md added to chat",
+        "aider --read CONVENTIONS.md",
+        ".aider.conf.yml read"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": "CONVENTIONS.md added to chat",
+        "anchors": [],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "active aider chat only; no Converge native question UI claimed",
+        "native_question_tool": null,
+        "fallback_surface": "conventions fallback"
+      },
+      "proof": {
+        "current_claim": "H0 documented",
+        "eval_case": "extended-host-capability-boundary.md",
+        "h3_boundary": "requires real aider run with CONVENTIONS.md in context and behavior reviewed"
+      }
+    },
+    {
+      "host_id": "unknown",
+      "display_name": "Unknown or future host",
+      "source_anchor": "none",
+      "source_urls": [],
+      "instruction_surfaces": [
+        "active system/developer/user messages",
+        "active tool manifest",
+        "visible host instructions"
+      ],
+      "install": {
+        "target_key": null,
+        "copy_skill": false,
+        "anchor_label": "none",
+        "anchors": [],
+        "bridge_files": []
+      },
+      "interaction": {
+        "native_question_surface": "active tool manifest only",
+        "native_question_tool": null,
+        "fallback_surface": "capability fallback"
+      },
+      "proof": {
+        "current_claim": "H0 capability model",
+        "eval_case": "host-support-proof-boundary.md",
+        "h3_boundary": "requires observed native tool and a real interactive run"
+      }
+    }
+  ]
+}

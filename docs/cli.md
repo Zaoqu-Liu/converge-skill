@@ -33,6 +33,8 @@ python3 -m converge doctor
 python3 -m converge doctor --json
 ```
 
+`doctor` reads `skills/converge/host-adapters.json`, checks declared skill anchors and required bridge files, and reports missing install evidence separately from proof-tier claims. It does not treat an installed copy as proof of native interactive behavior.
+
 ### install
 
 Install the canonical skill into supported local host directories:
@@ -41,6 +43,8 @@ Install the canonical skill into supported local host directories:
 python3 -m converge install --targets all
 python3 -m converge install --targets claude,cursor,opencode --dry-run
 ```
+
+Install targets are derived from the adapter registry. Today the local copy targets are `claude`, `cursor`, `opencode`, `cline`, and `antigravity`; H0 rule-only hosts such as Gemini CLI, GitHub Copilot, Windsurf, Continue, and Aider stay documented until a real bridge and proof path exists.
 
 ### pack
 
