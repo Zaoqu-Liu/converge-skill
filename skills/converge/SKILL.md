@@ -133,6 +133,7 @@ Low-expression ideation rules:
 - Do not compress ambiguity into a single `I infer` before recommending a product, plan, or route. State 2-4 plausible intent hypotheses first, then choose the owner default.
 - Do not add current market, competitor, benchmark, pricing, or ecosystem claims to make an ideation answer sound sharper unless the Freshness & Evidence Gate has actually been satisfied. If source access was not used, mark those claims unverified or omit them.
 - In low-expression ideation, ground the recommendation in user-goal mechanics such as frequency, pain, feedback loop, distribution, switching cost, and data advantage. Do not justify it with broad claims like "existing tools mostly..." or "competitors do not..." unless researched; write "Hypothesis to validate:" instead.
+- After giving the owner default for a low-expression idea, ask 1-3 explicit high-leverage convergence questions unless the user requested a final artifact only. At least one question should choose the next route, audience, or validation constraint. In Codex Default/headless mode, use natural language or one compact route choice, not a letter-coded survey. Do not end only with "if you want, I can continue."
 
 Context Intake rules:
 - First build an Input Inventory: user text, attachments/files, images/screenshots, links, local repo paths, previous thread state, and unavailable items.

@@ -155,6 +155,10 @@ python3 skills/converge/scripts/check_converge_response_eval.py \
   evidence/response-eval/codex-web-tech-route-20260529/results \
   --root skills/converge \
   --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-low-expression-20260529/results \
+  --root skills/converge \
+  --require-real-results
 ```
 
 For an installed console command:
