@@ -20,6 +20,15 @@ H0 documented instruction-surface coverage exists for Gemini CLI, GitHub Copilot
 
 Codex Default and selected fallback paths have H2 response-eval evidence. Codex Plan, Claude Code native `AskUserQuestion`, Cursor native `AskQuestion`, and extended-host native activation paths remain unproven until real interactive runs are reviewed.
 
+H3 evidence must be captured through native-proof packets:
+
+```bash
+python3 -m converge native-proof --out /tmp/converge-native-proof
+python3 -m converge native-proof --proofs /tmp/converge-native-proof/proofs --require-real-artifacts
+```
+
+Native-proof validation checks that the native question UI/tool was actually observed, used correctly, and supported by transcript, screenshot, log, or export evidence. It is separate from response-eval, which judges answer quality.
+
 ## Source Of Truth
 
 Use these files before changing host support:

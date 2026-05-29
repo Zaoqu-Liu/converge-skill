@@ -8,6 +8,7 @@ Use this before publishing a new Converge release.
 python3 scripts/verify.py
 python3 -m converge validate --protocol-only
 python3 -m converge doctor --json
+python3 -m converge native-proof --out /tmp/converge-native-proof
 python3 skills/converge/scripts/sync_converge_install.py
 python3 skills/converge/scripts/check_converge_release.py --source skills/converge --targets all
 ```
@@ -20,6 +21,7 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 - `skills/converge/host-support-ledger.md` uses proof-tiered language.
 - `skills/converge/eval-coverage.tsv` covers every required host, context, evidence, risk, trigger, and output surface.
 - No H2/H3/H4 claim is made without matching response-eval or host-run evidence.
+- No H3 claim is made without a passing native-proof JSON validated with `--require-real-artifacts`.
 
 ## Repository Checks
 

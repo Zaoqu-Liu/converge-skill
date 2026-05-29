@@ -50,6 +50,8 @@ def validate_source(source: Path) -> None:
         "scripts/check_converge_response_eval.py",
         "scripts/summarize_converge_response_eval.py",
         "scripts/select_converge_response_eval_batch.py",
+        "scripts/build_converge_native_proof.py",
+        "scripts/check_converge_native_proof.py",
         "scripts/sync_converge_install.py",
         "scripts/check_converge_release.py",
     ]

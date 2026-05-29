@@ -64,6 +64,18 @@ python3 -m converge eval --case low-expression-idea.md --out /tmp/converge-respo
 python3 -m converge eval --results /tmp/converge-results --require-real-results
 ```
 
+### native-proof
+
+Build or validate H3 native interaction proof packets:
+
+```bash
+python3 -m converge native-proof --out /tmp/converge-native-proof
+python3 -m converge native-proof --host-id cursor --out /tmp/converge-native-proof-cursor
+python3 -m converge native-proof --proofs /tmp/converge-native-proof/proofs --require-real-artifacts
+```
+
+This command does not create H3 evidence by itself. It creates the proof packet and validates filled proof JSON plus real transcript, screenshot, log, or exported conversation evidence from an interactive host run.
+
 ### release-check
 
 Run the release gate:

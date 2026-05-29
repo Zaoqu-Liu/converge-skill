@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Zaoqu-Liu/converge-skill/protocol/schemas/native-interaction-proof.schema.json",
+  "title": "Converge Native Interaction Proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "host_id",
+    "case_name",
+    "proof_tier",
+    "verdict",
+    "date",
+    "model_host",
+    "host_mode",
+    "native_surface_observed",
+    "native_tool_used",
+    "prompt_artifact",
+    "response_artifact",
+    "interaction",
+    "evidence_artifacts",
+    "claim_allowed",
+    "reviewer",
+    "notes"
+  ],
+  "properties": {
+    "protocol_version": {
+      "type": "string",
+      "pattern": "^1\\.0$"
+    },
+    "host_id": {
+      "type": "string"
+    },
+    "case_name": {
+      "type": "string"
+    },
+    "proof_tier": {
+      "type": "string",
+      "const": "H3"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["Pass", "Fail", "Blocked"]
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "model_host": {
+      "type": "string"
+    },
+    "host_mode": {
+      "type": "string"
+    },
+    "native_surface_observed": {
+      "type": "string"
+    },
+    "native_tool_used": {
+      "type": ["string", "null"]
+    },
+    "prompt_artifact": {
+      "type": "string"
+    },
+    "response_artifact": {
+      "type": "string"
+    },
+    "interaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question_count",
+        "recommended_default_first",
+        "freeform_escape_hatch",
+        "avoided_unrelated_host_tools",
+        "continued_after_clarification"
+      ],
+      "properties": {
+        "question_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "recommended_default_first": {
+          "type": "boolean"
+        },
+        "freeform_escape_hatch": {
+          "type": "boolean"
+        },
+        "avoided_unrelated_host_tools": {
+          "type": "boolean"
+        },
+        "continued_after_clarification": {
+          "type": "boolean"
+        }
+      }
+    },
+    "evidence_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "path_or_url", "description"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["screenshot", "transcript", "log", "export", "other"]
+          },
+          "path_or_url": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "claim_allowed": {
+      "type": "string"
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

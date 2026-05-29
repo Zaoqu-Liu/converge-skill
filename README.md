@@ -40,6 +40,7 @@ It includes:
 - context intake rules for files, screenshots, links, repos, configs, and instruction-bearing artifacts
 - cross-host adapter rules for Codex, Claude Code, Cursor, opencode, Cline, Google Antigravity, Gemini CLI, GitHub Copilot, Windsurf, Continue, Aider, and unknown future hosts
 - a machine-readable host adapter registry that drives `doctor`, install target selection, release checks, and TSV drift validation
+- H3 native interaction proof packets for real native question UI/tool evidence
 - eval cases, coverage matrix, response-eval tools, release checks, and install sync scripts
 
 ## Support Claims
@@ -111,6 +112,12 @@ Inspect local host support state:
 python3 -m converge doctor
 ```
 
+Build H3 native interaction proof packets:
+
+```bash
+python3 -m converge native-proof --out /tmp/converge-native-proof
+```
+
 For an installed console command:
 
 ```bash
@@ -151,6 +158,7 @@ Start here when changing support claims:
 - `skills/converge/host-adapter-matrix.md`
 - `skills/converge/host-support-ledger.md`
 - `skills/converge/host-native-interaction-runbook.md`
+- `skills/converge/scripts/check_converge_native_proof.py`
 
 Any change to host support should update the adapter registry, source evidence, capability contract, eval coverage, and release checks together. The protocol validator fails if `host-adapters.json` and `host-capability-contract.tsv` drift.
 

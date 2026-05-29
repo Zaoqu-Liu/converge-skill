@@ -1,0 +1,31 @@
+{
+  "protocol_version": "1.0",
+  "host_id": "cursor",
+  "case_name": "cursor-native-question-bridge.md",
+  "proof_tier": "H3",
+  "verdict": "Pass",
+  "date": "2026-05-29",
+  "model_host": "Cursor Agent interactive",
+  "host_mode": "Agent interactive session",
+  "native_surface_observed": "AskQuestion was visible as a callable native question surface in the active host context.",
+  "native_tool_used": "AskQuestion",
+  "prompt_artifact": "prompts/cursor-native-question-bridge.prompt.md",
+  "response_artifact": "responses/cursor-native-question-bridge.response.md",
+  "interaction": {
+    "question_count": 1,
+    "recommended_default_first": true,
+    "freeform_escape_hatch": true,
+    "avoided_unrelated_host_tools": true,
+    "continued_after_clarification": true
+  },
+  "evidence_artifacts": [
+    {
+      "kind": "transcript",
+      "path_or_url": "evidence/cursor-native-question-bridge.transcript.md",
+      "description": "Transcript showing the native AskQuestion call and the follow-up answer."
+    }
+  ],
+  "claim_allowed": "Cursor native interactive question path is H3-tested for this case only.",
+  "reviewer": "manual-reviewer",
+  "notes": "Example only; real proof requires a real interactive host run and artifact files."
+}

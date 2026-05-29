@@ -25,6 +25,15 @@ REQUIRED_SCHEMAS = {
     "converge-run.schema.json": ["protocol_version", "intent", "context", "decision", "evidence", "interaction", "output", "proof"],
     "host-capability.schema.json": ["protocol_version", "hosts"],
     "host-adapter-registry.schema.json": ["protocol_version", "registry_version", "proof_tiers", "hosts"],
+    "native-interaction-proof.schema.json": [
+        "protocol_version",
+        "host_id",
+        "case_name",
+        "proof_tier",
+        "verdict",
+        "interaction",
+        "evidence_artifacts",
+    ],
     "eval-result.schema.json": ["protocol_version", "case", "verdict", "host", "evidence", "failure_tags"],
     "converge-compatible-manifest.schema.json": [
         "converge_protocol",
@@ -41,6 +50,7 @@ EXAMPLE_TO_SCHEMA = {
     "converge-run.example.json": "converge-run.schema.json",
     "host-capability.example.json": "host-capability.schema.json",
     "host-adapter-registry.example.json": "host-adapter-registry.schema.json",
+    "native-interaction-proof.example.json": "native-interaction-proof.schema.json",
     "eval-result.example.json": "eval-result.schema.json",
     "converge-compatible-manifest.example.json": "converge-compatible-manifest.schema.json",
 }
@@ -175,6 +185,32 @@ def cmd_eval(args: argparse.Namespace) -> int:
     return run(command)
 
 
+def cmd_native_proof(args: argparse.Namespace) -> int:
+    if args.proofs:
+        command = [
+            sys.executable,
+            str(SKILL_ROOT / "scripts" / "check_converge_native_proof.py"),
+            str(args.proofs),
+            "--root",
+            str(SKILL_ROOT),
+        ]
+        if args.require_real_artifacts:
+            command.append("--require-real-artifacts")
+        return run(command)
+
+    command = [
+        sys.executable,
+        str(SKILL_ROOT / "scripts" / "build_converge_native_proof.py"),
+        "--root",
+        str(SKILL_ROOT),
+        "--out",
+        str(args.out.expanduser().resolve()),
+    ]
+    if args.host_id:
+        command.extend(["--host-id", args.host_id])
+    return run(command)
+
+
 def cmd_release_check(args: argparse.Namespace) -> int:
     command = [
         sys.executable,
@@ -219,6 +255,13 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser.add_argument("--require-all-cases", action="store_true")
     eval_parser.add_argument("--require-real-results", action="store_true")
     eval_parser.set_defaults(func=cmd_eval)
+
+    native_proof = subparsers.add_parser("native-proof", help="build or validate H3 native interaction proof artifacts")
+    native_proof.add_argument("--host-id", help="build a runpack for one host id")
+    native_proof.add_argument("--out", type=Path, default=Path("/tmp/converge-native-proof"))
+    native_proof.add_argument("--proofs", type=Path, help="validate an existing proofs directory")
+    native_proof.add_argument("--require-real-artifacts", action="store_true")
+    native_proof.set_defaults(func=cmd_native_proof)
 
     release_check = subparsers.add_parser("release-check", help="run the release gate")
     release_check.add_argument("--targets", default="all")

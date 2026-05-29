@@ -31,6 +31,20 @@ For each native interaction run, capture:
 - follow-up answer after the first clarification round
 - screenshot, transcript, log, or exported conversation link if the host supports it
 
+Build a proof collection packet before the run:
+
+```bash
+python3 scripts/build_converge_native_proof.py --out /tmp/converge-native-proof
+```
+
+After filling the generated `proofs/*.proof.json` file and evidence artifacts, validate it:
+
+```bash
+python3 scripts/check_converge_native_proof.py /tmp/converge-native-proof/proofs --require-real-artifacts
+```
+
+Passing this validator is required before any H3 claim is recorded in `host-support-ledger.md`. A `Blocked` proof can document why H3 remains unproven, but it must not promote the claim.
+
 ## Codex Plan H3
 
 Prerequisites:
@@ -109,6 +123,12 @@ When a native run is reviewed, create a normal response-eval result file for the
 - `codex-plan-native-question-ui.md`
 - `claude-native-question-bridge.md`
 - `cursor-native-question-bridge.md`
+
+Also create and validate the matching native proof JSON from the runpack:
+
+- `codex-plan-native-question-ui.proof.json`
+- `claude-native-question-bridge.proof.json`
+- `cursor-native-question-bridge.proof.json`
 
 Use `Model/Host` to name the real host and mode, for example:
 

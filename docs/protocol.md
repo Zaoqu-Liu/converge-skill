@@ -20,6 +20,7 @@ Protocol schemas live in `protocol/schemas/`.
 | `converge-run.schema.json` | Standard shape for a Converge run: intent, context, decision, evidence, interaction, output, and proof |
 | `host-capability.schema.json` | Standard host capability contract for instruction, install, interaction, fallback, claim, eval, and H3 boundary |
 | `host-adapter-registry.schema.json` | Machine-readable host adapter registry for install surfaces, bridges, interaction boundaries, proof tiers, and eval hooks |
+| `native-interaction-proof.schema.json` | H3 proof artifact for real native question UI/tool runs, including interaction checks and transcript/screenshot/log evidence |
 | `eval-result.schema.json` | Standard response-eval result shape |
 | `converge-compatible-manifest.schema.json` | Manifest for third-party skills or workflows that claim Converge compatibility |
 
@@ -44,6 +45,22 @@ The protocol requires evidence to match the claim. A host can be H1 installed an
 The runtime registry lives at `skills/converge/host-adapters.json`. It is intentionally more specific than the generic host capability schema: it includes install target keys, bridge files such as the Cursor rule bridge, native question tool names only when a tool is actually claimed, and the eval case that protects each support boundary.
 
 `host-capability-contract.tsv` remains a reviewer-friendly table, but validators treat it as derived from the registry. If a host claim, install anchor, interaction surface, eval case, or H3 boundary drifts between those files, `converge validate --protocol-only` fails.
+
+## Native Interaction Proof
+
+H3 proof requires a real interactive run where the native question surface is visible and used correctly. Build proof packets with:
+
+```bash
+python3 -m converge native-proof --out /tmp/converge-native-proof
+```
+
+After collecting the host response and evidence artifacts, validate the filled JSON:
+
+```bash
+python3 -m converge native-proof --proofs /tmp/converge-native-proof/proofs --require-real-artifacts
+```
+
+This proof sits beside response-eval results. Response-eval checks whether the answer satisfies Converge behavior; native proof checks whether the host-native interaction path itself was real.
 
 ## Validate Protocol Files
 

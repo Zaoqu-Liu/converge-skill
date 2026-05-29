@@ -29,11 +29,13 @@ REQUIRED_ROOT_FILES = [
     "protocol/schemas/converge-run.schema.json",
     "protocol/schemas/host-capability.schema.json",
     "protocol/schemas/host-adapter-registry.schema.json",
+    "protocol/schemas/native-interaction-proof.schema.json",
     "protocol/schemas/eval-result.schema.json",
     "protocol/schemas/converge-compatible-manifest.schema.json",
     "protocol/examples/converge-run.example.json",
     "protocol/examples/host-capability.example.json",
     "protocol/examples/host-adapter-registry.example.json",
+    "protocol/examples/native-interaction-proof.example.json",
     "protocol/examples/eval-result.example.json",
     "protocol/examples/converge-compatible-manifest.example.json",
     "converge/__init__.py",
@@ -114,6 +116,7 @@ def main() -> int:
     run([python, str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "summarize_converge_response_eval.py"), "--self-test"])
     run([python, str(SKILL_ROOT / "scripts" / "select_converge_response_eval_batch.py"), "--self-test"])
+    run([python, str(SKILL_ROOT / "scripts" / "check_converge_native_proof.py"), "--self-test"])
     run(
         [
             python,

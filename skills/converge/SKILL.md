@@ -238,6 +238,7 @@ When improving Converge or any reusable skill, use `playbooks/skill-evolution.md
 - Keep affected cases separate from holdout/regression cases; do not accept edits that only improve the known trace.
 - Run the structural validator, `scripts/check_converge_eval_suite.py`, and `scripts/check_converge_coverage_matrix.py` before claiming the skill improved.
 - For behavior-level changes, use `scripts/build_converge_response_eval.py` to create blind eval packets and `scripts/select_converge_response_eval_batch.py` to choose pilot/holdout batches, `scripts/summarize_converge_response_eval.py` to track real eval progress, and `scripts/check_converge_response_eval.py --require-all-cases --require-real-results` to validate full filled result sets.
+- For H3 native interaction claims, use `scripts/build_converge_native_proof.py` to create host-specific proof packets and `scripts/check_converge_native_proof.py --require-real-artifacts` to validate filled proof JSON plus transcript/screenshot/log evidence.
 - Sync installed copies only after the canonical source passes validation.
 
 ## Final Output Gate
@@ -384,6 +385,8 @@ Load only the resource needed for the current task:
 - `scripts/check_converge_response_eval.py`: validates filled response-eval result files, including optional all-case coverage.
 - `scripts/summarize_converge_response_eval.py`: summarizes response-eval progress, invalid results, gate failures, failure tags, and reviewed coverage while the full eval set is being filled.
 - `scripts/select_converge_response_eval_batch.py`: chooses deterministic pilot, next-cover, failed/invalid, or full response-eval batches from the coverage matrix.
+- `scripts/build_converge_native_proof.py`: builds H3 native interaction proof runpacks for Codex Plan, Claude Code, and Cursor.
+- `scripts/check_converge_native_proof.py`: validates H3 native interaction proof JSON and transcript/screenshot/log evidence.
 - `scripts/host_adapter_registry.py`: shared registry reader for install and release scripts.
 - `scripts/sync_converge_install.py`: syncs the canonical skill to registry-declared user skill directories, installs required bridge files such as the Cursor rule bridge, and creates backups.
 - `scripts/check_converge_release.py`: runs structural, eval-suite, response-eval smoke, install consistency, Cursor rule bridge, and script compile checks.
