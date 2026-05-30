@@ -114,6 +114,21 @@ REQUIRED_ROOT_FILES = [
     "evidence/response-eval/codex-headless-proof-discipline-20260530/responses/shallow-proof-publish-claim.response.md",
     "evidence/response-eval/codex-headless-proof-discipline-20260530/results/completion-proof-overclaim.result.md",
     "evidence/response-eval/codex-headless-proof-discipline-20260530/results/shallow-proof-publish-claim.result.md",
+    "evidence/response-eval/codex-web-current-research-20260530/README.md",
+    "evidence/response-eval/codex-web-current-research-20260530/RUNBOOK.md",
+    "evidence/response-eval/codex-web-current-research-20260530/manifest.tsv",
+    "evidence/response-eval/codex-web-current-research-20260530/prompts/latest-library-advice.prompt.md",
+    "evidence/response-eval/codex-web-current-research-20260530/prompts/benchmark-headline-route-trap.prompt.md",
+    "evidence/response-eval/codex-web-current-research-20260530/prompts/researched-answer-citations.prompt.md",
+    "evidence/response-eval/codex-web-current-research-20260530/reviews/latest-library-advice.review.md",
+    "evidence/response-eval/codex-web-current-research-20260530/reviews/benchmark-headline-route-trap.review.md",
+    "evidence/response-eval/codex-web-current-research-20260530/reviews/researched-answer-citations.review.md",
+    "evidence/response-eval/codex-web-current-research-20260530/responses/latest-library-advice.response.md",
+    "evidence/response-eval/codex-web-current-research-20260530/responses/benchmark-headline-route-trap.response.md",
+    "evidence/response-eval/codex-web-current-research-20260530/responses/researched-answer-citations.response.md",
+    "evidence/response-eval/codex-web-current-research-20260530/results/latest-library-advice.result.md",
+    "evidence/response-eval/codex-web-current-research-20260530/results/benchmark-headline-route-trap.result.md",
+    "evidence/response-eval/codex-web-current-research-20260530/results/researched-answer-citations.result.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -286,6 +301,16 @@ def main() -> int:
     run(
         [
             python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-web-current-research-20260530" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
             str(SKILL_ROOT / "scripts" / "summarize_converge_response_eval.py"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-20260529" / "results"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-choice-20260529" / "results"),
@@ -295,6 +320,7 @@ def main() -> int:
             str(ROOT / "evidence" / "response-eval" / "codex-headless-mixed-artifact-20260530" / "results"),
             str(ROOT / "evidence" / "response-eval" / "codex-web-current-model-20260530" / "results"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-proof-discipline-20260530" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-web-current-research-20260530" / "results"),
             "--root",
             str(SKILL_ROOT),
             "--require-real-results",
