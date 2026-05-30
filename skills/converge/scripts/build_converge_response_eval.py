@@ -81,7 +81,7 @@ def copy_artifacts(
             raise FileNotFoundError(f"{case.name}: provided artifact not found: {source}")
         target = target_dir / source.name
         shutil.copy2(source, target)
-        copied.append((label, str(target.relative_to(out))))
+        copied.append((label, str(target)))
     return copied
 
 
@@ -380,9 +380,9 @@ def self_test(root: Path = ROOT) -> list[str]:
         if prompt_path.is_file():
             prompt = prompt_path.read_text(encoding="utf-8")
             required_prompt_phrases = [
-                "artifacts/mixed-artifact-intake/screenshot.txt",
-                "artifacts/mixed-artifact-intake/prd.md",
-                "artifacts/mixed-artifact-intake/error.log",
+                str(out / "artifacts" / "mixed-artifact-intake" / "screenshot.txt"),
+                str(out / "artifacts" / "mixed-artifact-intake" / "prd.md"),
+                str(out / "artifacts" / "mixed-artifact-intake" / "error.log"),
                 "Inspect them with available file/image tools before judging the issue.",
             ]
             for phrase in required_prompt_phrases:

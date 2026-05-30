@@ -1,0 +1,7 @@
+2026-05-28T09:17:31.204Z INFO request_id=req_42 route=/api/reports/export workspace_id=ws_9
+2026-05-28T09:17:31.219Z ERROR request_id=req_42 TypeError: Cannot read properties of undefined (reading 'plan')
+    at buildExportPayload (/app/server/reports/export.ts:88:37)
+    at POST (/app/server/routes/reports.ts:41:21)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2026-05-28T09:17:31.221Z DEBUG request_id=req_42 workspace={"id":"ws_9","billing":undefined,"features":["reports"]}
+2026-05-28T09:17:31.222Z INFO request_id=req_42 status=500 duration_ms=18

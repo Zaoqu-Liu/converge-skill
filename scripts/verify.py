@@ -85,6 +85,16 @@ REQUIRED_ROOT_FILES = [
     "evidence/response-eval/codex-headless-low-expression-20260529/reviews/low-expression-idea.review.md",
     "evidence/response-eval/codex-headless-low-expression-20260529/responses/low-expression-idea.response.md",
     "evidence/response-eval/codex-headless-low-expression-20260529/results/low-expression-idea.result.md",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/README.md",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/RUNBOOK.md",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/manifest.tsv",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/artifacts/mixed-artifact-intake/screenshot.txt",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/artifacts/mixed-artifact-intake/prd.md",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/artifacts/mixed-artifact-intake/error.log",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/prompts/mixed-artifact-intake.prompt.md",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/reviews/mixed-artifact-intake.review.md",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/responses/mixed-artifact-intake.response.md",
+    "evidence/response-eval/codex-headless-mixed-artifact-20260530/results/mixed-artifact-intake.result.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -219,6 +229,16 @@ def main() -> int:
             python,
             str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-low-expression-20260529" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-mixed-artifact-20260530" / "results"),
             "--root",
             str(SKILL_ROOT),
             "--require-real-results",

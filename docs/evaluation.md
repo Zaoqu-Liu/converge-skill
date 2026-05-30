@@ -78,13 +78,19 @@ python3 skills/converge/scripts/check_converge_response_eval.py \
   evidence/response-eval/codex-headless-low-expression-20260529/results \
   --root skills/converge \
   --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-mixed-artifact-20260530/results \
+  --root skills/converge \
+  --require-real-results
 ```
 
-These prove only the stored `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, `host-support-proof-boundary.md`, `technology-route-current-stack.md`, and `low-expression-idea.md` cases. They are not full benchmark proof and do not promote Cursor, Claude Code, or native question UI paths.
+These prove only the stored `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, `host-support-proof-boundary.md`, `technology-route-current-stack.md`, `low-expression-idea.md`, and `mixed-artifact-intake.md` cases. They are not full benchmark proof and do not promote Cursor, Claude Code, or native question UI paths.
 
 The `codex-web-tech-route-20260529` run is the first stored current-research Technology Route proof. It supports a scoped claim that Converge can attach current source evidence when web access is available; it does not prove the chosen route is universally best.
 
 The `codex-headless-low-expression-20260529` run is the first stored low-expression ideation proof. It supports a scoped claim that Converge can turn a vague high-ambition product idea into an owner default, validation plan, and concise route question.
+
+The `codex-headless-mixed-artifact-20260530` run is the first stored mixed-artifact diagnosis proof. It supports a scoped claim that Converge can inspect available screenshot, PRD, and log artifacts before naming the real problem.
 
 ## Native Interaction Evidence
 

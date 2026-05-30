@@ -16,3 +16,4 @@ Current stored evidence:
 - `response-eval/codex-headless-host-proof-20260529`: one real Codex headless response-eval pass for `host-support-proof-boundary.md`.
 - `response-eval/codex-web-tech-route-20260529`: one real Codex web-assisted response-eval pass for `technology-route-current-stack.md`.
 - `response-eval/codex-headless-low-expression-20260529`: one real Codex headless response-eval pass for `low-expression-idea.md`.
+- `response-eval/codex-headless-mixed-artifact-20260530`: one real Codex headless response-eval pass for `mixed-artifact-intake.md`.
