@@ -175,6 +175,10 @@ python3 skills/converge/scripts/check_converge_response_eval.py \
   evidence/response-eval/codex-web-current-research-20260530/results \
   --root skills/converge \
   --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-everyday-usefulness-20260530/results \
+  --root skills/converge \
+  --require-real-results
 ```
 
 For an installed console command:

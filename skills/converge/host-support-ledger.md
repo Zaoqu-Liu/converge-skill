@@ -11,8 +11,8 @@ This ledger records what Converge can honestly claim for each host. Use it with 
 - Adapter registry coverage: `host-adapters.json` machine-checks install target keys, skill anchors, bridge files, interaction surfaces, proof tiers, and eval hooks.
 - Contract coverage: `host-capability-contract.tsv` machine-checks each host profile against source anchors, install surfaces, native question surfaces, fallback behavior, current claim tier, eval case, and H3 boundary.
 - Install coverage: release checks compare canonical source against installed copies for Claude Code, Cursor, opencode, Cline, and Google Antigravity.
-- Artifacted behavior coverage: 12 of 40 real response-eval cases are stored across Codex evidence runs and reviewed as Pass with 0 Fail: `evidence/response-eval/codex-headless-20260529`, `evidence/response-eval/codex-headless-choice-20260529`, `evidence/response-eval/codex-headless-host-proof-20260529`, `evidence/response-eval/codex-web-tech-route-20260529`, `evidence/response-eval/codex-headless-low-expression-20260529`, `evidence/response-eval/codex-headless-mixed-artifact-20260530`, `evidence/response-eval/codex-web-current-model-20260530`, `evidence/response-eval/codex-headless-proof-discipline-20260530`, and `evidence/response-eval/codex-web-current-research-20260530`.
-- Missing behavior evidence: the remaining 28 cases are not yet stored as real response-eval results; native interactive question UI cases must not be filled from CLI/headless fallback output.
+- Artifacted behavior coverage: 16 of 40 real response-eval cases are stored across Codex evidence runs and reviewed as Pass with 0 Fail: `evidence/response-eval/codex-headless-20260529`, `evidence/response-eval/codex-headless-choice-20260529`, `evidence/response-eval/codex-headless-host-proof-20260529`, `evidence/response-eval/codex-web-tech-route-20260529`, `evidence/response-eval/codex-headless-low-expression-20260529`, `evidence/response-eval/codex-headless-mixed-artifact-20260530`, `evidence/response-eval/codex-web-current-model-20260530`, `evidence/response-eval/codex-headless-proof-discipline-20260530`, `evidence/response-eval/codex-web-current-research-20260530`, and `evidence/response-eval/codex-headless-everyday-usefulness-20260530`.
+- Missing behavior evidence: the remaining 24 cases are not yet stored as real response-eval results; native interactive question UI cases must not be filled from CLI/headless fallback output.
 
 ## Host Ledger
 
@@ -47,7 +47,7 @@ Cursor, opencode, and extended hosts such as Cline, Google Antigravity, Gemini C
 Use scoped claims:
 
 ```text
-Converge is installed and release-checked for Claude Code, Cursor, opencode, Cline, and Google Antigravity. It has 12 stored real Codex response-eval passes: two Codex Default fallback cases, one host proof-boundary discipline case, five web-assisted current-tech route cases, one low-expression ideation case, one mixed-artifact diagnosis case, and two completion-proof discipline cases. Native interactive question paths for Codex Plan, Claude Code, and Cursor remain H3-unproven until real interactive runs capture the native question UI being used correctly.
+Converge is installed and release-checked for Claude Code, Cursor, opencode, Cline, and Google Antigravity. It has 16 stored real Codex response-eval passes: two Codex Default fallback cases, one host proof-boundary discipline case, five web-assisted current-tech route cases, five everyday intent/usefulness cases, one mixed-artifact diagnosis case, and two completion-proof discipline cases. Native interactive question paths for Codex Plan, Claude Code, and Cursor remain H3-unproven until real interactive runs capture the native question UI being used correctly.
 ```
 
 Do not say:

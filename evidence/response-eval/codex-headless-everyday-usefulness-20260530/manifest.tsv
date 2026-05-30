@@ -1,0 +1,5 @@
+case	prompt_packet	review_packet	result_stub
+messy-decision.md	prompts/messy-decision.prompt.md	reviews/messy-decision.review.md	results/messy-decision.result.md
+everyday-work-plan.md	prompts/everyday-work-plan.prompt.md	reviews/everyday-work-plan.review.md	results/everyday-work-plan.result.md
+reply-draft.md	prompts/reply-draft.prompt.md	reviews/reply-draft.review.md	results/reply-draft.result.md
+relationship-preserving-reply.md	prompts/relationship-preserving-reply.prompt.md	reviews/relationship-preserving-reply.review.md	results/relationship-preserving-reply.result.md

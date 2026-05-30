@@ -19,6 +19,7 @@ python3 skills/converge/scripts/check_converge_response_eval.py evidence/respons
 python3 skills/converge/scripts/check_converge_response_eval.py evidence/response-eval/codex-web-current-model-20260530/results --root skills/converge --require-real-results
 python3 skills/converge/scripts/check_converge_response_eval.py evidence/response-eval/codex-headless-proof-discipline-20260530/results --root skills/converge --require-real-results
 python3 skills/converge/scripts/check_converge_response_eval.py evidence/response-eval/codex-web-current-research-20260530/results --root skills/converge --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py evidence/response-eval/codex-headless-everyday-usefulness-20260530/results --root skills/converge --require-real-results
 python3 skills/converge/scripts/summarize_converge_response_eval.py \
   evidence/response-eval/codex-headless-20260529/results \
   evidence/response-eval/codex-headless-choice-20260529/results \
@@ -29,6 +30,7 @@ python3 skills/converge/scripts/summarize_converge_response_eval.py \
   evidence/response-eval/codex-web-current-model-20260530/results \
   evidence/response-eval/codex-headless-proof-discipline-20260530/results \
   evidence/response-eval/codex-web-current-research-20260530/results \
+  evidence/response-eval/codex-headless-everyday-usefulness-20260530/results \
   --root skills/converge \
   --require-real-results \
   --show-axes \
@@ -49,7 +51,7 @@ python3 skills/converge/scripts/check_converge_release.py --source skills/conver
 - `intentbench/manifest.json` validates and every suite selector maps to at least one eval case.
 - `docs/v1-readiness.md` matches the aggregate behavior evidence and states remaining proof gates.
 - `compatible/examples/*/converge-compatible.json` validates and every bundled compatible artifact references real entrypoints and eval cases.
-- Stored evidence under `evidence/response-eval/codex-headless-20260529`, `evidence/response-eval/codex-headless-choice-20260529`, `evidence/response-eval/codex-headless-host-proof-20260529`, `evidence/response-eval/codex-web-tech-route-20260529`, `evidence/response-eval/codex-headless-low-expression-20260529`, `evidence/response-eval/codex-headless-mixed-artifact-20260530`, `evidence/response-eval/codex-web-current-model-20260530`, `evidence/response-eval/codex-headless-proof-discipline-20260530`, and `evidence/response-eval/codex-web-current-research-20260530` validates with `--require-real-results`.
+- Stored evidence under `evidence/response-eval/codex-headless-20260529`, `evidence/response-eval/codex-headless-choice-20260529`, `evidence/response-eval/codex-headless-host-proof-20260529`, `evidence/response-eval/codex-web-tech-route-20260529`, `evidence/response-eval/codex-headless-low-expression-20260529`, `evidence/response-eval/codex-headless-mixed-artifact-20260530`, `evidence/response-eval/codex-web-current-model-20260530`, `evidence/response-eval/codex-headless-proof-discipline-20260530`, `evidence/response-eval/codex-web-current-research-20260530`, and `evidence/response-eval/codex-headless-everyday-usefulness-20260530` validates with `--require-real-results`.
 - `gallery/examples.json` validates, references real eval cases, and renders through `site/index.html`.
 - No H2/H3/H4 claim is made without matching response-eval or host-run evidence.
 - No H3 claim is made without a passing native-proof JSON validated with `--require-real-artifacts`.

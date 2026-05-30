@@ -18,6 +18,7 @@
 - Adds a V1 readiness ledger and aggregate response-eval summary support across multiple evidence directories.
 - Adds a proof-discipline response-eval pass for completion-proof and publish-readiness overclaim boundaries.
 - Adds a web-assisted current-research response-eval pass for latest frontend route, benchmark headline, and citation-boundary behavior.
+- Adds an everyday-usefulness response-eval pass for messy decisions, overloaded work plans, and negotiation replies.
 - Extends the response-eval builder to generate focused multi-case runpacks with repeated `--case` arguments.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
 - Adds machine-readable before/after gallery examples, a static docs site, and gallery/site validation in repository verification.

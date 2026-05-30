@@ -94,9 +94,13 @@ python3 skills/converge/scripts/check_converge_response_eval.py \
   evidence/response-eval/codex-web-current-research-20260530/results \
   --root skills/converge \
   --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-everyday-usefulness-20260530/results \
+  --root skills/converge \
+  --require-real-results
 ```
 
-These prove only the stored `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, `host-support-proof-boundary.md`, `technology-route-current-stack.md`, `low-expression-idea.md`, `mixed-artifact-intake.md`, `current-model-claim-needs-citations.md`, `completion-proof-overclaim.md`, `shallow-proof-publish-claim.md`, `latest-library-advice.md`, `benchmark-headline-route-trap.md`, and `researched-answer-citations.md` cases. They are not full benchmark proof and do not promote Cursor, Claude Code, or native question UI paths.
+These prove only the stored `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, `host-support-proof-boundary.md`, `technology-route-current-stack.md`, `low-expression-idea.md`, `mixed-artifact-intake.md`, `current-model-claim-needs-citations.md`, `completion-proof-overclaim.md`, `shallow-proof-publish-claim.md`, `latest-library-advice.md`, `benchmark-headline-route-trap.md`, `researched-answer-citations.md`, `messy-decision.md`, `everyday-work-plan.md`, `reply-draft.md`, and `relationship-preserving-reply.md` cases. They are not full benchmark proof and do not promote Cursor, Claude Code, or native question UI paths.
 
 The `codex-web-tech-route-20260529` run is the first stored current-research Technology Route proof. It supports a scoped claim that Converge can attach current source evidence when web access is available; it does not prove the chosen route is universally best.
 
@@ -109,6 +113,8 @@ The `codex-web-current-model-20260530` run is the first stored current-model com
 The `codex-headless-proof-discipline-20260530` run is the first stored completion-proof discipline proof. It supports a scoped claim that Converge can refuse to inflate lint-only evidence into completion, perfection, full-project verification, or publish-readiness claims.
 
 The `codex-web-current-research-20260530` run adds three stored current-research proofs. It supports a scoped claim that Converge can use official/current sources for frontend route decisions, refuse benchmark-headline migrations, and refuse fabricated citations for unnamed production-readiness targets.
+
+The `codex-headless-everyday-usefulness-20260530` run adds four stored everyday-usefulness proofs. It supports a scoped claim that Converge can produce useful decision, work-planning, and negotiation-reply outputs without turning ordinary fuzzy requests into PRDs, broad surveys, or generic motivation.
 
 Aggregate multiple stored runs when auditing release readiness:
 
@@ -123,6 +129,7 @@ python3 skills/converge/scripts/summarize_converge_response_eval.py \
   evidence/response-eval/codex-web-current-model-20260530/results \
   evidence/response-eval/codex-headless-proof-discipline-20260530/results \
   evidence/response-eval/codex-web-current-research-20260530/results \
+  evidence/response-eval/codex-headless-everyday-usefulness-20260530/results \
   --root skills/converge \
   --require-real-results \
   --show-axes \

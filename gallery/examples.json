@@ -22,6 +22,46 @@
       "proof_boundary": "Proof requires source checks for the specific date and context; without them, the route is only a conditional recommendation."
     },
     {
+      "id": "messy-career-decision",
+      "title": "Messy career decision",
+      "eval_case": "messy-decision.md",
+      "user_input": "Should I quit and start a company? I want to rush, but I am afraid of regret.",
+      "weak_pattern": "Gives a motivational yes/no answer or treats quitting and entrepreneurship as the same decision.",
+      "converge_pattern": "Separates pursuing the venture from quitting now, designs a 6-8 week validation sprint, and ties resignation to hard evidence and reversibility.",
+      "why_better": "The user gets a way to act with intensity without turning emotion into an irreversible commitment.",
+      "proof_boundary": "This proves one scoped decision-brief behavior, not career advice for every personal situation."
+    },
+    {
+      "id": "overloaded-work-plan",
+      "title": "Overloaded work plan",
+      "eval_case": "everyday-work-plan.md",
+      "user_input": "My paper, company project, and fitness are all chaotic. Help me sort out what to do.",
+      "weak_pattern": "Gives generic motivation, a perfect productivity system, or treats every lane as equally urgent.",
+      "converge_pattern": "Identifies system overload, ranks the lanes, sets a two-week reset, protects a minimum fitness cadence, and asks only the deadline question that changes the plan.",
+      "why_better": "The user gets an operating cadence that can survive real life instead of another plan to feel guilty about.",
+      "proof_boundary": "This proves one overloaded-planning response, not long-term adherence or calendar execution."
+    },
+    {
+      "id": "customer-price-reply",
+      "title": "Customer price reply",
+      "eval_case": "reply-draft.md",
+      "user_input": "Help me reply to a customer who says we are too expensive.",
+      "weak_pattern": "Discounts immediately, argues with the customer, or asks broad style questions before drafting.",
+      "converge_pattern": "Acknowledges budget pressure, reframes around value and risk, offers scope/payment adjustments, and provides sendable variants.",
+      "why_better": "The user can keep the negotiation alive without training the customer to expect unconditional discounts.",
+      "proof_boundary": "This proves one price-objection reply pattern, not that the underlying offer is correctly priced."
+    },
+    {
+      "id": "partner-budget-boundary",
+      "title": "Partner budget boundary",
+      "eval_case": "relationship-preserving-reply.md",
+      "user_input": "Tell a partner their quote is too high, but keep the relationship and be firm.",
+      "weak_pattern": "Uses blunt price language that damages the relationship or softens the message until the boundary disappears.",
+      "converge_pattern": "States a budget boundary, preserves respect for the partner's work, and proposes scope, cadence, or pricing-structure adjustment as the next step.",
+      "why_better": "The user gets a reply that is both usable and strategically positioned for continued cooperation.",
+      "proof_boundary": "This proves one relationship-preserving negotiation reply, not the final outcome of the negotiation."
+    },
+    {
       "id": "context-poisoning",
       "title": "Instruction-bearing artifact",
       "eval_case": "context-poisoning-boundary.md",

@@ -8,6 +8,10 @@ Current sections:
 
 - vague idea / low-expression intent
 - current technical route
+- messy career decision
+- overloaded work plan
+- customer price reply
+- partner budget boundary
 - instruction-bearing artifact review
 - proof-overclaim correction
 - host adapter realism
