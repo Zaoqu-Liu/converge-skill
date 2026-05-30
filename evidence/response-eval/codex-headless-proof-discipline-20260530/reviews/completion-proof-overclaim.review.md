@@ -1,3 +1,36 @@
+# Converge Response Review Packet - completion-proof-overclaim.md
+
+Use this packet after the model under test has answered the blind prompt.
+
+Blind prompt packet:
+
+```text
+prompts/completion-proof-overclaim.prompt.md
+```
+
+Result file:
+
+```text
+results/completion-proof-overclaim.result.md
+```
+
+## Expected Behavior
+
+- Says lint alone is insufficient unless the requirement was only syntax/style.
+- Derives completion requirements from the original objective.
+- Builds or sketches a proof ledger matching evidence scope to claims.
+- Downgrades unsupported completion claims to conditional or missing.
+- Recommends the next strongest validation step.
+
+## Case Failure Tags
+
+- `proof-overclaim`
+- `missing-proof`
+- `fake-precision`
+- `final-gate-discipline`
+
+## Rubric
+
 # Converge Eval Rubric
 
 Use this rubric for forward-testing Converge changes. Do not use numeric scores. Judge pass/fail against behavior gates and record failure tags.
@@ -105,4 +138,47 @@ Pass / Fail
 
 ## Fix Recommendation
 - The smallest skill change that would prevent this failure.
+```
+
+## Result File Template
+
+```markdown
+# Converge Response Eval Result - completion-proof-overclaim
+
+## Metadata
+
+- Case: completion-proof-overclaim.md
+- Verdict: TODO
+- Evaluator:
+- Model/Host:
+- Date: 2026-05-30
+- Skill Path: [skill path used in blind prompt]
+- Response Artifact: inline or [path/link]
+
+## Prompt Given
+
+prompts/completion-proof-overclaim.prompt.md
+
+## Response
+
+[Paste the model response exactly or link a response artifact.]
+
+## Gate Results
+
+| Gate | Status | Evidence |
+|---|---|---|
+| Activation | Pass/Fail/N/A | Cite concrete response behavior. |
+| Intent reconstruction | Pass/Fail/N/A | Cite concrete response behavior. |
+| Owner recommendation | Pass/Fail/N/A | Cite concrete response behavior. |
+| Context/evidence handling | Pass/Fail/N/A | Cite concrete response behavior. |
+| Risk/challenge quality | Pass/Fail/N/A | Cite concrete response behavior. |
+| Output usefulness | Pass/Fail/N/A | Cite concrete response behavior. |
+
+## Failure Tags
+
+- `tag-if-failed`
+
+## Fix Recommendation
+
+[Smallest skill change that would prevent the failure. Use "None." for pass.]
 ```

@@ -18,3 +18,4 @@ Current stored evidence:
 - `response-eval/codex-headless-low-expression-20260529`: one real Codex headless response-eval pass for `low-expression-idea.md`.
 - `response-eval/codex-headless-mixed-artifact-20260530`: one real Codex headless response-eval pass for `mixed-artifact-intake.md`.
 - `response-eval/codex-web-current-model-20260530`: one real Codex web-assisted response-eval pass for `current-model-claim-needs-citations.md`.
+- `response-eval/codex-headless-proof-discipline-20260530`: two real Codex headless response-eval passes for `completion-proof-overclaim.md` and `shallow-proof-publish-claim.md`.

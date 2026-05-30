@@ -103,6 +103,17 @@ REQUIRED_ROOT_FILES = [
     "evidence/response-eval/codex-web-current-model-20260530/reviews/current-model-claim-needs-citations.review.md",
     "evidence/response-eval/codex-web-current-model-20260530/responses/current-model-claim-needs-citations.response.md",
     "evidence/response-eval/codex-web-current-model-20260530/results/current-model-claim-needs-citations.result.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/README.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/RUNBOOK.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/manifest.tsv",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/prompts/completion-proof-overclaim.prompt.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/prompts/shallow-proof-publish-claim.prompt.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/reviews/completion-proof-overclaim.review.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/reviews/shallow-proof-publish-claim.review.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/responses/completion-proof-overclaim.response.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/responses/shallow-proof-publish-claim.response.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/results/completion-proof-overclaim.result.md",
+    "evidence/response-eval/codex-headless-proof-discipline-20260530/results/shallow-proof-publish-claim.result.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -265,6 +276,16 @@ def main() -> int:
     run(
         [
             python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-proof-discipline-20260530" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
             str(SKILL_ROOT / "scripts" / "summarize_converge_response_eval.py"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-20260529" / "results"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-choice-20260529" / "results"),
@@ -273,6 +294,7 @@ def main() -> int:
             str(ROOT / "evidence" / "response-eval" / "codex-headless-low-expression-20260529" / "results"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-mixed-artifact-20260530" / "results"),
             str(ROOT / "evidence" / "response-eval" / "codex-web-current-model-20260530" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-proof-discipline-20260530" / "results"),
             "--root",
             str(SKILL_ROOT),
             "--require-real-results",

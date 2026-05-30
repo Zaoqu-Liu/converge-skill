@@ -86,9 +86,13 @@ python3 skills/converge/scripts/check_converge_response_eval.py \
   evidence/response-eval/codex-web-current-model-20260530/results \
   --root skills/converge \
   --require-real-results
+python3 skills/converge/scripts/check_converge_response_eval.py \
+  evidence/response-eval/codex-headless-proof-discipline-20260530/results \
+  --root skills/converge \
+  --require-real-results
 ```
 
-These prove only the stored `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, `host-support-proof-boundary.md`, `technology-route-current-stack.md`, `low-expression-idea.md`, `mixed-artifact-intake.md`, and `current-model-claim-needs-citations.md` cases. They are not full benchmark proof and do not promote Cursor, Claude Code, or native question UI paths.
+These prove only the stored `codex-default-no-native-ui.md`, `codex-default-choice-survey-trap.md`, `host-support-proof-boundary.md`, `technology-route-current-stack.md`, `low-expression-idea.md`, `mixed-artifact-intake.md`, `current-model-claim-needs-citations.md`, `completion-proof-overclaim.md`, and `shallow-proof-publish-claim.md` cases. They are not full benchmark proof and do not promote Cursor, Claude Code, or native question UI paths.
 
 The `codex-web-tech-route-20260529` run is the first stored current-research Technology Route proof. It supports a scoped claim that Converge can attach current source evidence when web access is available; it does not prove the chosen route is universally best.
 
@@ -97,6 +101,8 @@ The `codex-headless-low-expression-20260529` run is the first stored low-express
 The `codex-headless-mixed-artifact-20260530` run is the first stored mixed-artifact diagnosis proof. It supports a scoped claim that Converge can inspect available screenshot, PRD, and log artifacts before naming the real problem.
 
 The `codex-web-current-model-20260530` run is the first stored current-model comparison proof. It supports a scoped claim that Converge can keep source traceability for current coding-agent recommendations even when the user asks to omit sources.
+
+The `codex-headless-proof-discipline-20260530` run is the first stored completion-proof discipline proof. It supports a scoped claim that Converge can refuse to inflate lint-only evidence into completion, perfection, full-project verification, or publish-readiness claims.
 
 Aggregate multiple stored runs when auditing release readiness:
 
@@ -109,6 +115,7 @@ python3 skills/converge/scripts/summarize_converge_response_eval.py \
   evidence/response-eval/codex-headless-low-expression-20260529/results \
   evidence/response-eval/codex-headless-mixed-artifact-20260530/results \
   evidence/response-eval/codex-web-current-model-20260530/results \
+  evidence/response-eval/codex-headless-proof-discipline-20260530/results \
   --root skills/converge \
   --require-real-results \
   --show-axes \

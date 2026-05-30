@@ -1,0 +1,3 @@
+case	prompt_packet	review_packet	result_stub
+completion-proof-overclaim.md	prompts/completion-proof-overclaim.prompt.md	reviews/completion-proof-overclaim.review.md	results/completion-proof-overclaim.result.md
+shallow-proof-publish-claim.md	prompts/shallow-proof-publish-claim.prompt.md	reviews/shallow-proof-publish-claim.review.md	results/shallow-proof-publish-claim.result.md

@@ -26,7 +26,7 @@ every eval case yet.
 | Before/after gallery exists | `gallery/examples.json`, `site/index.html`, `scripts/check_gallery_site.py` | Validated wiring | Add more real examples as response-eval coverage grows. |
 | Current technical routes use evidence | `codex-web-tech-route-20260529`, `codex-web-current-model-20260530` | Two scoped web-assisted passes | Add `latest-library-advice.md`, `benchmark-headline-route-trap.md`, and `researched-answer-citations.md` runs. |
 | Low-expression intent converges | `low-expression-idea.md`, `mixed-artifact-intake.md`, Codex Default fallback cases | Promising but partial | Add messy decision, reply draft, relationship-preserving reply, and everyday-work-plan runs. |
-| Completion and proof boundaries hold | `host-support-proof-boundary.md`, proof-tier docs | One scoped pass | Add completion-proof and shallow-publish-claim runs. |
+| Completion and proof boundaries hold | `host-support-proof-boundary.md`, `completion-proof-overclaim.md`, `shallow-proof-publish-claim.md`, proof-tier docs | Three scoped passes | Add dev-handoff, extended-host, and production-like proof-boundary runs. |
 | Public trust story is defensible | README, quickstart, install docs, release checklist, support ledger | Defensible for scoped claims | Needs external user install trial and H4 production-like workflow evidence. |
 
 ## Aggregate Behavior Evidence
@@ -42,6 +42,7 @@ python3 -B skills/converge/scripts/summarize_converge_response_eval.py \
   evidence/response-eval/codex-headless-low-expression-20260529/results \
   evidence/response-eval/codex-headless-mixed-artifact-20260530/results \
   evidence/response-eval/codex-web-current-model-20260530/results \
+  evidence/response-eval/codex-headless-proof-discipline-20260530/results \
   --root skills/converge \
   --require-real-results \
   --show-axes \
@@ -51,10 +52,10 @@ python3 -B skills/converge/scripts/summarize_converge_response_eval.py \
 Current aggregate result:
 
 - 40 expected cases.
-- 7 stored real results.
-- 7 valid Pass.
+- 9 stored real results.
+- 9 valid Pass.
 - 0 Fail.
-- 33 missing real results.
+- 31 missing real results.
 - Covered output profiles: Direct Answer, Technology Route, Thinking Reply, Universal Intent Guard.
 - Covered host surfaces: Codex Default and generic only.
 
@@ -75,9 +76,9 @@ Use these gates in order. Do not skip a lower gate when making public claims.
 
 The next response-eval runs should target gaps that affect public trust:
 
-1. `completion-proof-overclaim.md` and `shallow-proof-publish-claim.md` to harden proof discipline.
-2. `latest-library-advice.md`, `benchmark-headline-route-trap.md`, and `researched-answer-citations.md` to harden current research behavior.
-3. `messy-decision.md`, `everyday-work-plan.md`, `reply-draft.md`, and `relationship-preserving-reply.md` to prove everyday usefulness.
+1. `latest-library-advice.md`, `benchmark-headline-route-trap.md`, and `researched-answer-citations.md` to harden current research behavior.
+2. `messy-decision.md`, `everyday-work-plan.md`, `reply-draft.md`, and `relationship-preserving-reply.md` to prove everyday usefulness.
+3. `dev-handoff-after-docs.md`, `extended-host-capability-boundary.md`, and `full-converge-docs-complex-project.md` to harden handoff and broad support boundaries.
 4. `codex-plan-native-question-ui.md`, `claude-native-question-bridge.md`, and `cursor-native-question-bridge.md` only in real interactive hosts with native proof artifacts.
 
 ## Claim Policy
@@ -86,7 +87,7 @@ Allowed today:
 
 ```text
 Converge Protocol v1 is structurally validated, release-checked, installed for
-multiple local agent hosts, and backed by seven scoped real Codex response-eval
+multiple local agent hosts, and backed by nine scoped real Codex response-eval
 passes.
 ```
 

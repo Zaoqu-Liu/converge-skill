@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Sequence
 from datetime import date
 from pathlib import Path
 import re
@@ -85,16 +86,48 @@ def copy_artifacts(
     return copied
 
 
-def case_paths(root: Path, selected: str | None) -> list[Path]:
+def normalize_selected_cases(selected: str | Sequence[str] | None) -> tuple[str, ...]:
+    if selected is None:
+        return tuple()
+    if isinstance(selected, str):
+        return (selected,)
+    return tuple(selected)
+
+
+def case_paths(root: Path, selected: str | Sequence[str] | None) -> list[Path]:
     eval_dir = root / "eval-cases"
-    if selected:
-        case = eval_dir / selected
-        if not case.suffix:
-            case = case.with_suffix(".md")
-        if not case.is_file():
-            raise FileNotFoundError(f"eval case not found: {case}")
-        return [case]
+    selected_cases = normalize_selected_cases(selected)
+    if selected_cases:
+        cases: list[Path] = []
+        seen: set[Path] = set()
+        for item in selected_cases:
+            case = eval_dir / item
+            if not case.suffix:
+                case = case.with_suffix(".md")
+            if not case.is_file():
+                raise FileNotFoundError(f"eval case not found: {case}")
+            if case in seen:
+                raise ValueError(f"duplicate eval case selected: {case.name}")
+            cases.append(case)
+            seen.add(case)
+        return cases
     return sorted(eval_dir.glob("*.md"))
+
+
+def selected_label(selected: str | Sequence[str] | None) -> str:
+    selected_cases = normalize_selected_cases(selected)
+    if not selected_cases:
+        return "all eval cases"
+    if len(selected_cases) == 1:
+        return selected_cases[0]
+    return f"{len(selected_cases)} selected eval cases"
+
+
+def selected_display(selected: str | Sequence[str] | None) -> str:
+    selected_cases = normalize_selected_cases(selected)
+    if not selected_cases:
+        return "all eval cases"
+    return ", ".join(selected_cases)
 
 
 def prompt_packet(case: Path, skill_path: str, artifact_rows: list[tuple[str, str]]) -> str:
@@ -190,7 +223,7 @@ def runbook(
     manifest_rows: list[str],
     skill_path: str,
     with_result_stubs: bool,
-    selected: str | None,
+    selected: str | Sequence[str] | None,
 ) -> str:
     case_count = len(manifest_rows)
     results_note = (
@@ -198,7 +231,8 @@ def runbook(
         if with_result_stubs
         else "Result stubs were not generated; create result files from the templates in `reviews/`."
     )
-    scope = selected or "all eval cases"
+    scope = selected_label(selected)
+    scope_detail = selected_display(selected)
     return f"""# Converge Response Eval Runbook
 
 Generated for: `{scope}`
@@ -210,6 +244,7 @@ This runpack tests whether Converge behavior works in a real host/model response
 ## Contents
 
 - Cases: {case_count}
+- Case selection: `{scope_detail}`
 - Skill under test: `{skill_path}`
 - Manifest: `manifest.tsv`
 - Blind prompts: `prompts/`
@@ -306,7 +341,13 @@ Result file:
 """
 
 
-def build(root: Path, out: Path, selected: str | None, skill_path: str, with_result_stubs: bool) -> list[str]:
+def build(
+    root: Path,
+    out: Path,
+    selected: str | Sequence[str] | None,
+    skill_path: str,
+    with_result_stubs: bool,
+) -> list[str]:
     if out.exists():
         shutil.rmtree(out)
     prompt_dir = out / "prompts"
@@ -376,6 +417,26 @@ def self_test(root: Path = ROOT) -> list[str]:
         if len(rows) != 1:
             errors.append(f"self-test expected one manifest row, found {len(rows)}")
 
+        two_case_out = Path(tmp) / "two-case-runpack"
+        two_case_rows = build(
+            root=root,
+            out=two_case_out,
+            selected=["completion-proof-overclaim.md", "shallow-proof-publish-claim.md"],
+            skill_path="SKILL.md",
+            with_result_stubs=True,
+        )
+        two_case_manifest = (two_case_out / "manifest.tsv").read_text(encoding="utf-8")
+        if len(two_case_rows) != 2:
+            errors.append(f"self-test expected two selected rows, found {len(two_case_rows)}")
+        for expected_case in ("completion-proof-overclaim.md", "shallow-proof-publish-claim.md"):
+            if expected_case not in two_case_manifest:
+                errors.append(f"self-test multi-case manifest missing {expected_case}")
+        two_case_runbook = (two_case_out / "RUNBOOK.md").read_text(encoding="utf-8")
+        if "- Cases: 2" not in two_case_runbook:
+            errors.append("self-test multi-case runbook has the wrong case count")
+        if "2 selected eval cases" not in two_case_runbook:
+            errors.append("self-test multi-case runbook has the wrong scope label")
+
         prompt_path = out / "prompts" / "mixed-artifact-intake.prompt.md"
         if prompt_path.is_file():
             prompt = prompt_path.read_text(encoding="utf-8")
@@ -399,7 +460,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--out", type=Path)
-    parser.add_argument("--case", help="Eval case filename or stem. Defaults to all cases.")
+    parser.add_argument(
+        "--case",
+        action="append",
+        help="Eval case filename or stem. Repeat for multiple cases. Defaults to all cases.",
+    )
     parser.add_argument("--skill-path", default=str(ROOT / "SKILL.md"))
     parser.add_argument("--with-result-stubs", action="store_true")
     parser.add_argument("--self-test", action="store_true")
