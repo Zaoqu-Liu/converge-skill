@@ -240,6 +240,7 @@ Any change to host support should update the adapter registry, source evidence, 
 
 - [docs/protocol.md](docs/protocol.md): Converge Protocol v1 object model and compatibility contract.
 - [docs/cli.md](docs/cli.md): reference CLI/runtime commands.
+- [docs/v1-readiness.md](docs/v1-readiness.md): current launch boundary, aggregate behavior evidence, and next proof gates.
 - `protocol/schemas/`: JSON schemas.
 - `protocol/examples/`: valid example instances.
 - [compatible/README.md](compatible/README.md): third-party Converge-compatible artifact contract.

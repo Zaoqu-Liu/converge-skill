@@ -26,6 +26,7 @@ REQUIRED_ROOT_FILES = [
     "docs/host-support.md",
     "docs/evaluation.md",
     "docs/release.md",
+    "docs/v1-readiness.md",
     "protocol/schemas/converge-run.schema.json",
     "protocol/schemas/host-capability.schema.json",
     "protocol/schemas/host-adapter-registry.schema.json",
@@ -259,6 +260,23 @@ def main() -> int:
             "--root",
             str(SKILL_ROOT),
             "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
+            str(SKILL_ROOT / "scripts" / "summarize_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-20260529" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-choice-20260529" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-host-proof-20260529" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-web-tech-route-20260529" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-low-expression-20260529" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-headless-mixed-artifact-20260530" / "results"),
+            str(ROOT / "evidence" / "response-eval" / "codex-web-current-model-20260530" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+            "--show-axes",
         ]
     )
     run([python, str(ROOT / "scripts" / "check_gallery_site.py")])

@@ -98,6 +98,25 @@ The `codex-headless-mixed-artifact-20260530` run is the first stored mixed-artif
 
 The `codex-web-current-model-20260530` run is the first stored current-model comparison proof. It supports a scoped claim that Converge can keep source traceability for current coding-agent recommendations even when the user asks to omit sources.
 
+Aggregate multiple stored runs when auditing release readiness:
+
+```bash
+python3 skills/converge/scripts/summarize_converge_response_eval.py \
+  evidence/response-eval/codex-headless-20260529/results \
+  evidence/response-eval/codex-headless-choice-20260529/results \
+  evidence/response-eval/codex-headless-host-proof-20260529/results \
+  evidence/response-eval/codex-web-tech-route-20260529/results \
+  evidence/response-eval/codex-headless-low-expression-20260529/results \
+  evidence/response-eval/codex-headless-mixed-artifact-20260530/results \
+  evidence/response-eval/codex-web-current-model-20260530/results \
+  --root skills/converge \
+  --require-real-results \
+  --show-axes \
+  --show-cases
+```
+
+See `docs/v1-readiness.md` for the current aggregate boundary and next proof gates.
+
 ## Native Interaction Evidence
 
 Use native-proof packets for H3 claims:

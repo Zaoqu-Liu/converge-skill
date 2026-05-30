@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Sequence
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 import importlib.util
@@ -91,10 +92,24 @@ def expected_values(root: Path) -> dict[str, set[str]]:
     return {axis: set(index.get(axis, {})) for axis in AXES}
 
 
-def compute_statuses(results_dir: Path, root: Path, require_real_results: bool) -> tuple[list[CaseStatus], list[Path]]:
+def normalize_result_dirs(results_dirs: Path | Sequence[Path]) -> tuple[Path, ...]:
+    if isinstance(results_dirs, Path):
+        return (results_dirs,)
+    return tuple(results_dirs)
+
+
+def compute_statuses(
+    results_dirs: Path | Sequence[Path],
+    root: Path,
+    require_real_results: bool,
+) -> tuple[list[CaseStatus], list[Path]]:
     checker = load_checker(root)
     expected = sorted(checker.eval_case_names(root))
-    files = checker.result_files(results_dir) if results_dir.is_dir() else []
+    files: list[Path] = []
+    for results_dir in normalize_result_dirs(results_dirs):
+        if results_dir.is_dir():
+            files.extend(checker.result_files(results_dir))
+    files = sorted(files)
     by_case: dict[str, list[Path]] = defaultdict(list)
     for path in files:
         record = checker.result_record(path)
@@ -129,8 +144,12 @@ def compute_statuses(results_dir: Path, root: Path, require_real_results: bool) 
     return statuses, files
 
 
-def compute_summary(results_dir: Path, root: Path = ROOT, require_real_results: bool = False) -> EvalSummary:
-    statuses, files = compute_statuses(results_dir, root, require_real_results)
+def compute_summary(
+    results_dirs: Path | Sequence[Path],
+    root: Path = ROOT,
+    require_real_results: bool = False,
+) -> EvalSummary:
+    statuses, files = compute_statuses(results_dirs, root, require_real_results)
     coverage_index = coverage_rows(root)
     expected = expected_values(root)
 
@@ -256,6 +275,8 @@ def run_self_test(root: Path = ROOT) -> list[str]:
     errors: list[str] = []
     with tempfile.TemporaryDirectory(prefix="converge-response-eval-summary-") as tmp:
         tmp_path = Path(tmp)
+        other_path = tmp_path / "other"
+        other_path.mkdir()
         (tmp_path / "one.result.md").write_text(
             checker.sample_result(
                 case_name,
@@ -271,6 +292,27 @@ def run_self_test(root: Path = ROOT) -> list[str]:
             errors.append("self-test progress counts are wrong for one valid result")
         if case_name not in summary.reviewed_cases:
             errors.append("self-test valid case was not listed as reviewed")
+
+        case_names = sorted(checker.eval_case_names(root))
+        if len(case_names) > 1:
+            second_case = case_names[1]
+            (other_path / "second.result.md").write_text(
+                checker.sample_result(
+                    second_case,
+                    evaluator="manual-review",
+                    model_host="codex-real-host",
+                    response=valid_response,
+                    evidence=valid_evidence,
+                ),
+                encoding="utf-8",
+            )
+            aggregate_summary = compute_summary(
+                [tmp_path, other_path],
+                root,
+                require_real_results=True,
+            )
+            if aggregate_summary.valid_reviewed != 2 or aggregate_summary.valid_pass != 2:
+                errors.append("self-test aggregate progress counts are wrong for multiple dirs")
 
         (tmp_path / "bad.result.md").write_text(
             checker.sample_result(
@@ -290,7 +332,7 @@ def run_self_test(root: Path = ROOT) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("results_dir", type=Path, nargs="?")
+    parser.add_argument("results_dirs", type=Path, nargs="*")
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--require-real-results", action="store_true")
     parser.add_argument("--show-axes", action="store_true")
@@ -310,12 +352,12 @@ def main() -> int:
         print("Self-test passed.")
         return 0
 
-    if args.results_dir is None:
-        parser.error("results_dir is required unless --self-test is used")
+    if not args.results_dirs:
+        parser.error("at least one results_dir is required unless --self-test is used")
     if args.limit < 1:
         parser.error("--limit must be >= 1")
 
-    summary = compute_summary(args.results_dir, args.root, require_real_results=args.require_real_results)
+    summary = compute_summary(args.results_dirs, args.root, require_real_results=args.require_real_results)
     print(progress_report(summary, args.show_axes, args.show_cases, args.limit))
     return 0
 

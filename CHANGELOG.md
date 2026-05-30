@@ -15,6 +15,7 @@
 - Tightens mixed-artifact diagnosis behavior and adds response-eval builder self-tests for copied artifacts.
 - Adds a mixed-artifact intake response-eval pass and tightens runpack artifact paths for headless execution.
 - Adds a web-assisted current-model comparison response-eval pass for source-backed coding-agent recommendations.
+- Adds a V1 readiness ledger and aggregate response-eval summary support across multiple evidence directories.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
 - Adds machine-readable before/after gallery examples, a static docs site, and gallery/site validation in repository verification.
 
