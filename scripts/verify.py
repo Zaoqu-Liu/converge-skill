@@ -95,6 +95,13 @@ REQUIRED_ROOT_FILES = [
     "evidence/response-eval/codex-headless-mixed-artifact-20260530/reviews/mixed-artifact-intake.review.md",
     "evidence/response-eval/codex-headless-mixed-artifact-20260530/responses/mixed-artifact-intake.response.md",
     "evidence/response-eval/codex-headless-mixed-artifact-20260530/results/mixed-artifact-intake.result.md",
+    "evidence/response-eval/codex-web-current-model-20260530/README.md",
+    "evidence/response-eval/codex-web-current-model-20260530/RUNBOOK.md",
+    "evidence/response-eval/codex-web-current-model-20260530/manifest.tsv",
+    "evidence/response-eval/codex-web-current-model-20260530/prompts/current-model-claim-needs-citations.prompt.md",
+    "evidence/response-eval/codex-web-current-model-20260530/reviews/current-model-claim-needs-citations.review.md",
+    "evidence/response-eval/codex-web-current-model-20260530/responses/current-model-claim-needs-citations.response.md",
+    "evidence/response-eval/codex-web-current-model-20260530/results/current-model-claim-needs-citations.result.md",
     "intentbench/README.md",
     "intentbench/manifest.json",
     "gallery/README.md",
@@ -239,6 +246,16 @@ def main() -> int:
             python,
             str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
             str(ROOT / "evidence" / "response-eval" / "codex-headless-mixed-artifact-20260530" / "results"),
+            "--root",
+            str(SKILL_ROOT),
+            "--require-real-results",
+        ]
+    )
+    run(
+        [
+            python,
+            str(SKILL_ROOT / "scripts" / "check_converge_response_eval.py"),
+            str(ROOT / "evidence" / "response-eval" / "codex-web-current-model-20260530" / "results"),
             "--root",
             str(SKILL_ROOT),
             "--require-real-results",

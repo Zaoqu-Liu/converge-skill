@@ -17,3 +17,4 @@ Current stored evidence:
 - `response-eval/codex-web-tech-route-20260529`: one real Codex web-assisted response-eval pass for `technology-route-current-stack.md`.
 - `response-eval/codex-headless-low-expression-20260529`: one real Codex headless response-eval pass for `low-expression-idea.md`.
 - `response-eval/codex-headless-mixed-artifact-20260530`: one real Codex headless response-eval pass for `mixed-artifact-intake.md`.
+- `response-eval/codex-web-current-model-20260530`: one real Codex web-assisted response-eval pass for `current-model-claim-needs-citations.md`.

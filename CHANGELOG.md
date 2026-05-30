@@ -14,6 +14,7 @@
 - Adds a low-expression ideation response-eval pass and tightens the skill to end vague ideation with an explicit route question.
 - Tightens mixed-artifact diagnosis behavior and adds response-eval builder self-tests for copied artifacts.
 - Adds a mixed-artifact intake response-eval pass and tightens runpack artifact paths for headless execution.
+- Adds a web-assisted current-model comparison response-eval pass for source-backed coding-agent recommendations.
 - Adds protocol, CLI, IntentBench, and gallery documentation seeds.
 - Adds machine-readable before/after gallery examples, a static docs site, and gallery/site validation in repository verification.
 
